@@ -1,3 +1,24 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
-Console.WriteLine("Hello, World!");
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .CreateLogger();
+
+await CreateHostBuilder(args)
+    .Build()
+    .RunAsync();
+
+static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder()
+        .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+        .ConfigureHostConfiguration(configHost =>
+        {
+            configHost.SetBasePath(Directory.GetCurrentDirectory());
+            configHost.AddJsonFile("ServerConfig.json", optional: true);
+        })
+        .UseSerilog()
+        .UseConsoleLifetime();
