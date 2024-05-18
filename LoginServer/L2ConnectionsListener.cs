@@ -61,7 +61,7 @@ public class L2ConnectionsListener
     
     private async Task WaitForClients(CancellationToken ct)
     {
-        while (true)
+        while (!ct.IsCancellationRequested)
         {
             var client = await tcpListener.AcceptTcpClientAsync(ct);
             AcceptClient(client, ct);
@@ -74,14 +74,14 @@ public class L2ConnectionsListener
             "Получен запрос на подключение от: {RemoteEndPoint}",
             client.Client.RemoteEndPoint?.ToString());
         
-        var connection = new L2Connection(client, null);
+        var connection = new L2Connection(client);
         var loginController = new LoginController(connection);
         
         loginController.Init();
 
         Task.Run(() => connection.ReadAsync(ct))
             .ContinueWith(antecedent => client.Dispose())
-            .ContinueWith(antecedent => logger.Information("Client disposed"));;
+            .ContinueWith(antecedent => logger.Information("Client disposed"));
     }
     
     public void Stop()

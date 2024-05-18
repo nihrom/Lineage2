@@ -5,7 +5,7 @@ using Serilog;
 
 namespace LoginServer;
 
-public class L2Connection
+public class L2Connection : IDisposable
 {
     private readonly ILogger logger = Log.Logger.ForContext<L2Connection>();
     private readonly NetworkStream networkStream;
@@ -16,7 +16,7 @@ public class L2Connection
     public event Action<Packet>? ReceivedPacket;
     public event Action<Packet>? SendingPacket;
     
-    public L2Connection(TcpClient tcpClient, INetworkCrypt? crypt)
+    public L2Connection(TcpClient tcpClient, INetworkCrypt? crypt = null)
     {
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
@@ -58,9 +58,9 @@ public class L2Connection
     /// <returns></returns>
     public async Task ReadAsync(CancellationToken ct)
     {
-        try
+        while (!ct.IsCancellationRequested)
         {
-            while (true)
+            try
             {
                 var bodyLength = await ReadBodyLengthAsync(ct);
 
@@ -70,15 +70,15 @@ public class L2Connection
 
                 ReceivedPacket?.Invoke(packet);
             }
-        }
-        catch (Exception ex)
-        {
-            logger.Error(
-                ex,
-                "Ошибка при чтении пакета: {Message}",
-                ex.Message);
+            catch (Exception ex)
+            {
+                logger.Error(
+                    ex,
+                    "Ошибка при чтении пакета: {Message}",
+                    ex.Message);
 
-            //TODO: Тут надо наверно закрывать соединение
+                //TODO: Тут надо наверно закрывать соединение
+            }
         }
     }
 
@@ -95,7 +95,7 @@ public class L2Connection
 
         var length = BitConverter.ToInt16(buffer, 0);
 
-        return (short)(length - 2);
+        return (short)(length - 2); //TODO: избавиться от каста
     }
 
     /// <summary>
@@ -112,5 +112,11 @@ public class L2Connection
 
         //TODO: Возможно расшифровку надо обернуть в try catch
         Crypt?.Decrypt(body);
+    }
+
+    public void Dispose()
+    {
+        networkStream.Dispose();
+        tcpClient.Dispose();
     }
 }
