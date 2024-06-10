@@ -11,24 +11,34 @@ public class L2Connection : IDisposable
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
 
-    public INetworkCrypt? Crypt { get; set; }
+    public INetworkCrypt Crypt { get; set; }
     
-    public event Action<Packet>? ReceivedPacket;
-    public event Action<Packet>? SendingPacket;
+    public event Func<Packet, Task> ReceivedPacket;
+    public event Func<Packet, Task> SendingPacket;
     
-    public L2Connection(TcpClient tcpClient, INetworkCrypt? crypt = null)
+    public L2Connection(TcpClient tcpClient)
     {
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
-        Crypt = crypt;
+        Crypt = new LoginCrypt();
         
-        ReceivedPacket += packet => logger.Information(
-            "L2Connection получил пакет:{FirstOpcode:X2}",
-            packet.FirstOpcode);
+        ReceivedPacket += (packet) =>
+        {
+            logger.Information(
+                "L2Connection получил пакет:{FirstOpcode:X2}", 
+                packet.FirstOpcode);
+
+            return Task.CompletedTask;
+        };
         
-        SendingPacket += packet => logger.Information(
-            "L2Connection отправляет пакет:{FirstOpcode:X2}",
-            packet.FirstOpcode);
+        SendingPacket += packet =>
+        {
+            logger.Information(
+                "L2Connection отправляет пакет:{FirstOpcode:X2}",
+                packet.FirstOpcode);
+            
+            return Task.CompletedTask;
+        };
     }
 
     /// <summary>
@@ -40,7 +50,7 @@ public class L2Connection : IDisposable
     {
         SendingPacket?.Invoke(p);
         var data = p.GetBuffer();
-        Crypt?.Encrypt(data);
+        Crypt.Encrypt(data);
 
         var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2));
         var message = new byte[data.Length + 2];
@@ -58,17 +68,18 @@ public class L2Connection : IDisposable
     /// <returns></returns>
     public async Task ReadAsync(CancellationToken ct)
     {
-        while (!ct.IsCancellationRequested)
-        {
             try
             {
-                var bodyLength = await ReadBodyLengthAsync(ct);
+                while (!ct.IsCancellationRequested)
+                {
+                    var bodyLength = await ReadBodyLengthAsync(ct);
 
-                var body = new byte[bodyLength];
-                await ReadBodyAsync(body, bodyLength);
-                var packet = new Packet(1, body);
+                    var body = new byte[bodyLength];
+                    await ReadBodyAsync(body, bodyLength);
+                    var packet = new Packet(1, body);
 
-                ReceivedPacket?.Invoke(packet);
+                    await ReceivedPacket.Invoke(packet);
+                }
             }
             catch (Exception ex)
             {
@@ -79,7 +90,6 @@ public class L2Connection : IDisposable
 
                 //TODO: Тут надо наверно закрывать соединение
             }
-        }
     }
 
     /// <summary>
@@ -111,7 +121,7 @@ public class L2Connection : IDisposable
             throw new Exception("Пакет имеет поврежденную структуру");
 
         //TODO: Возможно расшифровку надо обернуть в try catch
-        Crypt?.Decrypt(body);
+        Crypt.Decrypt(ref body);
     }
 
     public void Dispose()

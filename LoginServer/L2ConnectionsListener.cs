@@ -63,8 +63,15 @@ public class L2ConnectionsListener
     {
         while (!ct.IsCancellationRequested)
         {
-            var client = await tcpListener.AcceptTcpClientAsync(ct);
-            AcceptClient(client, ct);
+            try
+            {
+                var client = await tcpListener.AcceptTcpClientAsync(ct);
+                AcceptClient(client, ct);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
     
@@ -87,6 +94,7 @@ public class L2ConnectionsListener
     public void Stop()
     {
         logger.Information("Прослушка входящих соединений завершается");
+        tcpListener.Server.Close();
         //TODO: реализовать остановку сетевого общения с пользователями
         logger.Information("Прослушка входящих соединений завершилась");
     }

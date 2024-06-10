@@ -10,7 +10,7 @@ public struct Packet
      /// <summary>
         /// Overflow value.
         /// </summary>
-        private const int DefaultOverflowValue = 128;
+        private const int DefaultOverflowValue = 256;
 
         /// <summary>
         /// Buffer.
