@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Common.Cryptography;
 using Common.Network;
+using LoginServer.Models;
 using Org.BouncyCastle.Crypto.Engines;
 using Serilog;
 
@@ -67,7 +68,7 @@ public class LoginController
             PacketBuilder.GGAuth(sessionId));
     }
 
-    public async Task RequestAuthLogin(byte[] raw, byte[] raw2, bool isNewAuthMethod)
+    public async Task RequestAuthLogin(byte[] raw)
     {
         if (loginClientState != LoginClientState.AuthedGg)
         {
@@ -77,9 +78,15 @@ public class LoginController
             return;
         }
         
-        var decrypt = DecryptPacket(raw, raw2, isNewAuthMethod);
+        var decrypt = DecryptPacket(raw);
 
-        var (username, password) = ExtractEncodingPass(decrypt, isNewAuthMethod);
+        var username = Encoding.ASCII
+            .GetString(decrypt, 0x4E, 64)
+            .Replace("\0", string.Empty);
+
+        var password = Encoding.ASCII
+            .GetString(decrypt, 0xDC, 16)
+            .Replace("\0", string.Empty);
         
         logger.Information(
             "Username: {Username}, password: {Password}",
@@ -131,68 +138,21 @@ public class LoginController
         await l2Connection.SendAsync(PacketBuilder.LoginOk(loginOkId1, loginOkId2));
     }
     
-    (string username, string password) ExtractEncodingPass(byte[] input, bool isNewAuthMethod)
-    {
-        if (isNewAuthMethod)
-        {
-            var username = Encoding.ASCII
-                .GetString(input, 0x4E, 50)
-                .Replace("\0", string.Empty);
-            
-            username += Encoding.ASCII
-                .GetString(input, 0xCE, 14)
-                .Replace("\0", string.Empty);
-        
-            var password = Encoding.ASCII
-                .GetString(input, 0xDC, 16)
-                .Replace("\0", string.Empty);
-
-            return (username, password);
-        }
-        else
-        {
-            var username = Encoding.ASCII
-                .GetString(input, 0x5E, 14)
-                .Replace("\0", string.Empty);
-        
-            var password = Encoding.ASCII
-                .GetString(input, 0x6C, 16)
-                .Replace("\0", string.Empty);
-                
-            return (username, password);
-        }
-    }
-    
-    byte[] DecryptPacket(byte[] raw, byte[]raw2, bool isNewAuthMethod)
+    byte[] DecryptPacket(byte[] input)
     {
         var privateKey = scrambledKeyPair.privateKey;
         var rsa = new RsaEngine();
         rsa.Init(false, privateKey);
 
-        var result = RsaProcessBlock(raw, raw2);
+        var decrypt = rsa.ProcessBlock(input, 0, 128);
+        var decrypt2 = rsa.ProcessBlock(input, 128, 128);
+            
+        var result = new byte[256];
+            
+        Array.Copy(decrypt, 0, result, 128 - decrypt.Length, decrypt.Length);
+        Array.Copy(decrypt2, 0, result, 256 - decrypt2.Length, decrypt2.Length);
 
         return result;
-
-        byte[] RsaProcessBlock(byte[] input, byte[] input2)
-        {
-            byte[] temp = [..input, ..input2];
-            
-            var decrypt = rsa.ProcessBlock(temp, 0, 128);
-            var decrypt2 = rsa.ProcessBlock(temp, 128, 128);
-            var tempDecrypt = new byte[128];
-            var tempDecrypt2 = new byte[128];
-            if (decrypt.Length < 128)
-            {
-                Array.Copy(decrypt, 0, tempDecrypt, 128 - decrypt.Length, decrypt.Length);
-            }
-            
-            if (decrypt2.Length < 128)
-            {
-                Array.Copy(decrypt2, 0, tempDecrypt2, 128 - decrypt2.Length, decrypt2.Length);
-            }
-
-            return [..tempDecrypt, ..tempDecrypt2];
-        }
     }
     
     public async Task RequestServerList(int _loginOkID1, int _loginOkID2)
@@ -212,8 +172,18 @@ public class LoginController
             //l2Connection.Close();
             return;
         }
+
+        var serverList = new List<L2Server>()
+        {
+            new L2Server()
+            {
+                Code = "asd",
+                Id = 15,
+                Info = "test server"
+            }
+        };
         
-        //_client.SendAsync(ServerList.ToPacket(_client));
+        await l2Connection.SendAsync(PacketBuilder.ServerList(serverList));
     }
 
     public async Task RequestServerLogin(int _loginOkID1, int _loginOkID2, byte _serverId)
@@ -259,22 +229,7 @@ public class LoginController
         switch (p.FirstOpcode)
         {
             case 0x00:
-                if (p.Length >= 256)
-                {
-                    await RequestAuthLogin(
-                        p.ReadByteArrayAlt(128),
-                        p.ReadByteArrayAlt(128),
-                        true);
-                    break;
-                }
-                else if(p.Length >= 128)
-                {
-                    await RequestAuthLogin(
-                        p.ReadByteArrayAlt(128),
-                        Array.Empty<byte>(),
-                        false);
-                    break;
-                }
+                await RequestAuthLogin(p.ReadByteArrayAlt(256));
                 break;
             case 0x02:
                 var _loginOkID1t = p.ReadInt();

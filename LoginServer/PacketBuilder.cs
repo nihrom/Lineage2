@@ -1,4 +1,5 @@
 ﻿using Common.Network;
+using LoginServer.Models;
 
 namespace LoginServer;
 
@@ -16,6 +17,16 @@ public static class PacketBuilder
         p.WriteByte(0); // null termination
         return p;
     }
+    
+    public static Packet LoginFail(LoginFailReason reason)
+    {
+        byte opcode = 0x01;
+
+        var p = new Packet(opcode);
+        p.WriteByte((byte)reason);
+
+        return p;
+    }
 
     public static Packet LoginOk(int loginOkId1, int loginOkId2)
     {
@@ -29,13 +40,32 @@ public static class PacketBuilder
         p.WriteByteArray(new byte[16]);
         return p;
     }
-
-    public static Packet LoginFail(LoginFailReason reason)
+    
+    public static Packet ServerList(List<L2Server> servers)
     {
-        byte opcode = 0x01;
-
+        byte opcode = 0x04;
+        
         var p = new Packet(opcode);
-        p.WriteByte((byte)reason);
+        
+        p.WriteByte((byte)servers.Count, 1); //(byte)client.ActiveAccount.LastServer);
+        
+        foreach (L2Server server in servers)
+        {
+            int bits = 0x40;
+            if (server.TestMode)
+                bits |= 0x04;
+
+            p.WriteByte(server.Id);
+            p.WriteByteArray(server.GetIp());
+            p.WriteInt(server.Port);
+            p.WriteByte(server.AgeLimit);
+            p.WriteByte(server.IsPvp ? (byte)1 : (byte)0);
+            p.WriteShort(server.CurrentPlayers);
+            p.WriteShort(server.MaxPlayers);
+            p.WriteByte(server.Connected? (byte)1 : (byte)0); // status
+            p.WriteInt(1);//bits); // 1: Normal, 2: Relax, 4: Public Test, 8: No Label, 16: Character Creation Restricted, 32: Event, 64: Free
+            p.WriteByte(server.IsBrackets ? (byte)1 : (byte)0); //brackets
+        }
 
         return p;
     }
@@ -61,6 +91,8 @@ public static class PacketBuilder
 
         return p;
     }
+
+
 
     public static Packet KickPlayer(string account)
     {
