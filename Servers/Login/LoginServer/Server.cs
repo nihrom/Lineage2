@@ -1,4 +1,4 @@
-﻿using LoginServer.ClientNetwork;
+﻿using LoginServer.ClientsNetwork;
 using Microsoft.Extensions.Hosting;
 
 namespace LoginServer;

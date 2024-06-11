@@ -3,7 +3,7 @@ using Common.Cryptography;
 using Common.Network;
 using Serilog;
 
-namespace LoginServer.ClientNetwork;
+namespace LoginServer.ClientsNetwork;
 
 public class L2Connection : IDisposable
 {

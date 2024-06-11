@@ -1,4 +1,4 @@
-﻿namespace LoginServer.ClientNetwork;
+﻿namespace LoginServer.ClientsNetwork;
 
 public enum LoginClientState
 {

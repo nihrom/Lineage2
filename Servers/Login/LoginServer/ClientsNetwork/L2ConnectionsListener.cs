@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using Microsoft.Extensions.Options;
 using Serilog;
 
-namespace LoginServer.ClientNetwork;
+namespace LoginServer.ClientsNetwork;
 
 public class L2ConnectionsListener
 {
