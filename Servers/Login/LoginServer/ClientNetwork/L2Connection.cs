@@ -3,7 +3,7 @@ using Common.Cryptography;
 using Common.Network;
 using Serilog;
 
-namespace LoginServer;
+namespace LoginServer.ClientNetwork;
 
 public class L2Connection : IDisposable
 {
@@ -48,7 +48,7 @@ public class L2Connection : IDisposable
     /// <returns></returns>
     public async Task SendAsync(Packet p)
     {
-        SendingPacket?.Invoke(p);
+        await SendingPacket.Invoke(p);
         var data = p.GetBuffer();
         Crypt.Encrypt(data);
 

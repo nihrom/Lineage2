@@ -10,19 +10,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Login", "Login", "{FDAB717B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{8E36935B-E2FD-4EED-B9DF-916BE559548B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer", "LoginServer\LoginServer.csproj", "{C58230BD-441A-43B3-97BD-A5F8D7D4CBD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer", "Servers\Login\LoginServer\LoginServer.csproj", "{C58230BD-441A-43B3-97BD-A5F8D7D4CBD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "GameServer\GameServer.csproj", "{6F60A7F9-F9E4-47A4-9E15-E1478CAFFC01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "Servers\Game\GameServer\GameServer.csproj", "{6F60A7F9-F9E4-47A4-9E15-E1478CAFFC01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer.DataAccess", "GameServer.DataAccess\GameServer.DataAccess.csproj", "{CFD13C40-1B4C-46E6-8157-DF140BCA3435}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer.DataAccess", "Servers\Game\GameServer.DataAccess\GameServer.DataAccess.csproj", "{CFD13C40-1B4C-46E6-8157-DF140BCA3435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer.DataAccess", "LoginServer.DataAccess\LoginServer.DataAccess.csproj", "{B292997E-DDB9-44F0-A384-24982270B3BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer.DataAccess", "Servers\Login\LoginServer.DataAccess\LoginServer.DataAccess.csproj", "{B292997E-DDB9-44F0-A384-24982270B3BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Cryptography", "Common.Cryptography\Common.Cryptography.csproj", "{0C621B24-A092-4559-8FAB-8E70E41C6627}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Cryptography", "Commons\Common.Cryptography\Common.Cryptography.csproj", "{0C621B24-A092-4559-8FAB-8E70E41C6627}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Network", "Common.Network\Common.Network.csproj", "{D868B854-5BD6-4339-84C0-23691970AEA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Network", "Commons\Common.Network\Common.Network.csproj", "{D868B854-5BD6-4339-84C0-23691970AEA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utility", "Common.Utility\Common.Utility.csproj", "{0358D3A0-531C-4156-9B24-19B32CB2F546}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utility", "Commons\Common.Utility\Common.Utility.csproj", "{0358D3A0-531C-4156-9B24-19B32CB2F546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

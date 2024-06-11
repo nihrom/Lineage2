@@ -1,7 +1,7 @@
 ﻿using Common.Network;
 using LoginServer.Models;
 
-namespace LoginServer;
+namespace LoginServer.ClientNetwork;
 
 public static class PacketBuilder
 {

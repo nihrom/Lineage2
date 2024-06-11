@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using Microsoft.Extensions.Options;
 using Serilog;
 
-namespace LoginServer;
+namespace LoginServer.ClientNetwork;
 
 public class L2ConnectionsListener
 {
@@ -50,7 +50,7 @@ public class L2ConnectionsListener
         }
 
         logger.Information(
-            "Сервер аутентификации слушает входящих клиентов на {LocalEndpoint}",
+            "Логин Сервер слушает входящих клиентов на {LocalEndpoint}",
             tcpListener.LocalEndpoint.ToString());
         
         //TODO: CancellationToken
@@ -66,7 +66,7 @@ public class L2ConnectionsListener
             try
             {
                 var client = await tcpListener.AcceptTcpClientAsync(ct);
-                AcceptClient(client, ct);
+                await AcceptClient(client, ct);
             }
             catch (Exception e)
             {
@@ -75,7 +75,7 @@ public class L2ConnectionsListener
         }
     }
     
-    private void AcceptClient(TcpClient client, CancellationToken ct)
+    private async Task AcceptClient(TcpClient client, CancellationToken ct)
     {
         logger.Information(
             "Получен запрос на подключение от: {RemoteEndPoint}",
@@ -84,11 +84,15 @@ public class L2ConnectionsListener
         var connection = new L2Connection(client);
         var loginController = new LoginController(connection);
         
-        loginController.Init();
+        await loginController.Init();
 
         Task.Run(() => connection.ReadAsync(ct))
-            .ContinueWith(antecedent => client.Dispose())
-            .ContinueWith(antecedent => logger.Information("Client disposed"));
+            .ContinueWith(
+                _ => client.Dispose(),
+                CancellationToken.None)
+            .ContinueWith(
+                _ => logger.Information("Client disposed"),
+                CancellationToken.None);
     }
     
     public void Stop()

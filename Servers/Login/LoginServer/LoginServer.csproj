@@ -31,8 +31,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common.Cryptography\Common.Cryptography.csproj" />
-      <ProjectReference Include="..\Common.Network\Common.Network.csproj" />
+      <ProjectReference Include="..\..\..\Commons\Common.Cryptography\Common.Cryptography.csproj" />
+      <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
     </ItemGroup>
 
 </Project>
