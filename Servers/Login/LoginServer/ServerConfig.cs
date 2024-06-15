@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace LoginServer;
+﻿namespace LoginServer;
 
 public sealed class ServerConfig
 {
@@ -8,7 +6,7 @@ public sealed class ServerConfig
 
     public int Port { get; set; }
 
-    public int GsPort { get; set; }
+    public int GameServersPort { get; set; }
 
     public bool AutoCreate { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac.Extensions.DependencyInjection;
+using GameServer.LoginServerNetwork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -7,6 +8,8 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
     .CreateLogger();
+
+await LoginServerNetworkManager.StartAsync();
 
 await CreateHostBuilder(args)
     .Build()

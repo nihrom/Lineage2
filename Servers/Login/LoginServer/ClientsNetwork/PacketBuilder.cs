@@ -69,62 +69,6 @@ public static class PacketBuilder
 
         return p;
     }
-    
-    public static Packet AuthResponse(byte serverId, string serverName)
-    {
-        byte opcode = 0x02;
-
-        var p = new Packet(opcode);
-        p.WriteByte(serverId);
-        p.WriteString(serverName);
-
-        return p;
-    }
-
-    public static Packet PlayerAuthResponse(string account, bool response)
-    {
-        byte opcode = 0x03;
-
-        var p = new Packet(opcode);
-        p.WriteString(account);
-        p.WriteByte(response ? (byte)1 : (byte)0);
-
-        return p;
-    }
-
-
-
-    public static Packet KickPlayer(string account)
-    {
-        byte opcode = 0x04;
-
-        var p = new Packet(opcode);
-        p.WriteString(account);
-
-        return p;
-    }
-
-    public static Packet RequestCharacters(string account)
-    {
-        byte opcode = 0x05;
-
-        var p = new Packet(opcode);
-        p.WriteString(account);
-
-        return p;
-    }
-
-    public static Packet ChangePasswordResponse(byte successful, string characterName, string msgToSend)
-    {
-        byte opcode = 0x06;
-        
-        var p = new Packet(opcode);
-        // writeByte(successful); // 0 false, 1 true
-        p.WriteString(characterName);
-        p.WriteString(msgToSend);
-
-        return p;
-    }
 
     public static Packet GGAuth(int sessionId)
     {

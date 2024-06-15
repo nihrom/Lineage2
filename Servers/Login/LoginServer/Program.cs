@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using LoginServer;
 using LoginServer.ClientsNetwork;
+using LoginServer.ServersNetwork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +16,8 @@ Log.Logger = new LoggerConfiguration()
 await CreateHostBuilder(args)
     .Build()
     .RunAsync();
+
+return;
 
 static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder()
@@ -33,6 +36,7 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         {
             builder.RegisterType<Server>();
             builder.RegisterType<L2ConnectionsListener>().SingleInstance();
+            builder.RegisterType<L2ServersConnectionsListener>().SingleInstance();
         })
         .UseSerilog(Log.Logger, false)
         .UseConsoleLifetime();

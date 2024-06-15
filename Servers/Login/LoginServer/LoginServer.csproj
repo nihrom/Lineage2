@@ -35,8 +35,4 @@
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ServersNetwork\" />
-    </ItemGroup>
-
 </Project>
