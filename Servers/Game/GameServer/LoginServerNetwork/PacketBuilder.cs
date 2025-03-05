@@ -94,6 +94,7 @@ public static class PacketBuilder
     public static Packet ServerStatus() //-
     {
         var p = new Packet(0x06);
+        p.WriteInt(0);
         // p.WriteInt(_attributes.size());
         // for (Attribute temp : _attributes)
         // {
@@ -103,7 +104,6 @@ public static class PacketBuilder
         
         return p;
     }
-    
     
     public static Packet PlayerTracert(string account, string pcIp, string hop1, string hop2, string hop3, string hop4) //+
     {

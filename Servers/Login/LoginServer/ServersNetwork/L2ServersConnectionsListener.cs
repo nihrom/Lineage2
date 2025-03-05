@@ -86,7 +86,6 @@ public class L2ServersConnectionsListener
         
         var l2GameServerAvatar = new L2GameServerAvatar(client);
         
-        
         await l2GameServerAvatar.Init();
         
         _ = Task

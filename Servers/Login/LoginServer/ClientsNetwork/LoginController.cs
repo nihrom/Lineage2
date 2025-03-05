@@ -29,8 +29,8 @@ public class LoginController
         var random = new Random();
 
         sessionId = random.Next();
-        scrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair()); //TODO: Возможно нужен пул ключей
-        random.NextBytes(blowfish); //TODO: Возможно нужен пул ключей
+        scrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
+        random.NextBytes(blowfish);
     }
 
     public async Task Init()

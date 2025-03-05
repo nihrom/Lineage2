@@ -4,10 +4,10 @@ namespace LoginServer.ServersNetwork;
 
 public static class PacketBuilder
 {
-    public static Packet InitLS_0x00(int protocolRev, byte[] publicKey) //+
+    public static Packet InitLS_0x00(byte[] publicKey) //+
     {
         var p = new Packet(0x00);
-        p.WriteInt(protocolRev);
+        p.WriteInt(0x0106);
         p.WriteInt(publicKey.Length);
         p.WriteByte(publicKey);
 
@@ -44,7 +44,7 @@ public static class PacketBuilder
         var p = new Packet(0x03);
         p.WriteString(account);
         p.WriteByte(response ? (byte)1 : (byte)0);
-
+        
         return p;
     }
 

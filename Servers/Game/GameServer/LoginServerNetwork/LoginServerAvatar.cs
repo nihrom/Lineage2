@@ -12,17 +12,33 @@ public class LoginServerAvatar : L2LoginServerConnection
 
     private async Task InitLS(Packet packet)
     {
+        var rev = packet.ReadInt();
+        var size = packet.ReadInt();
+
+        var key = packet.ReadBytesArray(size);
         
+        //Send blowFish
+
+        await SendAsync(PacketBuilder.AuthRequest(
+            1,
+            false,
+            new byte[]{1},
+            7777,
+            false,
+            2000,
+            new List<string>(){"123123"},
+            new List<string>(){"123123"}));
     }
     
     private async Task LoginServerFail(Packet packet)
     {
-        
+        logger.Error("LoginServerFail packet не реализован");
     }
     
     private async Task AuthResponse(Packet packet)
     {
-        
+        await SendAsync(PacketBuilder.ServerStatus());
+        await SendAsync(PacketBuilder.PlayerInGame("dfgdfg"));
     }
     
     private async Task PlayerAuthResponse(Packet packet)
