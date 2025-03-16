@@ -2,7 +2,7 @@
 using Common.Network;
 using Serilog;
 
-namespace GameServer.LoginServerNetwork;
+namespace GameServer.Network.LoginServer.LoginServerNetwork;
 
 public class L2LoginServerConnection
 {

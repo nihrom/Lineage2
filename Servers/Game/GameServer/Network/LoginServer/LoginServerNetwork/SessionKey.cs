@@ -1,4 +1,4 @@
-﻿namespace GameServer.LoginServerNetwork;
+﻿namespace GameServer.Network.LoginServer.LoginServerNetwork;
 
 public class SessionKey
 {

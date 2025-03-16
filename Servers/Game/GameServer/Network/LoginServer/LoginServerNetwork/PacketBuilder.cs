@@ -1,6 +1,6 @@
 ﻿using Common.Network;
 
-namespace GameServer.LoginServerNetwork;
+namespace GameServer.Network.LoginServer.LoginServerNetwork;
 
 public static class PacketBuilder
 {

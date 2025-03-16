@@ -1,5 +1,5 @@
 ﻿using Autofac.Extensions.DependencyInjection;
-using GameServer.LoginServerNetwork;
+using GameServer.Network.LoginServer.LoginServerNetwork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
