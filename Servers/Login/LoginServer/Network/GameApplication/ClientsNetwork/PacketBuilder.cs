@@ -2,7 +2,7 @@
 using LoginServer.Models;
 using LoginServer.Network.GameApplication.Packets.Sent;
 
-namespace LoginServer.ClientsNetwork;
+namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public static class PacketBuilder
 {

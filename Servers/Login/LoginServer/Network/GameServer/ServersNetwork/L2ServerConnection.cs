@@ -1,8 +1,8 @@
-﻿namespace LoginServer.ServersNetwork;
-
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using Common.Network;
 using Serilog;
+
+namespace LoginServer.Network.GameServer.ServersNetwork;
 
 public class L2ServerConnection : IDisposable
 {

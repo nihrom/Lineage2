@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using LoginServer;
-using LoginServer.ClientsNetwork;
-using LoginServer.ServersNetwork;
+using LoginServer.Network.GameApplication.ClientsNetwork;
+using LoginServer.Network.GameServer.ServersNetwork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

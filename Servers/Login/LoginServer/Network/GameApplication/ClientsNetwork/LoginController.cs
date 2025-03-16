@@ -5,7 +5,7 @@ using LoginServer.Models;
 using Org.BouncyCastle.Crypto.Engines;
 using Serilog;
 
-namespace LoginServer.ClientsNetwork;
+namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public class LoginController
 {

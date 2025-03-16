@@ -1,5 +1,5 @@
 ﻿using System.Net.Sockets;
-using LoginServer.ClientsNetwork;
+using LoginServer.Network.GameApplication.ClientsNetwork;
 
 namespace LoginServer;
 

@@ -1,4 +1,4 @@
-﻿namespace LoginServer.ClientsNetwork;
+﻿namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public enum LoginFailReason
 {
