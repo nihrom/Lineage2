@@ -5,7 +5,7 @@ namespace Common.Network;
 /// <summary>
 /// Represents client packet structure.
 /// </summary>
-public struct Packet
+public class Packet
 {
      /// <summary>
         /// Overflow value.
