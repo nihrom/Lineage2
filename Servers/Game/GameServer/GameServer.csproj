@@ -27,7 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Network\GameApplication\Packets\Listenable\" />
       <Folder Include="Network\LoginServer\Packets\Listenable\" />
     </ItemGroup>
 
