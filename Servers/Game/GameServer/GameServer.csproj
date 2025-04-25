@@ -26,8 +26,4 @@
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Network\LoginServer\Packets\Listenable\" />
-    </ItemGroup>
-
 </Project>
