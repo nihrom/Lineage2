@@ -57,7 +57,10 @@ public class L2GameServerAvatar : L2ServerConnection
 
         if (HandleRegProcess())
         {
-            await SendAsync(PacketBuilder.AuthResponse_0x02(1, "SuperServer"));
+            await SendAsync(
+                PacketBuilder.AuthResponse_0x02(
+                    1,
+                    "SuperServer"));
         }
 
         bool HandleRegProcess()

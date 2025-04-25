@@ -35,9 +35,4 @@
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Network\GameApplication\Packets\Listenable\" />
-      <Folder Include="Network\GameServer\Packets\Listenable\" />
-    </ItemGroup>
-
 </Project>
