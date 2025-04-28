@@ -6,11 +6,11 @@ public class RequestExMagicSkillUseGround
 {
     public RequestExMagicSkillUseGround(Packet packet)
     {
-        _x = readInt();
-        _y = readInt();
-        _z = readInt();
-        _skillId = readInt();
-        _ctrlPressed = readInt() != 0;
-        _shiftPressed = readByte() != 0;
+        var _x = packet.ReadInt();
+        var _y = packet.ReadInt();
+        var _z = packet.ReadInt();
+        var _skillId = packet.ReadInt();
+        var _ctrlPressed = packet.ReadInt() != 0;
+        var _shiftPressed = packet.ReadByte() != 0;
     }
 }

@@ -6,7 +6,7 @@ public class RequestDestroyItem
 {
     public RequestDestroyItem(Packet packet)
     {
-        // _objectId = readInt();
-        // _count = readInt();
+        var _objectId = packet.ReadInt();
+        var _count = packet.ReadInt();
     }
 }

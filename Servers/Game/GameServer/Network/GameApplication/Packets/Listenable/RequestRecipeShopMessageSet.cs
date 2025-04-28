@@ -6,6 +6,6 @@ public class RequestRecipeShopMessageSet
 {
     public RequestRecipeShopMessageSet(Packet packet)
     {
-        _name = readString();
+        var _name = packet.ReadString();
     }
 }

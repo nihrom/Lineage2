@@ -6,6 +6,6 @@ public class CharacterRestore
 {
     public CharacterRestore(Packet packet)
     {
-        // _charSlot = readInt();
+        var _charSlot = packet.ReadInt();
     }
 }

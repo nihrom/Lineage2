@@ -6,7 +6,7 @@ public class RequestJoinParty
 {
     public RequestJoinParty(Packet packet)
     {
-        _name = readString();
-        _partyDistributionTypeId = readInt();
+        var _name = packet.ReadString();
+        var _partyDistributionTypeId = packet.ReadInt();
     }
 }

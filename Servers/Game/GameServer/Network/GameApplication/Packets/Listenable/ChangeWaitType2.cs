@@ -6,6 +6,6 @@ public class ChangeWaitType2
 {
     public ChangeWaitType2(Packet packet)
     {
-        // _typeStand = readInt() == 1;
+        var _typeStand = packet.ReadInt() == 1;
     }
 }

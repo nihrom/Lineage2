@@ -6,6 +6,6 @@ public class RequestRecipeItemMakeInfo
 {
     public RequestRecipeItemMakeInfo(Packet packet)
     {
-        _id = readInt();
+        var _id = packet.ReadInt();
     }
 }

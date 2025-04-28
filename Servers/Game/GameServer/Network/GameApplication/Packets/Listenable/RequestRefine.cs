@@ -6,9 +6,9 @@ public class RequestRefine
 {
     public RequestRefine(Packet packet)
     {
-        _targetItemObjId = readInt();
-        _refinerItemObjId = readInt();
-        _gemStoneItemObjId = readInt();
-        _gemStoneCount = readInt();
+        var _targetItemObjId = packet.ReadInt();
+        var _refinerItemObjId = packet.ReadInt();
+        var _gemStoneItemObjId = packet.ReadInt();
+        var _gemStoneCount = packet.ReadInt();
     }
 }

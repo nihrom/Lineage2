@@ -6,11 +6,11 @@ public class RequestSetAllyCrest
 {
     public RequestSetAllyCrest(Packet packet)
     {
-        _length = readInt();
+        var _length = packet.ReadInt();
         if (_length > 192)
         {
             return;
         }
-        _data = readBytes(_length);
+        var _data = packet.ReadBytes(_length);
     }
 }

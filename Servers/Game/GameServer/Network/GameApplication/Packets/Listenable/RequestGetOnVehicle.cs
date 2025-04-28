@@ -6,7 +6,7 @@ public class RequestGetOnVehicle
 {
     public RequestGetOnVehicle(Packet packet)
     {
-        _boatId = readInt();
-        _pos = new Location(readInt(), readInt(), readInt());
+        var _boatId = packet.ReadInt();
+        var _pos = new Location(packet.ReadInt(), packet.ReadInt(), packet.ReadInt());
     }
 }

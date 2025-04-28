@@ -6,8 +6,8 @@ public class RequestGMCommand
 {
     public RequestGMCommand(Packet packet)
     {
-        _targetName = readString();
-        _command = readInt();
-        // _unknown = readInt();
+        var _targetName = packet.ReadString();
+        var _command = packet.ReadInt();
+        // _unknown = packet.ReadInt();
     }
 }

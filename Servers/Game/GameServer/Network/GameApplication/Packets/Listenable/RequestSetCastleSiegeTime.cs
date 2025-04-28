@@ -6,8 +6,8 @@ public class RequestSetCastleSiegeTime
 {
     public RequestSetCastleSiegeTime(Packet packet)
     {
-        _castleId = readInt();
-        _time = readInt();
+        var _castleId = packet.ReadInt();
+        var _time = packet.ReadInt();
         _time *= 1000;
     }
 }

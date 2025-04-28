@@ -6,8 +6,8 @@ public class RequestPrivateStoreSell
 {
     public RequestPrivateStoreSell(Packet packet)
     {
-        _storePlayerId = readInt();
-        final int count = readInt();
+        var _storePlayerId = packet.ReadInt();
+         int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -16,12 +16,12 @@ public class RequestPrivateStoreSell
         _items = new ItemRequest[count];
         for (int i = 0; i < count; i++)
         {
-            final int objectId = readInt();
-            final int itemId = readInt();
+             int objectId = packet.ReadInt();
+             int itemId = packet.ReadInt();
             readShort(); // TODO analyse this
             readShort(); // TODO analyse this
-            final int cnt = readInt();
-            final int price = readInt();
+             int cnt = packet.ReadInt();
+             int price = packet.ReadInt();
             if ((count > Integer.MAX_VALUE) || (objectId < 1) || (itemId < 1) || (cnt < 1) || (price < 0))
             {
                 _items = null;

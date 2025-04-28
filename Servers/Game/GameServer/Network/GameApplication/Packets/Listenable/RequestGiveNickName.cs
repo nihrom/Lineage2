@@ -6,7 +6,7 @@ public class RequestGiveNickName
 {
     public RequestGiveNickName(Packet packet)
     {
-        _target = readString();
-        _title = readString();
+        var _target = packet.ReadString();
+        var _title = packet.ReadString();
     }
 }

@@ -6,8 +6,8 @@ public class RequestSetSeed
 {
     public RequestSetSeed(Packet packet)
     {
-        _manorId = readInt();
-        final int count = readInt();
+        var _manorId = packet.ReadInt();
+         int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -16,9 +16,9 @@ public class RequestSetSeed
         _items = new ArrayList<>(count);
         for (int i = 0; i < count; i++)
         {
-            final int itemId = readInt();
-            final int sales = readInt();
-            final int price = readInt();
+             int itemId = packet.ReadInt();
+             int sales = packet.ReadInt();
+             int price = packet.ReadInt();
             if ((itemId < 1) || (sales < 0) || (price < 0))
             {
                 _items.clear();

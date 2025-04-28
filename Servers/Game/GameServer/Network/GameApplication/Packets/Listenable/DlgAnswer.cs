@@ -6,8 +6,8 @@ public class DlgAnswer
 {
     public DlgAnswer(Packet packet)
     {
-        // _messageId = readInt();
-        // _answer = readInt();
-        // _requesterId = readInt();
+        var _messageId = packet.ReadInt();
+        var _answer = packet.ReadInt();
+        var _requesterId = packet.ReadInt();
     }
 }

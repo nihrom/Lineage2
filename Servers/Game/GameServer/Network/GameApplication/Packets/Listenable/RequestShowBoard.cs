@@ -6,6 +6,6 @@ public class RequestShowBoard
 {
     public RequestShowBoard(Packet packet)
     {
-        readInt(); // Unused.
+        packet.ReadInt(); // Unused.
     }
 }

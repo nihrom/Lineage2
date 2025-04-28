@@ -6,6 +6,6 @@ public class RequestAnswerJoinPledge
 {
     public RequestAnswerJoinPledge(Packet packet)
     {
-        // _answer = readInt();
+        var _answer = packet.ReadInt();
     }
 }

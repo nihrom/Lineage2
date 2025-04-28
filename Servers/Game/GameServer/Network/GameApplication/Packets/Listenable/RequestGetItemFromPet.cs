@@ -6,8 +6,8 @@ public class RequestGetItemFromPet
 {
     public RequestGetItemFromPet(Packet packet)
     {
-        _objectId = readInt();
-        _amount = readInt();
-        _unknown = readInt(); // = 0 for most trades
+        var _objectId = packet.ReadInt();
+        var _amount = packet.ReadInt();
+        var _unknown = packet.ReadInt(); // = 0 for most trades
     }
 }

@@ -6,8 +6,8 @@ public class RequestSellItem
 {
     public RequestSellItem(Packet packet)
     {
-        _listId = readInt();
-        final int size = readInt();
+        var _listId = packet.ReadInt();
+         int size = packet.ReadInt();
         if ((size <= 0) || (size > Config.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -16,9 +16,9 @@ public class RequestSellItem
         _items = new ArrayList<>(size);
         for (int i = 0; i < size; i++)
         {
-            final int objectId = readInt();
-            final int itemId = readInt();
-            final int count = readInt();
+             int objectId = packet.ReadInt();
+             int itemId = packet.ReadInt();
+             int count = packet.ReadInt();
             if ((count > Integer.MAX_VALUE) || (objectId < 1) || (itemId < 1) || (count < 1))
             {
                 _items = null;

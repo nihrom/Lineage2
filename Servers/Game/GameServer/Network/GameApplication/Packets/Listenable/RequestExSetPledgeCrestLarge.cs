@@ -6,12 +6,12 @@ public class RequestExSetPledgeCrestLarge
 {
     public RequestExSetPledgeCrestLarge(Packet packet)
     {
-        _length = readInt();
+        var _length = packet.ReadInt();
         if (_length > 2176)
         {
             return;
         }
 		
-        _data = readBytes(_length);
+        var _data = packet.ReadBytes(_length);
     }
 }

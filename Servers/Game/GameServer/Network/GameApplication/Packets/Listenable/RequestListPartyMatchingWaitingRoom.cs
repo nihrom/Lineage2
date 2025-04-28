@@ -6,9 +6,9 @@ public class RequestListPartyMatchingWaitingRoom
 {
     public RequestListPartyMatchingWaitingRoom(Packet packet)
     {
-        _page = readInt();
-        _minLevel = readInt();
-        _maxLevel = readInt();
-        _mode = readInt();
+        var _page = packet.ReadInt();
+        var _minLevel = packet.ReadInt();
+        var _maxLevel = packet.ReadInt();
+        var _mode = packet.ReadInt();
     }
 }

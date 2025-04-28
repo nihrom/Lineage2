@@ -6,8 +6,8 @@ public class RequestActionUse
 {
     public RequestActionUse(Packet packet)
     {
-        // _actionId = readInt();
-        // _ctrlPressed = readInt() == 1;
-        // _shiftPressed = readByte() == 1;
+        var _actionId = packet.ReadInt();
+        var _ctrlPressed = packet.ReadInt() == 1;
+        var _shiftPressed = packet.ReadByte() == 1;
     }
 }

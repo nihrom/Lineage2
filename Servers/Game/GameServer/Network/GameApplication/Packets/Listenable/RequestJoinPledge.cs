@@ -6,7 +6,7 @@ public class RequestJoinPledge
 {
     public RequestJoinPledge(Packet packet)
     {
-        _target = readInt();
-        _pledgeType = readInt();
+        var _target = packet.ReadInt();
+        var _pledgeType = packet.ReadInt();
     }
 }

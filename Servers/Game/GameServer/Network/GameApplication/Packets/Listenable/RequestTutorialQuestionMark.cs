@@ -6,6 +6,6 @@ public class RequestTutorialQuestionMark
 {
     public RequestTutorialQuestionMark(Packet packet)
     {
-        _number = readInt();
+        var _number = packet.ReadInt();
     }
 }

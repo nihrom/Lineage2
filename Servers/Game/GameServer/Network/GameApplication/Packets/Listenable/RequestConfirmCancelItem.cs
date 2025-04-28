@@ -6,6 +6,6 @@ public class RequestConfirmCancelItem
 {
     public RequestConfirmCancelItem(Packet packet)
     {
-        // _objectId = readInt();
+        var _objectId = packet.ReadInt();
     }
 }

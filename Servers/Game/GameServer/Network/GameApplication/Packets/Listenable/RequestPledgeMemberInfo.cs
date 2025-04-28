@@ -6,7 +6,7 @@ public class RequestPledgeMemberInfo
 {
     public RequestPledgeMemberInfo(Packet packet)
     {
-        _unk1 = readInt();
-        _player = readString();
+        var _unk1 = packet.ReadInt();
+        var _player = packet.ReadString();
     }
 }

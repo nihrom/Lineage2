@@ -6,6 +6,6 @@ public class RequestEvaluate
 {
     public RequestEvaluate(Packet packet)
     {
-        // readInt(); // target Id
+        packet.ReadInt(); // target Id
     }
 }

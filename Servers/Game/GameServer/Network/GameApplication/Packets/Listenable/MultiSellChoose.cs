@@ -6,8 +6,8 @@ public class MultiSellChoose
 {
     public MultiSellChoose(Packet packet)
     {
-        // _listId = readInt();
-        // _entryId = readInt();
-        // _amount = readInt();
+        var _listId = packet.ReadInt();
+        var _entryId = packet.ReadInt();
+        var _amount = packet.ReadInt();
     }
 }

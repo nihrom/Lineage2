@@ -6,7 +6,7 @@ public class SetPrivateStoreListBuy
 {
     public SetPrivateStoreListBuy(Packet packet)
     {
-        final int count = readInt();
+         int count = packet.ReadInt();
         if ((count < 1) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) > remaining()))
         {
             return;
@@ -15,12 +15,12 @@ public class SetPrivateStoreListBuy
         _items = new Item[count];
         for (int i = 0; i < count; i++)
         {
-            final int itemId = readInt();
-            readShort(); // Enchant?
-            readShort(); // TODO analyse this
+             int itemId = packet.ReadInt();
+            packet.ReadShort(); // Enchant?
+            packet.ReadShort(); // TODO analyse this
 			
-            final int cnt = readInt();
-            final int price = readInt();
+             int cnt = packet.ReadInt();
+             int price = packet.ReadInt();
             if ((cnt > Integer.MAX_VALUE) || (itemId < 1) || (cnt < 1) || (price < 0))
             {
                 _items = null;

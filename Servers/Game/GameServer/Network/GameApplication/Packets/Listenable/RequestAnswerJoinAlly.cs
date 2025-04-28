@@ -6,6 +6,6 @@ public class RequestAnswerJoinAlly
 {
     public RequestAnswerJoinAlly(Packet packet)
     {
-        // _response = readInt();
+        var _response = packet.ReadInt();
     }
 }

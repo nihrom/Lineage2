@@ -6,6 +6,6 @@ public class RequestAskJoinPartyRoom
 {
     public RequestAskJoinPartyRoom(Packet packet)
     {
-        // _name = readString();
+        var _name = packet.ReadString();
     }
 }

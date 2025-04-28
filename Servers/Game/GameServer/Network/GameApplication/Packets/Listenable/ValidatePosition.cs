@@ -6,10 +6,10 @@ public class ValidatePosition
 {
     public ValidatePosition(Packet packet)
     {
-        _x = readInt();
-        _y = readInt();
-        _z = readInt();
-        _heading = readInt();
-        readInt(); // vehicle id
+        var _x = packet.ReadInt();
+        var _y = packet.ReadInt();
+        var _z = packet.ReadInt();
+        var _heading = packet.ReadInt();
+        packet.ReadInt(); // vehicle id
     }
 }

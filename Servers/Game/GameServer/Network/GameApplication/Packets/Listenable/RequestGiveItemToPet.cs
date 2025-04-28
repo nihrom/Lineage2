@@ -6,7 +6,7 @@ public class RequestGiveItemToPet
 {
     public RequestGiveItemToPet(Packet packet)
     {
-        _objectId = readInt();
-        _amount = readInt();
+        var _objectId = packet.ReadInt();
+        var _amount = packet.ReadInt();
     }
 }

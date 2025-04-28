@@ -6,7 +6,7 @@ public class SendBypassBuildCmd
 {
     public SendBypassBuildCmd(Packet packet)
     {
-        _command = readString();
+        var _command = packet.ReadString();
         if (_command != null)
         {
             _command = _command.trim();

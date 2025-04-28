@@ -6,9 +6,9 @@ public class RequestPledgeReorganizeMember
 {
     public RequestPledgeReorganizeMember(Packet packet)
     {
-        _isMemberSelected = readInt();
-        _memberName = readString();
-        _newPledgeType = readInt();
-        _selectedMember = readString();
+        var _isMemberSelected = packet.ReadInt();
+        var _memberName = packet.ReadString();
+        var _newPledgeType = packet.ReadInt();
+        var _selectedMember = packet.ReadString();
     }
 }

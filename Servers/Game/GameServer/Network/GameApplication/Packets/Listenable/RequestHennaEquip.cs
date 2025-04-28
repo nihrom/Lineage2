@@ -6,6 +6,6 @@ public class RequestHennaEquip
 {
     public RequestHennaEquip(Packet packet)
     {
-        _symbolId = readInt();
+        var _symbolId = packet.ReadInt();
     }
 }

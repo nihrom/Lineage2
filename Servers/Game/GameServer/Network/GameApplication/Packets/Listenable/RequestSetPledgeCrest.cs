@@ -6,12 +6,12 @@ public class RequestSetPledgeCrest
 {
     public RequestSetPledgeCrest(Packet packet)
     {
-        _length = readInt();
+        var _length = packet.ReadInt();
         if (_length > 256)
         {
             return;
         }
 		
-        _data = readBytes(_length);
+        var _data = packet.ReadBytes(_length);
     }
 }

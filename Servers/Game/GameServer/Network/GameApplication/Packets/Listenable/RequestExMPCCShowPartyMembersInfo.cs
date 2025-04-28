@@ -6,6 +6,6 @@ public class RequestExMPCCShowPartyMembersInfo
 {
     public RequestExMPCCShowPartyMembersInfo(Packet packet)
     {
-        _partyLeaderId = readInt();
+        var _partyLeaderId = packet.ReadInt();
     }
 }

@@ -6,6 +6,6 @@ public class RequestRecipeBookDestroy
 {
     public RequestRecipeBookDestroy(Packet packet)
     {
-        _recipeID = readInt();
+        var _recipeID = packet.ReadInt();
     }
 }

@@ -6,9 +6,9 @@ public class RequestGetOffVehicle
 {
     public RequestGetOffVehicle(Packet packet)
     {
-        _boatId = readInt();
-        _x = readInt();
-        _y = readInt();
-        _z = readInt();
+        var _boatId = packet.ReadInt();
+        var _x = packet.ReadInt();
+        var _y = packet.ReadInt();
+        var _z = packet.ReadInt();
     }
 }

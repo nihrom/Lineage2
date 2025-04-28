@@ -6,7 +6,7 @@ public class RequestProcureCropList
 {
     public RequestProcureCropList(Packet packet)
     {
-        final int count = readInt();
+         int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -15,10 +15,10 @@ public class RequestProcureCropList
         _items = new ArrayList<>(count);
         for (int i = 0; i < count; i++)
         {
-            final int objId = readInt();
-            final int itemId = readInt();
-            final int manorId = readInt();
-            int cnt = readInt();
+             int objId = packet.ReadInt();
+             int itemId = packet.ReadInt();
+             int manorId = packet.ReadInt();
+            int cnt = packet.ReadInt();
             if (cnt > Integer.MAX_VALUE)
             {
                 cnt = Integer.MAX_VALUE;

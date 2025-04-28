@@ -6,6 +6,6 @@ public class SnoopQuit
 {
     public SnoopQuit(Packet packet)
     {
-        _snoopID = readInt();
+        var _snoopID = packet.ReadInt();
     }
 }

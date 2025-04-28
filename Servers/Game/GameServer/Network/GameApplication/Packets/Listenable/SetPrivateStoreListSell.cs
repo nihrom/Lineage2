@@ -6,8 +6,8 @@ public class SetPrivateStoreListSell
 {
     public SetPrivateStoreListSell(Packet packet)
     {
-        _packageSale = (readInt() == 1);
-        final int count = readInt();
+        var _packageSale = (packet.ReadInt() == 1);
+         int count = packet.ReadInt();
         if ((count < 1) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -16,9 +16,9 @@ public class SetPrivateStoreListSell
         _items = new Item[count];
         for (int i = 0; i < count; i++)
         {
-            final int itemId = readInt();
-            final int cnt = readInt();
-            final int price = readInt();
+             int itemId = packet.ReadInt();
+             int cnt = packet.ReadInt();
+             int price = packet.ReadInt();
             if ((cnt > Integer.MAX_VALUE) || (itemId < 1) || (cnt < 1) || (price < 0))
             {
                 _items = null;

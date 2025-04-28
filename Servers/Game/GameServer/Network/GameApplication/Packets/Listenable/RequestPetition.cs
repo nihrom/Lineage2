@@ -6,7 +6,7 @@ public class RequestPetition
 {
     public RequestPetition(Packet packet)
     {
-        _content = readString();
-        _type = readInt();
+        var _content = packet.ReadString();
+        var _type = packet.ReadInt();
     }
 }

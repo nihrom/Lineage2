@@ -6,6 +6,6 @@ public class RequestOustFromPartyRoom
 {
     public RequestOustFromPartyRoom(Packet packet)
     {
-        _charid = readInt();
+        var _charid = packet.ReadInt();
     }
 }

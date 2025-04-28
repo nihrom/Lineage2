@@ -6,7 +6,7 @@ public class RequestPetUseItem
 {
     public RequestPetUseItem(Packet packet)
     {
-        _objectId = readInt();
+        var _objectId = packet.ReadInt();
         // TODO: implement me properly
         // readLong();
         // readInt();

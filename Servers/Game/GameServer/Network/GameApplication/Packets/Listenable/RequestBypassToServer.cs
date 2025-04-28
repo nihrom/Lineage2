@@ -6,6 +6,6 @@ public class RequestBypassToServer
 {
     public RequestBypassToServer(Packet packet)
     {
-        // _command = readString();
+        var _command = packet.ReadString();
     }
 }

@@ -6,7 +6,7 @@ public class RequestSendFriendMsg
 {
     public RequestSendFriendMsg(Packet packet)
     {
-        _message = readString();
-        _reciever = readString();
+        var _message = packet.ReadString();
+        var _reciever = packet.ReadString();
     }
 }

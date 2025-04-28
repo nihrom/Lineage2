@@ -6,6 +6,6 @@ public class RequestStopPledgeWar
 {
     public RequestStopPledgeWar(Packet packet)
     {
-        _pledgeName = readString();
+        var _pledgeName = packet.ReadString();
     }
 }

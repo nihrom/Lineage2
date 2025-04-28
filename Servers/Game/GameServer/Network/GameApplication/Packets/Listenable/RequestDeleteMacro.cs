@@ -6,6 +6,6 @@ public class RequestDeleteMacro
 {
     public RequestDeleteMacro(Packet packet)
     {
-        // _id = readInt();
+        var _id = packet.ReadInt();
     }
 }

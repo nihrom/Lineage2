@@ -6,6 +6,6 @@ public class RequestChangePartyLeader
 {
     public RequestChangePartyLeader(Packet packet)
     {
-        // _name = readString();
+        var _name = packet.ReadString();
     }
 }

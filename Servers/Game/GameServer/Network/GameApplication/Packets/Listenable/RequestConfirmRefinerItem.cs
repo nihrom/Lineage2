@@ -6,7 +6,7 @@ public class RequestConfirmRefinerItem
 {
     public RequestConfirmRefinerItem(Packet packet)
     {
-        // _targetItemObjId = readInt();
-        // _refinerItemObjId = readInt();
+        var _targetItemObjId = packet.ReadInt();
+        var _refinerItemObjId = packet.ReadInt();
     }
 }

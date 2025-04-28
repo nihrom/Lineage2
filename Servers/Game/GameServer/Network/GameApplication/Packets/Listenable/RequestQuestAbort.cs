@@ -6,6 +6,6 @@ public class RequestQuestAbort
 {
     public RequestQuestAbort(Packet packet)
     {
-        _questId = readInt();
+        var _questId = packet.ReadInt();
     }
 }

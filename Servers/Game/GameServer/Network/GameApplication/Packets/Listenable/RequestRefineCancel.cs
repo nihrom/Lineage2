@@ -6,6 +6,6 @@ public class RequestRefineCancel
 {
     public RequestRefineCancel(Packet packet)
     {
-        _targetItemObjId = readInt();
+        var _targetItemObjId = packet.ReadInt();
     }
 }

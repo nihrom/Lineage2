@@ -6,6 +6,6 @@ public class RequestOustPartyMember
 {
     public RequestOustPartyMember(Packet packet)
     {
-        _name = readString();
+        var _name = packet.ReadString();
     }
 }

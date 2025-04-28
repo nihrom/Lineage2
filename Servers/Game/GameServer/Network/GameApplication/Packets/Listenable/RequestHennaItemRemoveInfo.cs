@@ -6,6 +6,6 @@ public class RequestHennaItemRemoveInfo
 {
     public RequestHennaItemRemoveInfo(Packet packet)
     {
-        _symbolId = readInt();
+        var _symbolId = packet.ReadInt();
     }
 }

@@ -6,6 +6,6 @@ public class RequestRestartPoint
 {
     public RequestRestartPoint(Packet packet)
     {
-        _requestedPointType = readInt();
+        var _requestedPointType = packet.ReadInt();
     }
 }

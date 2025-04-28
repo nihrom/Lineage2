@@ -6,8 +6,8 @@ public class RequestJoinSiege
 {
     public RequestJoinSiege(Packet packet)
     {
-        _castleId = readInt();
-        _isAttacker = readInt();
-        _isJoining = readInt();
+        var _castleId = packet.ReadInt();
+        var _isAttacker = packet.ReadInt();
+        var _isJoining = packet.ReadInt();
     }
 }

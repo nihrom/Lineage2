@@ -6,6 +6,6 @@ public class RequestChangePetName
 {
     public RequestChangePetName(Packet packet)
     {
-        // _name = readString();
+        var _name = packet.ReadString();
     }
 }

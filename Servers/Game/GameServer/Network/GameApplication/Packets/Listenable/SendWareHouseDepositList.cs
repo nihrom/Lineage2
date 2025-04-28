@@ -6,7 +6,7 @@ public class SendWareHouseDepositList
 {
     public SendWareHouseDepositList(Packet packet)
     {
-        final int size = readInt();
+         int size = packet.ReadInt();
         if ((size <= 0) || (size > Config.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -15,8 +15,8 @@ public class SendWareHouseDepositList
         _items = new ArrayList<>(size);
         for (int i = 0; i < size; i++)
         {
-            final int objId = readInt();
-            final int count = readInt();
+             int objId = packet.ReadInt();
+             int count = packet.ReadInt();
             if ((count > Integer.MAX_VALUE) || (objId < 1) || (count < 1))
             {
                 _items = null;

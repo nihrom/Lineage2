@@ -6,7 +6,7 @@ public class RequestDismissPartyRoom
 {
     public RequestDismissPartyRoom(Packet packet)
     {
-        // _roomid = readInt();
-        // _data2 = readInt();
+        var _roomid = packet.ReadInt();
+        var _data2 = packet.ReadInt();
     }
 }

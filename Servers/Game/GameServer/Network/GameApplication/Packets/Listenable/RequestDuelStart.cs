@@ -6,7 +6,7 @@ public class RequestDuelStart
 {
     public RequestDuelStart(Packet packet)
     {
-        // _player = readString();
-        // _partyDuel = readInt();
+        var _player = packet.ReadString();
+        var _partyDuel = packet.ReadInt();
     }
 }

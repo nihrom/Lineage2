@@ -6,6 +6,6 @@ public class RequestEnchantItem
 {
     public RequestEnchantItem(Packet packet)
     {
-        // _objectId = readInt();
+        var _objectId = packet.ReadInt();
     }
 }

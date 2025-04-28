@@ -6,10 +6,10 @@ public class CannotMoveAnymoreInVehicle
 {
     public CannotMoveAnymoreInVehicle(Packet packet)
     {
-        // _boatId = readInt();
-        // _x = readInt();
-        // _y = readInt();
-        // _z = readInt();
-        // _heading = readInt();
+        var _boatId = packet.ReadInt();
+        var _x = packet.ReadInt();
+        var _y = packet.ReadInt();
+        var _z = packet.ReadInt();
+        var _heading = packet.ReadInt();
     }
 }

@@ -6,7 +6,7 @@ public class RequestExEnchantSkill
 {
     public RequestExEnchantSkill(Packet packet)
     {
-        _skillId = readInt();
-        _skillLevel = readInt();
+        var _skillId = packet.ReadInt();
+        var _skillLevel = packet.ReadInt();
     }
 }

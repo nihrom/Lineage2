@@ -6,8 +6,8 @@ public class RequestRecipeShopMakeItem
 {
     public RequestRecipeShopMakeItem(Packet packet)
     {
-        _id = readInt();
-        _recipeId = readInt();
-        _unknown = readInt();
+        var _id = packet.ReadInt();
+        var _recipeId = packet.ReadInt();
+        var _unknown = packet.ReadInt();
     }
 }

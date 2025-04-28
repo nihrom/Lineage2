@@ -6,6 +6,6 @@ public class RequestSSQStatus
 {
     public RequestSSQStatus(Packet packet)
     {
-        _page = readByte();
+        var _page = packet.ReadByte();
     }
 }

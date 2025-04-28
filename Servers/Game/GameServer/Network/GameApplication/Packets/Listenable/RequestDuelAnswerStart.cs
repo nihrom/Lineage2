@@ -6,8 +6,8 @@ public class RequestDuelAnswerStart
 {
     public RequestDuelAnswerStart(Packet packet)
     {
-        // _partyDuel = readInt();
-        // _unk1 = readInt();
-        // _response = readInt();
+        var _partyDuel = packet.ReadInt();
+        var _unk1 = packet.ReadInt();
+        var _response = packet.ReadInt();
     }
 }

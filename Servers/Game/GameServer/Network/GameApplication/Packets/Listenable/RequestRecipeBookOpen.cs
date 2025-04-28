@@ -6,6 +6,6 @@ public class RequestRecipeBookOpen
 {
     public RequestRecipeBookOpen(Packet packet)
     {
-        _isDwarvenCraft = readInt() == 0;
+        var _isDwarvenCraft = packet.ReadInt() == 0;
     }
 }

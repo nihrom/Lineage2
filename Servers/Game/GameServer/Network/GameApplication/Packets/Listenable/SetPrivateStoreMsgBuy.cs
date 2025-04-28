@@ -6,6 +6,6 @@ public class SetPrivateStoreMsgBuy
 {
     public SetPrivateStoreMsgBuy(Packet packet)
     {
-        _storeMsg = readString();
+        var _storeMsg = packet.ReadString();
     }
 }

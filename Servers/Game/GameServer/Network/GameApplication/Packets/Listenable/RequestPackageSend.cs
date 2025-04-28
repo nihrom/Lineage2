@@ -6,9 +6,9 @@ public class RequestPackageSend
 {
     public RequestPackageSend(Packet packet)
     {
-        _objectId = readInt();
+        var _objectId = packet.ReadInt();
 		
-        final int count = readInt();
+         int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             _items = null;
@@ -18,8 +18,8 @@ public class RequestPackageSend
         _items = new ItemHolder[count];
         for (int i = 0; i < count; i++)
         {
-            final int objId = readInt();
-            final int cnt = readInt();
+             int objId = packet.ReadInt();
+             int cnt = packet.ReadInt();
             if ((objId < 1) || (cnt < 0))
             {
                 _items = null;

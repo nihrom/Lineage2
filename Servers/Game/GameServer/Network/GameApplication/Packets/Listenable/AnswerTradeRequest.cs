@@ -6,6 +6,6 @@ public class AnswerTradeRequest
 {
     public AnswerTradeRequest(Packet packet)
     {
-        // _response = readInt();
+        var _response = packet.ReadInt();
     }
 }

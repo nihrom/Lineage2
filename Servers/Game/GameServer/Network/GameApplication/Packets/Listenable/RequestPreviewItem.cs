@@ -6,9 +6,9 @@ public class RequestPreviewItem
 {
     public RequestPreviewItem(Packet packet)
     {
-        _unk = readInt();
-        _listId = readInt();
-        _count = readInt();
+        var _unk = packet.ReadInt();
+        var _listId = packet.ReadInt();
+        var _count = packet.ReadInt();
         if (_count < 0)
         {
             _count = 0;
@@ -24,7 +24,7 @@ public class RequestPreviewItem
         // Fill _items table with all ItemID to Wear
         for (int i = 0; i < _count; i++)
         {
-            _items[i] = readInt();
+            _items[i] = packet.ReadInt();
         }
     }
 }

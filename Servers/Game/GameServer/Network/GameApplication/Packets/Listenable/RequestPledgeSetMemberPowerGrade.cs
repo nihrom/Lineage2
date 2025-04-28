@@ -6,7 +6,7 @@ public class RequestPledgeSetMemberPowerGrade
 {
     public RequestPledgeSetMemberPowerGrade(Packet packet)
     {
-        _member = readString();
-        _powerGrade = readInt();
+        var _member = packet.ReadString();
+        var _powerGrade = packet.ReadInt();
     }
 }

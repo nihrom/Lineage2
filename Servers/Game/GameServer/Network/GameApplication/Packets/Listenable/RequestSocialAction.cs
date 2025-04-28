@@ -6,6 +6,6 @@ public class RequestSocialAction
 {
     public RequestSocialAction(Packet packet)
     {
-        _actionId = readInt();
+        var _actionId = packet.ReadInt();
     }
 }

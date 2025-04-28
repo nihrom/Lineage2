@@ -6,8 +6,8 @@ public class RequestPledgeSetAcademyMaster
 {
     public RequestPledgeSetAcademyMaster(Packet packet)
     {
-        _set = readInt();
-        _currPlayerName = readString();
-        _targetPlayerName = readString();
+        var _set = packet.ReadInt();
+        var _currPlayerName = packet.ReadString();
+        var _targetPlayerName = packet.ReadString();
     }
 }

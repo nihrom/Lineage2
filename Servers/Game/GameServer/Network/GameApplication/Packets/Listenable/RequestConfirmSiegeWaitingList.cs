@@ -6,8 +6,8 @@ public class RequestConfirmSiegeWaitingList
 {
     public RequestConfirmSiegeWaitingList(Packet packet)
     {
-        // _castleId = readInt();
-        // _clanId = readInt();
-        // _approved = readInt();
+        var _castleId = packet.ReadInt();
+        var _clanId = packet.ReadInt();
+        var _approved = packet.ReadInt();
     }
 }

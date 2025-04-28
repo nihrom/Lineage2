@@ -6,6 +6,6 @@ public class RequestHennaItemInfo
 {
     public RequestHennaItemInfo(Packet packet)
     {
-        _symbolId = readInt();
+        var _symbolId = packet.ReadInt();
     }
 }

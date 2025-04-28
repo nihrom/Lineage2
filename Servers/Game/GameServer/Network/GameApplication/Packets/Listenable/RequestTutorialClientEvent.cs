@@ -6,6 +6,6 @@ public class RequestTutorialClientEvent
 {
     public RequestTutorialClientEvent(Packet packet)
     {
-        eventId = readInt();
+        var eventId = packet.ReadInt();
     }
 }

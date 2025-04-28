@@ -6,6 +6,6 @@ public class RequestLinkHtml
 {
     public RequestLinkHtml(Packet packet)
     {
-        _link = readString();
+        var _link = packet.ReadString();
     }
 }

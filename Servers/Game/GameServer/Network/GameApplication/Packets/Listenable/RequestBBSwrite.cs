@@ -6,11 +6,11 @@ public class RequestBBSwrite
 {
     public RequestBBSwrite(Packet packet)
     {
-        // _url = readString();
-        // _arg1 = readString();
-        // _arg2 = readString();
-        // _arg3 = readString();
-        // _arg4 = readString();
-        // _arg5 = readString();
+        var _url = packet.ReadString();
+        var _arg1 = packet.ReadString();
+        var _arg2 = packet.ReadString();
+        var _arg3 = packet.ReadString();
+        var _arg4 = packet.ReadString();
+        var _arg5 = packet.ReadString();
     }
 }

@@ -6,8 +6,8 @@ public class RequestShortCutDel
 {
     public RequestShortCutDel(Packet packet)
     {
-        final int id = readInt();
-        _slot = id % 12;
-        _page = id / 12;
+         int id = packet.ReadInt();
+         var _slot = id % 12;
+         var _page = id / 12;
     }
 }

@@ -6,6 +6,6 @@ public class RequestStartPledgeWar
 {
     public RequestStartPledgeWar(Packet packet)
     {
-        _pledgeName = readString();
+        var _pledgeName = packet.ReadString();
     }
 }

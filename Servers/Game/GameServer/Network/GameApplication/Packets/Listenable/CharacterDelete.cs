@@ -6,6 +6,6 @@ public class CharacterDelete
 {
     public CharacterDelete(Packet packet)
     {
-        // _charSlot = readInt();
+        var _charSlot = packet.ReadInt();
     }
 }

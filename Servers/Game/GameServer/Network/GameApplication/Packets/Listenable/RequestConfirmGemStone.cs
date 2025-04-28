@@ -6,9 +6,9 @@ public class RequestConfirmGemStone
 {
     public RequestConfirmGemStone(Packet packet)
     {
-        // _targetItemObjId = readInt();
-        // _refinerItemObjId = readInt();
-        // _gemstoneItemObjId = readInt();
-        // _gemStoneCount = readInt();
+        var _targetItemObjId = packet.ReadInt();
+        var _refinerItemObjId = packet.ReadInt();
+        var _gemstoneItemObjId = packet.ReadInt();
+        var _gemStoneCount = packet.ReadInt();
     }
 }

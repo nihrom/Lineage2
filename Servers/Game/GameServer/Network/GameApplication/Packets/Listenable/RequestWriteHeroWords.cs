@@ -6,6 +6,6 @@ public class RequestWriteHeroWords
 {
     public RequestWriteHeroWords(Packet packet)
     {
-        _heroWords = readString();
+        var _heroWords = packet.ReadString();
     }
 }

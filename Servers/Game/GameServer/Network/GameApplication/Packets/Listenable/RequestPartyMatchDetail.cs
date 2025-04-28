@@ -6,11 +6,11 @@ public class RequestPartyMatchDetail
 {
     public RequestPartyMatchDetail(Packet packet)
     {
-        _roomid = readInt();
+        var _roomid = packet.ReadInt();
         // If player click on Room all unk are 0
         // If player click AutoJoin values are -1 1 1
-        _unk1 = readInt();
-        _unk2 = readInt();
-        _unk3 = readInt();
+        var _unk1 = packet.ReadInt();
+        var _unk2 = packet.ReadInt();
+        var _unk3 = packet.ReadInt();
     }
 }

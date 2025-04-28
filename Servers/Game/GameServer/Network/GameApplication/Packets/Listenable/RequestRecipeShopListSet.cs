@@ -6,7 +6,7 @@ public class RequestRecipeShopListSet
 {
     public RequestRecipeShopListSet(Packet packet)
     {
-        final int count = readInt();
+         int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {
             return;
@@ -15,8 +15,8 @@ public class RequestRecipeShopListSet
         _items = new ManufactureItem[count];
         for (int i = 0; i < count; i++)
         {
-            final int id = readInt();
-            final int cost = readInt();
+             int id = packet.ReadInt();
+             int cost = packet.ReadInt();
             if (cost < 0)
             {
                 _items = null;

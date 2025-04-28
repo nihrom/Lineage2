@@ -6,10 +6,10 @@ public class CharacterSelect
 {
     public CharacterSelect(Packet packet)
     {
-        // _charSlot = readInt();
-        // _unk1 = readShort();
-        // _unk2 = readInt();
-        // _unk3 = readInt();
-        // _unk4 = readInt();
+        var _charSlot = packet.ReadInt();
+        var _unk1 = packet.ReadShort();
+        var _unk2 = packet.ReadInt();
+        var _unk3 = packet.ReadInt();
+        var _unk4 = packet.ReadInt();
     }
 }

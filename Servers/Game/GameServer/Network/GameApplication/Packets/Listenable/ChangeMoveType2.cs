@@ -6,6 +6,6 @@ public class ChangeMoveType2
 {
     public ChangeMoveType2(Packet packet)
     {
-        // _typeRun = readInt() == 1;
+        var _typeRun = packet.ReadInt() == 1;
     }
 }

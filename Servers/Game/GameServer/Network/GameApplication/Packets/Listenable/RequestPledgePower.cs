@@ -6,11 +6,11 @@ public class RequestPledgePower
 {
     public RequestPledgePower(Packet packet)
     {
-        _rank = readInt();
-        _action = readInt();
+        var _rank = packet.ReadInt();
+        var _action = packet.ReadInt();
         if (_action == 2)
         {
-            _privs = readInt();
+            var _privs = packet.ReadInt();
         }
         else
         {

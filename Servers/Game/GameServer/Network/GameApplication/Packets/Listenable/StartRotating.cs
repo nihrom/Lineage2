@@ -6,7 +6,7 @@ public class StartRotating
 {
     public StartRotating(Packet packet)
     {
-        _degree = readInt();
-        _side = readInt();
+        var _degree = packet.ReadInt();
+        var _side = packet.ReadInt();
     }
 }

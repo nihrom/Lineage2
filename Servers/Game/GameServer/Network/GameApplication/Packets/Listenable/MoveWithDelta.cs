@@ -6,8 +6,8 @@ public class MoveWithDelta
 {
     public MoveWithDelta(Packet packet)
     {
-        // readInt(); // dx
-        // readInt(); // dy
-        // readInt(); // dz
+        packet.ReadInt(); // dx
+        packet.ReadInt(); // dy
+        packet.ReadInt(); // dz
     }
 }

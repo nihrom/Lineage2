@@ -6,6 +6,6 @@ public class AllyDismiss
 {
     public AllyDismiss(Packet packet)
     {
-        // _clanName = readString();
+        var _clanName = packet.ReadString();
     }
 }

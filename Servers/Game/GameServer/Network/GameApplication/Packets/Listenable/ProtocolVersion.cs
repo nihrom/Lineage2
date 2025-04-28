@@ -6,13 +6,13 @@ public class ProtocolVersion
 {
     public ProtocolVersion(Packet packet)
     {
-        // try
-        // {
-        //     _version = readInt();
-        // }
-        // catch (Exception e)
-        // {
-        //     _version = 0;
-        // }
+        try
+        {
+            var _version = packet.ReadInt();
+        }
+        catch (Exception e)
+        {
+            _version = 0;
+        }
     }
 }

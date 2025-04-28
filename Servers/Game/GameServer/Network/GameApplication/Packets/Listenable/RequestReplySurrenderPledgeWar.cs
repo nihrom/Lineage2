@@ -6,7 +6,7 @@ public class RequestReplySurrenderPledgeWar
 {
     public RequestReplySurrenderPledgeWar(Packet packet)
     {
-        _reqName = readString();
-        _answer = readInt();
+        var _reqName = packet.ReadString();
+        var _answer = packet.ReadInt();
     }
 }

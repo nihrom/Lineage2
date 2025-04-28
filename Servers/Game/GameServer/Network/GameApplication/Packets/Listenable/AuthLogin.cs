@@ -6,10 +6,10 @@ public class AuthLogin
 {
     public AuthLogin(Packet packet)
     {
-        // _loginName = readString().toLowerCase();
-        // _playKey2 = readInt();
-        // _playKey1 = readInt();
-        // _loginKey1 = readInt();
-        // _loginKey2 = readInt();
+        var _loginName = packet.ReadString().toLowerCase();
+        var _playKey2 = packet.ReadInt();
+        var _playKey1 = packet.ReadInt();
+        var _loginKey1 = packet.ReadInt();
+        var _loginKey2 = packet.ReadInt();
     }
 }

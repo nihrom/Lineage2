@@ -6,7 +6,7 @@ public class RequestAutoSoulShot
 {
     public RequestAutoSoulShot(Packet packet)
     {
-        // _itemId = readInt();
-        // _type = readInt();
+        var _itemId = packet.ReadInt();
+        var _type = packet.ReadInt();
     }
 }
