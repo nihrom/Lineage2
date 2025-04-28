@@ -4,14 +4,16 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestSetPledgeCrest
 {
+    public byte[] Data;
+
     public RequestSetPledgeCrest(Packet packet)
     {
-        var _length = packet.ReadInt();
-        if (_length > 256)
+        var length = packet.ReadInt();
+        if (length > 256)
         {
             return;
         }
-		
-        var _data = packet.ReadBytes(_length);
+        
+        Data = packet.ReadBytesArray(length);
     }
 }

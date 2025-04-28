@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestEnchantItem
 {
+    public int ObjectId;
+
     public RequestEnchantItem(Packet packet)
     {
-        var _objectId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
     }
 }

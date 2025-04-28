@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestJoinParty
 {
+    public string Name;
+    public int PartyDistributionTypeId;
+
     public RequestJoinParty(Packet packet)
     {
-        var _name = packet.ReadString();
-        var _partyDistributionTypeId = packet.ReadInt();
+        Name = packet.ReadString();
+        PartyDistributionTypeId = packet.ReadInt();
     }
 }

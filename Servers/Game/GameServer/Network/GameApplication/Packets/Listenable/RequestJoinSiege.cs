@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestJoinSiege
 {
+    public int CastleId;
+    public int IsAttacker;
+    public int IsJoining;
+
     public RequestJoinSiege(Packet packet)
     {
-        var _castleId = packet.ReadInt();
-        var _isAttacker = packet.ReadInt();
-        var _isJoining = packet.ReadInt();
+        CastleId = packet.ReadInt();
+        IsAttacker = packet.ReadInt();
+        IsJoining = packet.ReadInt();
     }
 }

@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestAnswerJoinParty
 {
+    public int Response;
+
     public RequestAnswerJoinParty(Packet packet)
     {
-        _response = packet.ReadInt();
+        Response = packet.ReadInt();
     }
 }

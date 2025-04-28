@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestTutorialLinkHtml
 {
+    public string Bypass;
+
     public RequestTutorialLinkHtml(Packet packet)
     {
-        var _bypass = packet.ReadString();
+        Bypass = packet.ReadString();
     }
 }

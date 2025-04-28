@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestSendFriendMsg
 {
+    public string Message;
+    public string Reciever;
+
     public RequestSendFriendMsg(Packet packet)
     {
-        var _message = packet.ReadString();
-        var _reciever = packet.ReadString();
+        Message = packet.ReadString();
+        Reciever = packet.ReadString();
     }
 }

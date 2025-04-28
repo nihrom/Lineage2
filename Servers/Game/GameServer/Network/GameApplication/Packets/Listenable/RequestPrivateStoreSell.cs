@@ -4,9 +4,11 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPrivateStoreSell
 {
+    public int StorePlayerId;
+
     public RequestPrivateStoreSell(Packet packet)
     {
-        var _storePlayerId = packet.ReadInt();
+        StorePlayerId = packet.ReadInt();
          int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {

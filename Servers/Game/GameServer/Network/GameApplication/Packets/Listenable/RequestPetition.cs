@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPetition
 {
+    public string Content;
+    public int Type;
+
     public RequestPetition(Packet packet)
     {
-        var _content = packet.ReadString();
-        var _type = packet.ReadInt();
+        Content = packet.ReadString();
+        Type = packet.ReadInt();
     }
 }

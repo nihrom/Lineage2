@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestSiegeAttackerList
 {
+    public int CastleId;
+
     public RequestSiegeAttackerList(Packet packet)
     {
-        var _castleId = packet.ReadInt();
+        CastleId = packet.ReadInt();
     }
 }

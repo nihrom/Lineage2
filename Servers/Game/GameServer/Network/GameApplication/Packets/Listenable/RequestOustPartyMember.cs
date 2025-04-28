@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestOustPartyMember
 {
+    public string Name;
+
     public RequestOustPartyMember(Packet packet)
     {
-        var _name = packet.ReadString();
+        Name = packet.ReadString();
     }
 }

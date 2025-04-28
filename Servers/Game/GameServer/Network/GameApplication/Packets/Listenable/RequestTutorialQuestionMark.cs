@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestTutorialQuestionMark
 {
+    public int Number;
+
     public RequestTutorialQuestionMark(Packet packet)
     {
-        var _number = packet.ReadInt();
+        Number = packet.ReadInt();
     }
 }

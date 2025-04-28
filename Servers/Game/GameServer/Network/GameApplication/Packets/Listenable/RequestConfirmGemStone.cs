@@ -4,11 +4,16 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestConfirmGemStone
 {
+    public int TargetItemObjId;
+    public int RefinerItemObjId;
+    public int GemstoneItemObjId;
+    public int GemStoneCount;
+
     public RequestConfirmGemStone(Packet packet)
     {
-        var _targetItemObjId = packet.ReadInt();
-        var _refinerItemObjId = packet.ReadInt();
-        var _gemstoneItemObjId = packet.ReadInt();
-        var _gemStoneCount = packet.ReadInt();
+        TargetItemObjId = packet.ReadInt();
+        RefinerItemObjId = packet.ReadInt();
+        GemstoneItemObjId = packet.ReadInt();
+        GemStoneCount = packet.ReadInt();
     }
 }

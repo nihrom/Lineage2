@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestAskJoinPartyRoom
 {
+    public string Name;
+
     public RequestAskJoinPartyRoom(Packet packet)
     {
-        var _name = packet.ReadString();
+        Name = packet.ReadString();
     }
 }

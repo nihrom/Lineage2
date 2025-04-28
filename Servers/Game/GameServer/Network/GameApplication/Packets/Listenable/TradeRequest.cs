@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class TradeRequest
 {
+    public int ObjectId;
+
     public TradeRequest(Packet packet)
     {
-        var _objectId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
     }
 }

@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestDeleteMacro
 {
+    public int Id;
+
     public RequestDeleteMacro(Packet packet)
     {
-        var _id = packet.ReadInt();
+        Id = packet.ReadInt();
     }
 }

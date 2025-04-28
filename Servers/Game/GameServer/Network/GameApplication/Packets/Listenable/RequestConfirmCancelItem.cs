@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestConfirmCancelItem
 {
+    public int ObjectId;
+
     public RequestConfirmCancelItem(Packet packet)
     {
-        var _objectId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
     }
 }

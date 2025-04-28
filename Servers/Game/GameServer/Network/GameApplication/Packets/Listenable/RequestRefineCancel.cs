@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestRefineCancel
 {
+    public int TargetItemObjId;
+
     public RequestRefineCancel(Packet packet)
     {
-        var _targetItemObjId = packet.ReadInt();
+        TargetItemObjId = packet.ReadInt();
     }
 }

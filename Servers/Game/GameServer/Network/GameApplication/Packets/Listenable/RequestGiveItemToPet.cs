@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestGiveItemToPet
 {
+    public int ObjectId;
+    public int Amount;
+
     public RequestGiveItemToPet(Packet packet)
     {
-        var _objectId = packet.ReadInt();
-        var _amount = packet.ReadInt();
+        ObjectId = packet.ReadInt();
+        Amount = packet.ReadInt();
     }
 }

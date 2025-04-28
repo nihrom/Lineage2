@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestWithdrawPartyRoom
 {
+    public int Roomid;
+    public int Unk1;
+
     public RequestWithdrawPartyRoom(Packet packet)
     {
-        var _roomid = packet.ReadInt();
-        var _unk1 = packet.ReadInt();
+        Roomid = packet.ReadInt();
+        Unk1 = packet.ReadInt();
     }
 }

@@ -4,11 +4,13 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class ProtocolVersion
 {
+    public int Version;
+
     public ProtocolVersion(Packet packet)
     {
         try
         {
-            var _version = packet.ReadInt();
+            Version = packet.ReadInt();
         }
         catch (Exception e)
         {

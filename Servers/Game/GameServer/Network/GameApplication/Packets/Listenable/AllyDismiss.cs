@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class AllyDismiss
 {
+    public string ClanName;
+
     public AllyDismiss(Packet packet)
     {
-        var _clanName = packet.ReadString();
+        ClanName = packet.ReadString();
     }
 }

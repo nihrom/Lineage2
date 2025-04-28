@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class SetPrivateStoreMsgBuy
 {
+    public string StoreMsg;
+
     public SetPrivateStoreMsgBuy(Packet packet)
     {
-        var _storeMsg = packet.ReadString();
+        StoreMsg = packet.ReadString();
     }
 }

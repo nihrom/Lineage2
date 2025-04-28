@@ -4,12 +4,18 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class CharacterSelect
 {
+    public int CharSlot;
+    public short Unk1;
+    public int Unk2;
+    public int Unk3;
+    public int Unk4;
+
     public CharacterSelect(Packet packet)
     {
-        var _charSlot = packet.ReadInt();
-        var _unk1 = packet.ReadShort();
-        var _unk2 = packet.ReadInt();
-        var _unk3 = packet.ReadInt();
-        var _unk4 = packet.ReadInt();
+        CharSlot = packet.ReadInt();
+        Unk1 = packet.ReadShort();
+        Unk2 = packet.ReadInt();
+        Unk3 = packet.ReadInt();
+        Unk4 = packet.ReadInt();
     }
 }

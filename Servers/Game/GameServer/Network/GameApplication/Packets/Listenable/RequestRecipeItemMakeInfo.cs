@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestRecipeItemMakeInfo
 {
+    public int Id;
+
     public RequestRecipeItemMakeInfo(Packet packet)
     {
-        var _id = packet.ReadInt();
+        Id = packet.ReadInt();
     }
 }

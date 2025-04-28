@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestJoinAlly
 {
+    public int Id;
+
     public RequestJoinAlly(Packet packet)
     {
-        var _id = packet.ReadInt();
+        Id = packet.ReadInt();
     }
 }

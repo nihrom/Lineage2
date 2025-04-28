@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestOustFromPartyRoom
 {
+    public int Charid;
+
     public RequestOustFromPartyRoom(Packet packet)
     {
-        var _charid = packet.ReadInt();
+        Charid = packet.ReadInt();
     }
 }

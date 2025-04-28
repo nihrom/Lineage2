@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestExMPCCShowPartyMembersInfo
 {
+    public int PartyLeaderId;
+
     public RequestExMPCCShowPartyMembersInfo(Packet packet)
     {
-        var _partyLeaderId = packet.ReadInt();
+        PartyLeaderId = packet.ReadInt();
     }
 }

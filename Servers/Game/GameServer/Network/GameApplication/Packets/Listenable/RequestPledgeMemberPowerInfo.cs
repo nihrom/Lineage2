@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPledgeMemberPowerInfo
 {
+    public int Unk1;
+    public string Player;
+
     public RequestPledgeMemberPowerInfo(Packet packet)
     {
-        var _unk1 = packet.ReadInt();
-        var _player = packet.ReadString();
+        Unk1 = packet.ReadInt();
+        Player = packet.ReadString();
     }
 }

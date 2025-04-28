@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestBuyItem
 {
+    public int ListId;
+
     public RequestBuyItem(Packet packet)
     {
-        var _listId = packet.ReadInt();
-         int size = packet.ReadInt();
+        ListId = packet.ReadInt();
+        
+        int size = packet.ReadInt();
+         
         if ((size <= 0) || (size > Config.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != remaining()))
         {
             return;

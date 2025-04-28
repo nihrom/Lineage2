@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class CharacterDelete
 {
+    public int CharSlot;
+
     public CharacterDelete(Packet packet)
     {
-        var _charSlot = packet.ReadInt();
+        CharSlot = packet.ReadInt();
     }
 }

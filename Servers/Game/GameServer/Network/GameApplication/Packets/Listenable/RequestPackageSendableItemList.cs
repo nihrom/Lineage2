@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPackageSendableItemList
 {
+    public int ObjectId;
+
     public RequestPackageSendableItemList(Packet packet)
     {
-        var _objectId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
     }
 }

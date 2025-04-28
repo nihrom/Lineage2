@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestLinkHtml
 {
+    public string Link;
+
     public RequestLinkHtml(Packet packet)
     {
-        var _link = packet.ReadString();
+        Link = packet.ReadString();
     }
 }

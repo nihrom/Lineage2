@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class SnoopQuit
 {
+    public int SnoopId;
+
     public SnoopQuit(Packet packet)
     {
-        var _snoopID = packet.ReadInt();
+        SnoopId = packet.ReadInt();
     }
 }

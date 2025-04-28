@@ -4,11 +4,16 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestRefine
 {
+    public int TargetItemObjId;
+    public int RefinerItemObjId;
+    public int GemStoneItemObjId;
+    public int GemStoneCount;
+
     public RequestRefine(Packet packet)
     {
-        var _targetItemObjId = packet.ReadInt();
-        var _refinerItemObjId = packet.ReadInt();
-        var _gemStoneItemObjId = packet.ReadInt();
-        var _gemStoneCount = packet.ReadInt();
+        TargetItemObjId = packet.ReadInt();
+        RefinerItemObjId = packet.ReadInt();
+        GemStoneItemObjId = packet.ReadInt();
+        GemStoneCount = packet.ReadInt();
     }
 }

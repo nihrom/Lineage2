@@ -4,10 +4,13 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class Say2
 {
+    public string Text;
+    public int Type;
+
     public Say2(Packet packet)
     {
-        var _text = packet.ReadString();
-        var _type = packet.ReadInt();
-        var _target = (_type == ChatType.WHISPER.getClientId()) ? readString() : null;
+        Text = packet.ReadString();
+        Type = packet.ReadInt();
+        var _target = (Type == ChatType.WHISPER.getClientId()) ? readString() : null;
     }
 }

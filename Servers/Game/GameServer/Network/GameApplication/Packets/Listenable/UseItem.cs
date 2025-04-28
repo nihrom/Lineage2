@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class UseItem
 {
+    public int ObjectId;
+    public bool CtrlPressed;
+
     public UseItem(Packet packet)
     {
-        var _objectId = packet.ReadInt();
-        var _ctrlPressed = packet.ReadInt() != 0;
+        ObjectId = packet.ReadInt();
+        CtrlPressed = packet.ReadInt() != 0;
     }
 }

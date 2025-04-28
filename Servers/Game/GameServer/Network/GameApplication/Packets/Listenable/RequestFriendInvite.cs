@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestFriendInvite
 {
+    public string Name;
+
     public RequestFriendInvite(Packet packet)
     {
-        var _name = packet.ReadString();
+        Name = packet.ReadString();
     }
 }

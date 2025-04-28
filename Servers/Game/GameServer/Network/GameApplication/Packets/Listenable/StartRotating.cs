@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class StartRotating
 {
+    public int Degree;
+    public int Side;
+
     public StartRotating(Packet packet)
     {
-        var _degree = packet.ReadInt();
-        var _side = packet.ReadInt();
+        Degree = packet.ReadInt();
+        Side = packet.ReadInt();
     }
 }

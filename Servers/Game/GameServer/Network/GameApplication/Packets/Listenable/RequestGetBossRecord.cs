@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestGetBossRecord
 {
+    public int BossId;
+
     public RequestGetBossRecord(Packet packet)
     {
-        var _bossId = packet.ReadInt();
+        BossId = packet.ReadInt();
     }
 }

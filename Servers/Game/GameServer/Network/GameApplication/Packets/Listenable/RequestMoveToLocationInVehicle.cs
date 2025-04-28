@@ -4,14 +4,22 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestMoveToLocationInVehicle
 {
+    public int BoatId;
+    public int TargetX;
+    public int TargetY;
+    public int TargetZ;
+    public int OriginX;
+    public int OriginY;
+    public int OriginZ;
+
     public RequestMoveToLocationInVehicle(Packet packet)
     {
-        var _boatId = packet.ReadInt(); // objectId of boat
-        var _targetX = packet.ReadInt();
-        var _targetY = packet.ReadInt();
-        var _targetZ = packet.ReadInt();
-        var _originX = packet.ReadInt();
-        var _originY = packet.ReadInt();
-        var _originZ = packet.ReadInt();
+        BoatId = packet.ReadInt();
+        TargetX = packet.ReadInt();
+        TargetY = packet.ReadInt();
+        TargetZ = packet.ReadInt();
+        OriginX = packet.ReadInt();
+        OriginY = packet.ReadInt();
+        OriginZ = packet.ReadInt();
     }
 }

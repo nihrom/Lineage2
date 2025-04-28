@@ -4,12 +4,17 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class ValidatePosition
 {
+    public int X;
+    public int Y;
+    public int Z;
+    public int Heading;
+
     public ValidatePosition(Packet packet)
     {
-        var _x = packet.ReadInt();
-        var _y = packet.ReadInt();
-        var _z = packet.ReadInt();
-        var _heading = packet.ReadInt();
+        X = packet.ReadInt();
+        Y = packet.ReadInt();
+        Z = packet.ReadInt();
+        Heading = packet.ReadInt();
         packet.ReadInt(); // vehicle id
     }
 }

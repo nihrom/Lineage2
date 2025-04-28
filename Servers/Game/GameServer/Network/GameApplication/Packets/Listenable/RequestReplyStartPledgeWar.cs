@@ -4,9 +4,11 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestReplyStartPledgeWar
 {
+    public int Answer;
+
     public RequestReplyStartPledgeWar(Packet packet)
     {
-        readString(); // _reqName
-        var _answer = packet.ReadInt();
+        packet.ReadString(); // _reqName
+        Answer = packet.ReadInt();
     }
 }

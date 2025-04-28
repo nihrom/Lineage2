@@ -4,13 +4,20 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestExMagicSkillUseGround
 {
+    public int X;
+    public int Y;
+    public int Z;
+    public int SkillId;
+    public bool CtrlPressed;
+    public bool ShiftPressed;
+
     public RequestExMagicSkillUseGround(Packet packet)
     {
-        var _x = packet.ReadInt();
-        var _y = packet.ReadInt();
-        var _z = packet.ReadInt();
-        var _skillId = packet.ReadInt();
-        var _ctrlPressed = packet.ReadInt() != 0;
-        var _shiftPressed = packet.ReadByte() != 0;
+        X = packet.ReadInt();
+        Y = packet.ReadInt();
+        Z = packet.ReadInt();
+        SkillId = packet.ReadInt();
+        CtrlPressed = packet.ReadInt() != 0;
+        ShiftPressed = packet.ReadByte() != 0;
     }
 }

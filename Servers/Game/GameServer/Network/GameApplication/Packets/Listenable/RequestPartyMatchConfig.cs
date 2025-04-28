@@ -4,10 +4,22 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPartyMatchConfig
 {
+    public int Auto;
+    
+    /// <summary>
+    /// Location
+    /// </summary>
+    public int Loc;
+
+    /// <summary>
+    /// My level
+    /// </summary>
+    public int Level;
+
     public RequestPartyMatchConfig(Packet packet)
     {
-        var _auto = packet.ReadInt(); //
-        var _loc = packet.ReadInt(); // Location
-        var _level = packet.ReadInt(); // my level
+        Auto = packet.ReadInt();
+        Loc = packet.ReadInt();
+        Level = packet.ReadInt();
     }
 }

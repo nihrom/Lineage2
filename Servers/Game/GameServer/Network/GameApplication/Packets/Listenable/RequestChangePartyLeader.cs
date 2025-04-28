@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestChangePartyLeader
 {
+    public string Name;
+
     public RequestChangePartyLeader(Packet packet)
     {
-        var _name = packet.ReadString();
+        Name = packet.ReadString();
     }
 }

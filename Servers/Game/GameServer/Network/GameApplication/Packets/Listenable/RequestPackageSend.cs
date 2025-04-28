@@ -4,9 +4,11 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPackageSend
 {
+    public int ObjectId;
+
     public RequestPackageSend(Packet packet)
     {
-        var _objectId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
 		
          int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))

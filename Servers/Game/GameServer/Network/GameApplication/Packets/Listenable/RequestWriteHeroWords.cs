@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestWriteHeroWords
 {
+    public string HeroWords;
+
     public RequestWriteHeroWords(Packet packet)
     {
-        var _heroWords = packet.ReadString();
+        HeroWords = packet.ReadString();
     }
 }

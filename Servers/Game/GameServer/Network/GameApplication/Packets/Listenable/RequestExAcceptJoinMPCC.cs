@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestExAcceptJoinMPCC
 {
+    public int Response;
+
     public RequestExAcceptJoinMPCC(Packet packet)
     {
-        var _response = packet.ReadInt();
+        Response = packet.ReadInt();
     }
 }

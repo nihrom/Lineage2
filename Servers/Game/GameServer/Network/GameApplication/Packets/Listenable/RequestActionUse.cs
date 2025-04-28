@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestActionUse
 {
+    public int ActionId;
+    public bool CtrlPressed;
+    public bool ShiftPressed;
+
     public RequestActionUse(Packet packet)
     {
-        var _actionId = packet.ReadInt();
-        var _ctrlPressed = packet.ReadInt() == 1;
-        var _shiftPressed = packet.ReadByte() == 1;
+        ActionId = packet.ReadInt();
+        CtrlPressed = packet.ReadInt() == 1;
+        ShiftPressed = packet.ReadByte() == 1;
     }
 }

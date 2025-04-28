@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestQuestAbort
 {
+    public int QuestId;
+
     public RequestQuestAbort(Packet packet)
     {
-        var _questId = packet.ReadInt();
+        QuestId = packet.ReadInt();
     }
 }

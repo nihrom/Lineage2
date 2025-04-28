@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class AddTradeItem
 {
+    public int TradeId;
+    public int ObjectId;
+    public int Count;
+
     public AddTradeItem(Packet packet)
     {
-        var _tradeId = packet.ReadInt();
-        var _objectId = packet.ReadInt();
-        var _count = packet.ReadInt();
+        TradeId = packet.ReadInt();
+        ObjectId = packet.ReadInt();
+        Count = packet.ReadInt();
     }
 }

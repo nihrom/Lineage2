@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class CharacterRestore
 {
+    public int CharSlot;
+
     public CharacterRestore(Packet packet)
     {
-        var _charSlot = packet.ReadInt();
+        CharSlot = packet.ReadInt();
     }
 }

@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestSocialAction
 {
+    public int ActionId;
+
     public RequestSocialAction(Packet packet)
     {
-        var _actionId = packet.ReadInt();
+        ActionId = packet.ReadInt();
     }
 }

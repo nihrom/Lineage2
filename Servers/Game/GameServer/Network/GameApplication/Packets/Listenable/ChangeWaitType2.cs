@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class ChangeWaitType2
 {
+    public bool TypeStand;
+
     public ChangeWaitType2(Packet packet)
     {
-        var _typeStand = packet.ReadInt() == 1;
+        TypeStand = packet.ReadInt() == 1;
     }
 }

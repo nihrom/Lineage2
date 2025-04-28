@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestExEnchantSkillInfo
 {
+    public int SkillId;
+    public int SkillLevel;
+
     public RequestExEnchantSkillInfo(Packet packet)
     {
-        var _skillId = packet.ReadInt();
-        var _skillLevel = packet.ReadInt();
+        SkillId = packet.ReadInt();
+        SkillLevel = packet.ReadInt();
     }
 }

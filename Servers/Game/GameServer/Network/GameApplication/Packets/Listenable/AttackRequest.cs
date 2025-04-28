@@ -4,12 +4,21 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class AttackRequest
 {
+    public int ObjectId;
+    public int OriginX;
+    public int OriginY;
+    public int OriginZ;
+        /// <summary>
+        ///  0 for simple click 1 for shift-click
+        /// </summary>
+    public byte AttackId;
+
     public AttackRequest(Packet packet)
     {
-        var _objectId = packet.ReadInt();
-        var _originX = packet.ReadInt();
-        var _originY = packet.ReadInt();
-        var _originZ = packet.ReadInt();
-        var _attackId = packet.ReadByte(); // 0 for simple click 1 for shift-click
+        ObjectId = packet.ReadInt();
+        OriginX = packet.ReadInt();
+        OriginY = packet.ReadInt();
+        OriginZ = packet.ReadInt();
+        AttackId = packet.ReadByte(); 
     }
 }

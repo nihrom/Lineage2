@@ -4,14 +4,25 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class MoveBackwardToLocation
 {
+    public int TargetX;
+    public int TargetY;
+    public int TargetZ;
+    public int OriginX;
+    public int OriginY;
+    public int OriginZ;
+    /// <summary>
+    /// // is 0 if cursor keys are used 1 if mouse is used
+    /// </summary>
+    public int MovementMode;
+
     public MoveBackwardToLocation(Packet packet)
     {
-        var _targetX = packet.ReadInt();
-        var _targetY = packet.ReadInt();
-        var _targetZ = packet.ReadInt();
-        var _originX = packet.ReadInt();
-        var _originY = packet.ReadInt();
-        var _originZ = packet.ReadInt();
-        var _movementMode = packet.ReadInt(); // is 0 if cursor keys are used 1 if mouse is used
+        TargetX = packet.ReadInt();
+        TargetY = packet.ReadInt();
+        TargetZ = packet.ReadInt();
+        OriginX = packet.ReadInt();
+        OriginY = packet.ReadInt();
+        OriginZ = packet.ReadInt();
+        MovementMode = packet.ReadInt(); 
     }
 }

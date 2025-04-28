@@ -4,11 +4,16 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPledgeReorganizeMember
 {
+    public int IsMemberSelected;
+    public string MemberName;
+    public int NewPledgeType;
+    public string SelectedMember;
+
     public RequestPledgeReorganizeMember(Packet packet)
     {
-        var _isMemberSelected = packet.ReadInt();
-        var _memberName = packet.ReadString();
-        var _newPledgeType = packet.ReadInt();
-        var _selectedMember = packet.ReadString();
+        IsMemberSelected = packet.ReadInt();
+        MemberName = packet.ReadString();
+        NewPledgeType = packet.ReadInt();
+        SelectedMember = packet.ReadString();
     }
 }

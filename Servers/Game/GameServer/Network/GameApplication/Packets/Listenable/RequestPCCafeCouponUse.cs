@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPCCafeCouponUse
 {
+    public string Str;
+
     public RequestPCCafeCouponUse(Packet packet)
     {
-        var _str = packet.ReadString();
+        Str = packet.ReadString();
     }
 }

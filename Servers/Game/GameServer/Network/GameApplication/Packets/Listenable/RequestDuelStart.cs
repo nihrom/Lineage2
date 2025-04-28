@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestDuelStart
 {
+    public string Player;
+    public int PartyDuel;
+
     public RequestDuelStart(Packet packet)
     {
-        var _player = packet.ReadString();
-        var _partyDuel = packet.ReadInt();
+        Player = packet.ReadString();
+        PartyDuel = packet.ReadInt();
     }
 }

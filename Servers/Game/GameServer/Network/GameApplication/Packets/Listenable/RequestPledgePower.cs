@@ -4,17 +4,21 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPledgePower
 {
+    public int Rank;
+    public int Action;
+    public int Privs;
+
     public RequestPledgePower(Packet packet)
     {
-        var _rank = packet.ReadInt();
-        var _action = packet.ReadInt();
-        if (_action == 2)
+        Rank = packet.ReadInt();
+        Action = packet.ReadInt();
+        if (Action == 2)
         {
-            var _privs = packet.ReadInt();
+            Privs = packet.ReadInt();
         }
         else
         {
-            _privs = 0;
+            Privs = 0;
         }
     }
 }

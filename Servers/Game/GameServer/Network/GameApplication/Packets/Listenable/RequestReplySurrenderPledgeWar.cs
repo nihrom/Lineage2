@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestReplySurrenderPledgeWar
 {
+    public string ReqName;
+    public int Answer;
+
     public RequestReplySurrenderPledgeWar(Packet packet)
     {
-        var _reqName = packet.ReadString();
-        var _answer = packet.ReadInt();
+        ReqName = packet.ReadString();
+        Answer = packet.ReadInt();
     }
 }

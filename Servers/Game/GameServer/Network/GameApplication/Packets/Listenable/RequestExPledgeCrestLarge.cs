@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestExPledgeCrestLarge
 {
+    public int CrestId;
+
     public RequestExPledgeCrestLarge(Packet packet)
     {
-        var _crestId = packet.ReadInt();
+        CrestId = packet.ReadInt();
     }
 }

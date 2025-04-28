@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class TradeDone
 {
+    public int Response;
+
     public TradeDone(Packet packet)
     {
-        var _response = packet.ReadInt();
+        Response = packet.ReadInt();
     }
 }

@@ -4,10 +4,25 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestMagicSkillUse
 {
+    /// <summary>
+    /// Identifier of the used skill
+    /// </summary>
+    public int MagicId;
+
+    /// <summary>
+    /// True if it's a ForceAttack : Ctrl pressed
+    /// </summary>
+    public bool CtrlPressed;
+
+    /// <summary>
+    /// True if Shift pressed
+    /// </summary>
+    public bool ShiftPressed;
+
     public RequestMagicSkillUse(Packet packet)
     {
-        var _magicId = packet.ReadInt(); // Identifier of the used skill
-        var _ctrlPressed = packet.ReadInt() != 0; // True if it's a ForceAttack : Ctrl pressed
-        var _shiftPressed = packet.ReadByte() != 0; // True if Shift pressed
+        MagicId = packet.ReadInt(); 
+        CtrlPressed = packet.ReadInt() != 0;
+        ShiftPressed = packet.ReadByte() != 0;
     }
 }

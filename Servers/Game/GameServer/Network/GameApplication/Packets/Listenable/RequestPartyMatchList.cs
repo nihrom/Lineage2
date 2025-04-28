@@ -4,13 +4,20 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPartyMatchList
 {
+    public int Roomid;
+    public int Membersmax;
+    public int MinLevel;
+    public int MaxLevel;
+    public int Loot;
+    public string Roomtitle;
+
     public RequestPartyMatchList(Packet packet)
     {
-        var _roomid = packet.ReadInt();
-        var _membersmax = packet.ReadInt();
-        var _minLevel = packet.ReadInt();
-        var _maxLevel = packet.ReadInt();
-        var _loot = packet.ReadInt();
-        var _roomtitle = packet.ReadString();
+        Roomid = packet.ReadInt();
+        Membersmax = packet.ReadInt();
+        MinLevel = packet.ReadInt();
+        MaxLevel = packet.ReadInt();
+        Loot = packet.ReadInt();
+        Roomtitle = packet.ReadString();
     }
 }

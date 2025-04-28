@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestSetCrop
 {
+    public int ManorId;
+
     public RequestSetCrop(Packet packet)
     {
-        var _manorId = packet.ReadInt();
+        ManorId = packet.ReadInt();
+        
          int count = packet.ReadInt();
         if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
         {

@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class DlgAnswer
 {
+    public int MessageId;
+    public int Answer;
+    public int RequesterId;
+
     public DlgAnswer(Packet packet)
     {
-        var _messageId = packet.ReadInt();
-        var _answer = packet.ReadInt();
-        var _requesterId = packet.ReadInt();
+        MessageId = packet.ReadInt();
+        Answer = packet.ReadInt();
+        RequesterId = packet.ReadInt();
     }
 }

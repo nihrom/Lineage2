@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestShortCutDel
 {
+    public int Id;
+    public int Slot;
+    public int Page;
+
     public RequestShortCutDel(Packet packet)
     {
-         int id = packet.ReadInt();
-         var _slot = id % 12;
-         var _page = id / 12;
+         Id = packet.ReadInt();
+         Slot = Id % 12;
+         Page = Id / 12;
     }
 }

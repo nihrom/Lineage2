@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestRestartPoint
 {
+    public int RequestedPointType;
+
     public RequestRestartPoint(Packet packet)
     {
-        var _requestedPointType = packet.ReadInt();
+        RequestedPointType = packet.ReadInt();
     }
 }

@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestHennaItemRemoveInfo
 {
+    public int SymbolId;
+
     public RequestHennaItemRemoveInfo(Packet packet)
     {
-        var _symbolId = packet.ReadInt();
+        SymbolId = packet.ReadInt();
     }
 }

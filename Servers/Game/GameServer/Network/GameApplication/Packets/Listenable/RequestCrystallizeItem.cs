@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestCrystallizeItem
 {
+    public int ObjectId;
+    public int Count;
+
     public RequestCrystallizeItem(Packet packet)
     {
-        var _objectId = packet.ReadInt();
-        var _count = packet.ReadInt();
+        ObjectId = packet.ReadInt();
+        Count = packet.ReadInt();
     }
 }

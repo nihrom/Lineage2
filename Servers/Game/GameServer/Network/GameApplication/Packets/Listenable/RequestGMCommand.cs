@@ -4,10 +4,13 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestGMCommand
 {
+    public string TargetName;
+    public int Command;
+
     public RequestGMCommand(Packet packet)
     {
-        var _targetName = packet.ReadString();
-        var _command = packet.ReadInt();
+        TargetName = packet.ReadString();
+        Command = packet.ReadInt();
         // _unknown = packet.ReadInt();
     }
 }

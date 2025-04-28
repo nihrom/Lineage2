@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestGiveNickName
 {
+    public string Target;
+    public string Title;
+
     public RequestGiveNickName(Packet packet)
     {
-        var _target = packet.ReadString();
-        var _title = packet.ReadString();
+        Target = packet.ReadString();
+        Title = packet.ReadString();
     }
 }

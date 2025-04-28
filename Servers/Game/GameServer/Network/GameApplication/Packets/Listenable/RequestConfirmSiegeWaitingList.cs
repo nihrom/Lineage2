@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestConfirmSiegeWaitingList
 {
+    public int CastleId;
+    public int ClanId;
+    public int Approved;
+
     public RequestConfirmSiegeWaitingList(Packet packet)
     {
-        var _castleId = packet.ReadInt();
-        var _clanId = packet.ReadInt();
-        var _approved = packet.ReadInt();
+        CastleId = packet.ReadInt();
+        ClanId = packet.ReadInt();
+        Approved = packet.ReadInt();
     }
 }

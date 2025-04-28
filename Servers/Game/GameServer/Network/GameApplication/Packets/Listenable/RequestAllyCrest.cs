@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestAllyCrest
 {
+    public int CrestId;
+
     public RequestAllyCrest(Packet packet)
     {
-        var _crestId = packet.ReadInt();
+        CrestId = packet.ReadInt();
     }
 }

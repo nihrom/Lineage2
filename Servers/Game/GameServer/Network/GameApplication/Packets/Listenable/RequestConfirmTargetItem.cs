@@ -4,8 +4,10 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestConfirmTargetItem
 {
+    public int ItemObjId;
+
     public RequestConfirmTargetItem(Packet packet)
     {
-        var _itemObjId = packet.ReadInt();
+        ItemObjId = packet.ReadInt();
     }
 }

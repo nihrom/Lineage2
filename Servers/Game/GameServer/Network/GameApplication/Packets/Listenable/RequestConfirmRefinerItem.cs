@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestConfirmRefinerItem
 {
+    public int TargetItemObjId;
+    public int RefinerItemObjId;
+
     public RequestConfirmRefinerItem(Packet packet)
     {
-        var _targetItemObjId = packet.ReadInt();
-        var _refinerItemObjId = packet.ReadInt();
+        TargetItemObjId = packet.ReadInt();
+        RefinerItemObjId = packet.ReadInt();
     }
 }

@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPledgeWarList
 {
+    public int Unk1;
+    public int Tab;
+
     public RequestPledgeWarList(Packet packet)
     {
-        var _unk1 = packet.ReadInt();
-        var _tab = packet.ReadInt();
+        Unk1 = packet.ReadInt();
+        Tab = packet.ReadInt();
     }
 }

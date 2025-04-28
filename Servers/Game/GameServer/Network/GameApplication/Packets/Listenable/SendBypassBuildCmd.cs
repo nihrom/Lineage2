@@ -4,12 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class SendBypassBuildCmd
 {
+    public string? Command;
+
     public SendBypassBuildCmd(Packet packet)
     {
-        var _command = packet.ReadString();
-        if (_command != null)
-        {
-            _command = _command.trim();
-        }
+        Command = packet.ReadString();
+
+        Command = Command?.Trim();
     }
 }

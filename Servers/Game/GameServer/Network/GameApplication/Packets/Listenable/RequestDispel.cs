@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestDispel
 {
+    public int SkillId;
+    public int SkillLevel;
+
     public RequestDispel(Packet packet)
     {
-        var _skillId = packet.ReadInt();
-        var _skillLevel = packet.ReadInt();
+        SkillId = packet.ReadInt();
+        SkillLevel = packet.ReadInt();
     }
 }

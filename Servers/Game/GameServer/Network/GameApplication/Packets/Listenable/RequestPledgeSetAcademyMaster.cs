@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestPledgeSetAcademyMaster
 {
+    public int Set;
+    public string CurrPlayerName;
+    public string TargetPlayerName;
+
     public RequestPledgeSetAcademyMaster(Packet packet)
     {
-        var _set = packet.ReadInt();
-        var _currPlayerName = packet.ReadString();
-        var _targetPlayerName = packet.ReadString();
+        Set = packet.ReadInt();
+        CurrPlayerName = packet.ReadString();
+        TargetPlayerName = packet.ReadString();
     }
 }

@@ -4,10 +4,14 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestGetItemFromPet
 {
+    public int ObjectId;
+    public int Amount;
+    public int Unknown;
+
     public RequestGetItemFromPet(Packet packet)
     {
-        var _objectId = packet.ReadInt();
-        var _amount = packet.ReadInt();
-        var _unknown = packet.ReadInt(); // = 0 for most trades
+        ObjectId = packet.ReadInt();
+        Amount = packet.ReadInt();
+        Unknown = packet.ReadInt();
     }
 }

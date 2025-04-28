@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestAutoSoulShot
 {
+    public int ItemId;
+    public int Type;
+
     public RequestAutoSoulShot(Packet packet)
     {
-        var _itemId = packet.ReadInt();
-        var _type = packet.ReadInt();
+        ItemId = packet.ReadInt();
+        Type = packet.ReadInt();
     }
 }

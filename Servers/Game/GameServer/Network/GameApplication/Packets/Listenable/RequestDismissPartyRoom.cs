@@ -4,9 +4,12 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestDismissPartyRoom
 {
+    public int Roomid;
+    public int Data2;
+
     public RequestDismissPartyRoom(Packet packet)
     {
-        var _roomid = packet.ReadInt();
-        var _data2 = packet.ReadInt();
+        Roomid = packet.ReadInt();
+        Data2 = packet.ReadInt();
     }
 }
