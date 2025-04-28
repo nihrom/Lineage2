@@ -6,5 +6,6 @@ public class RequestSkillCoolTime
 {
     public RequestSkillCoolTime(Packet packet)
     {
+        //Тут пусто
     }
 }

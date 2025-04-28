@@ -6,5 +6,6 @@ public class RequestOlympiadObserverEnd
 {
     public RequestOlympiadObserverEnd(Packet packet)
     {
+        //Тут пусто
     }
 }

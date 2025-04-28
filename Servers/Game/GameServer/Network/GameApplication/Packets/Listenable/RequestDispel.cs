@@ -6,5 +6,7 @@ public class RequestDispel
 {
     public RequestDispel(Packet packet)
     {
+        // _skillId = readInt();
+        // _skillLevel = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestDismissAlly
 {
     public RequestDismissAlly(Packet packet)
     {
+        //Тут пусто
     }
 }

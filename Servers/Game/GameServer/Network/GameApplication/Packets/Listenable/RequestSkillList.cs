@@ -6,5 +6,6 @@ public class RequestSkillList
 {
     public RequestSkillList(Packet packet)
     {
+        //Тут пусто
     }
 }

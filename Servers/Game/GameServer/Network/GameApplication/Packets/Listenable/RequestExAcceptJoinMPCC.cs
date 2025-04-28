@@ -6,5 +6,6 @@ public class RequestExAcceptJoinMPCC
 {
     public RequestExAcceptJoinMPCC(Packet packet)
     {
+        _response = readInt();
     }
 }

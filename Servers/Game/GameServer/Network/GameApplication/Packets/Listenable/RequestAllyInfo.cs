@@ -6,5 +6,6 @@ public class RequestAllyInfo
 {
     public RequestAllyInfo(Packet packet)
     {
+        //Тут пусто
     }
 }

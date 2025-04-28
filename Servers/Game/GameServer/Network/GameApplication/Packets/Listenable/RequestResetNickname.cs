@@ -6,5 +6,6 @@ public class RequestResetNickname
 {
     public RequestResetNickname(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,6 @@ public class RequestSiegeInfo
 {
     public RequestSiegeInfo(Packet packet)
     {
+        //Тут пусто
     }
 }

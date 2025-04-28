@@ -6,5 +6,8 @@ public class AddTradeItem
 {
     public AddTradeItem(Packet packet)
     {
+        // _tradeId = readInt();
+        // _objectId = readInt();
+        // _count = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestEnchantItem
 {
     public RequestEnchantItem(Packet packet)
     {
+        // _objectId = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class Appearing
 {
     public Appearing(Packet packet)
     {
+        //Тут пусто
     }
 }

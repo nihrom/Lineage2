@@ -6,5 +6,6 @@ public class RequestRecipeShopManageList
 {
     public RequestRecipeShopManageList(Packet packet)
     {
+        //Тут пусто
     }
 }

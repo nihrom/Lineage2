@@ -6,5 +6,6 @@ public class NewCharacter
 {
     public NewCharacter(Packet packet)
     {
+        //Тут пусто
     }
 }

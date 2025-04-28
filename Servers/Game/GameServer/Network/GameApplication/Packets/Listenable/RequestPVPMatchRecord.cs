@@ -6,5 +6,6 @@ public class RequestPVPMatchRecord
 {
     public RequestPVPMatchRecord(Packet packet)
     {
+        //Тут пусто
     }
 }

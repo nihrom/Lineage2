@@ -6,5 +6,7 @@ public class RequestCrystallizeItem
 {
     public RequestCrystallizeItem(Packet packet)
     {
+        // _objectId = readInt();
+        // _count = readInt();
     }
 }

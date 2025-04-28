@@ -6,5 +6,6 @@ public class RequestTargetCanceld
 {
     public RequestTargetCanceld(Packet packet)
     {
+        _unselect = readShort();
     }
 }

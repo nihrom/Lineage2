@@ -6,5 +6,6 @@ public class RequestDeleteMacro
 {
     public RequestDeleteMacro(Packet packet)
     {
+        // _id = readInt();
     }
 }

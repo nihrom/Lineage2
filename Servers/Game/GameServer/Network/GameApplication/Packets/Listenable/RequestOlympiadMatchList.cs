@@ -6,5 +6,6 @@ public class RequestOlympiadMatchList
 {
     public RequestOlympiadMatchList(Packet packet)
     {
+        //Тут пусто
     }
 }

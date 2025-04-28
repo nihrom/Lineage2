@@ -6,5 +6,6 @@ public class RequestPledgePowerGradeList
 {
     public RequestPledgePowerGradeList(Packet packet)
     {
+        //Тут пусто
     }
 }

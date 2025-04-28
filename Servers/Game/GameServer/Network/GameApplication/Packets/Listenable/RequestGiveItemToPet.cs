@@ -6,5 +6,7 @@ public class RequestGiveItemToPet
 {
     public RequestGiveItemToPet(Packet packet)
     {
+        _objectId = readInt();
+        _amount = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestHennaItemList
 {
     public RequestHennaItemList(Packet packet)
     {
+        readInt(); // Unknown.
     }
 }

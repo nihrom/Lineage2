@@ -6,5 +6,6 @@ public class RequestPetitionCancel
 {
     public RequestPetitionCancel(Packet packet)
     {
+        //Тут пусто
     }
 }

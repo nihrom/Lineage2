@@ -6,5 +6,6 @@ public class CharacterRestore
 {
     public CharacterRestore(Packet packet)
     {
+        // _charSlot = readInt();
     }
 }

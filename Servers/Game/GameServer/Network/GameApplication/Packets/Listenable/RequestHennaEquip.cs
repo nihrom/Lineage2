@@ -6,5 +6,6 @@ public class RequestHennaEquip
 {
     public RequestHennaEquip(Packet packet)
     {
+        _symbolId = readInt();
     }
 }

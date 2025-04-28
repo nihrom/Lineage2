@@ -6,5 +6,23 @@ public class RequestRecipeShopListSet
 {
     public RequestRecipeShopListSet(Packet packet)
     {
+        final int count = readInt();
+        if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
+        {
+            return;
+        }
+		
+        _items = new ManufactureItem[count];
+        for (int i = 0; i < count; i++)
+        {
+            final int id = readInt();
+            final int cost = readInt();
+            if (cost < 0)
+            {
+                _items = null;
+                return;
+            }
+            _items[i] = new ManufactureItem(id, cost);
+        }
     }
 }

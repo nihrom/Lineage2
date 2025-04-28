@@ -6,5 +6,10 @@ public class CannotMoveAnymoreInVehicle
 {
     public CannotMoveAnymoreInVehicle(Packet packet)
     {
+        // _boatId = readInt();
+        // _x = readInt();
+        // _y = readInt();
+        // _z = readInt();
+        // _heading = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestTutorialClientEvent
 {
     public RequestTutorialClientEvent(Packet packet)
     {
+        eventId = readInt();
     }
 }

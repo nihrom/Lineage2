@@ -6,5 +6,6 @@ public class RequestOustPledgeMember
 {
     public RequestOustPledgeMember(Packet packet)
     {
+        _target = readString();
     }
 }

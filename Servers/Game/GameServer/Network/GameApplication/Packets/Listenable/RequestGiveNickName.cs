@@ -6,5 +6,7 @@ public class RequestGiveNickName
 {
     public RequestGiveNickName(Packet packet)
     {
+        _target = readString();
+        _title = readString();
     }
 }

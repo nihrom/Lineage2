@@ -6,5 +6,8 @@ public class MultiSellChoose
 {
     public MultiSellChoose(Packet packet)
     {
+        // _listId = readInt();
+        // _entryId = readInt();
+        // _amount = readInt();
     }
 }

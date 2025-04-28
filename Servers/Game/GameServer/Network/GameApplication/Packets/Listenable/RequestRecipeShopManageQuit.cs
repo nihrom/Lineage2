@@ -6,5 +6,6 @@ public class RequestRecipeShopManageQuit
 {
     public RequestRecipeShopManageQuit(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,6 @@ public class RequestStopPledgeWar
 {
     public RequestStopPledgeWar(Packet packet)
     {
+        _pledgeName = readString();
     }
 }

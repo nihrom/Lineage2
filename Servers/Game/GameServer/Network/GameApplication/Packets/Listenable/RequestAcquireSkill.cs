@@ -6,5 +6,8 @@ public class RequestAcquireSkill
 {
     public RequestAcquireSkill(Packet packet)
     {
+        // _id = readInt();
+        // _level = readInt();
+        // _skillType = AcquireSkillType.getAcquireSkillType(readInt());
     }
 }

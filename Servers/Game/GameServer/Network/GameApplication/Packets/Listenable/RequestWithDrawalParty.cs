@@ -6,5 +6,6 @@ public class RequestWithDrawalParty
 {
     public RequestWithDrawalParty(Packet packet)
     {
+        //Тут пусто
     }
 }

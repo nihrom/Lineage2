@@ -6,5 +6,6 @@ public class RequestGmList
 {
     public RequestGmList(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,6 @@ public class AnswerJoinPartyRoom
 {
     public AnswerJoinPartyRoom(Packet packet)
     {
+        // _answer = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestSurrenderPledgeWar
 {
     public RequestSurrenderPledgeWar(Packet packet)
     {
+        _pledgeName = readString();
     }
 }

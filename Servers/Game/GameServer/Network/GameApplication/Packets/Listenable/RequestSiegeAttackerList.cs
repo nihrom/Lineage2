@@ -6,5 +6,6 @@ public class RequestSiegeAttackerList
 {
     public RequestSiegeAttackerList(Packet packet)
     {
+        _castleId = readInt();
     }
 }

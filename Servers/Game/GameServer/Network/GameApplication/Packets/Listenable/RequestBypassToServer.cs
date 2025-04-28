@@ -6,5 +6,6 @@ public class RequestBypassToServer
 {
     public RequestBypassToServer(Packet packet)
     {
+        // _command = readString();
     }
 }

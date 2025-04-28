@@ -6,5 +6,6 @@ public class RequestWithdrawalPledge
 {
     public RequestWithdrawalPledge(Packet packet)
     {
+        //Тут пусто
     }
 }

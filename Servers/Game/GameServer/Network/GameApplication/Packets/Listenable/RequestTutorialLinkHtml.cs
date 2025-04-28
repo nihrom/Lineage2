@@ -6,5 +6,6 @@ public class RequestTutorialLinkHtml
 {
     public RequestTutorialLinkHtml(Packet packet)
     {
+        _bypass = readString();
     }
 }

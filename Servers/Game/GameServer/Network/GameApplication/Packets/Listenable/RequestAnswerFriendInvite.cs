@@ -6,5 +6,6 @@ public class RequestAnswerFriendInvite
 {
     public RequestAnswerFriendInvite(Packet packet)
     {
+        // _response = readInt();
     }
 }

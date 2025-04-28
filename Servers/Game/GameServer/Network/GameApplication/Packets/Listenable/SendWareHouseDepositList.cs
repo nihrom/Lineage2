@@ -6,5 +6,23 @@ public class SendWareHouseDepositList
 {
     public SendWareHouseDepositList(Packet packet)
     {
+        final int size = readInt();
+        if ((size <= 0) || (size > Config.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != remaining()))
+        {
+            return;
+        }
+		
+        _items = new ArrayList<>(size);
+        for (int i = 0; i < size; i++)
+        {
+            final int objId = readInt();
+            final int count = readInt();
+            if ((count > Integer.MAX_VALUE) || (objId < 1) || (count < 1))
+            {
+                _items = null;
+                return;
+            }
+            _items.add(new ItemHolder(objId, count));
+        }
     }
 }

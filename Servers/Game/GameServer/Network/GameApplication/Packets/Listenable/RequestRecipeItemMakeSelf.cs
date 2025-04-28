@@ -6,5 +6,6 @@ public class RequestRecipeItemMakeSelf
 {
     public RequestRecipeItemMakeSelf(Packet packet)
     {
+        _id = readInt();
     }
 }

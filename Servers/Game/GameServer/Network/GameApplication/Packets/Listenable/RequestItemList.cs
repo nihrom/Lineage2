@@ -6,5 +6,6 @@ public class RequestItemList
 {
     public RequestItemList(Packet packet)
     {
+        //Тут пусто
     }
 }

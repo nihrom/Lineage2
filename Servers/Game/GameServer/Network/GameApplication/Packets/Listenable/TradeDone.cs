@@ -6,5 +6,6 @@ public class TradeDone
 {
     public TradeDone(Packet packet)
     {
+        _response = readInt();
     }
 }

@@ -6,5 +6,7 @@ public class RequestSendFriendMsg
 {
     public RequestSendFriendMsg(Packet packet)
     {
+        _message = readString();
+        _reciever = readString();
     }
 }

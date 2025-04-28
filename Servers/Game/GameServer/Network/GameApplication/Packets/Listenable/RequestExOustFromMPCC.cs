@@ -6,5 +6,6 @@ public class RequestExOustFromMPCC
 {
     public RequestExOustFromMPCC(Packet packet)
     {
+        _name = readString();
     }
 }

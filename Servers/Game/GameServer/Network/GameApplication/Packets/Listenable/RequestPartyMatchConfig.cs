@@ -6,5 +6,8 @@ public class RequestPartyMatchConfig
 {
     public RequestPartyMatchConfig(Packet packet)
     {
+        _auto = readInt(); //
+        _loc = readInt(); // Location
+        _level = readInt(); // my level
     }
 }

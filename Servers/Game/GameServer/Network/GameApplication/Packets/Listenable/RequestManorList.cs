@@ -6,5 +6,6 @@ public class RequestManorList
 {
     public RequestManorList(Packet packet)
     {
+        //Тут пусто
     }
 }

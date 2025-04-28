@@ -6,5 +6,8 @@ public class DlgAnswer
 {
     public DlgAnswer(Packet packet)
     {
+        // _messageId = readInt();
+        // _answer = readInt();
+        // _requesterId = readInt();
     }
 }

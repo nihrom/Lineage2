@@ -6,5 +6,6 @@ public class RequestExPledgeCrestLarge
 {
     public RequestExPledgeCrestLarge(Packet packet)
     {
+        _crestId = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestAnswerJoinParty
 {
     public RequestAnswerJoinParty(Packet packet)
     {
+        // _response = readInt();
     }
 }

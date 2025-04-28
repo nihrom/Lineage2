@@ -6,5 +6,6 @@ public class AllyLeave
 {
     public AllyLeave(Packet packet)
     {
+        //Тут пусто
     }
 }

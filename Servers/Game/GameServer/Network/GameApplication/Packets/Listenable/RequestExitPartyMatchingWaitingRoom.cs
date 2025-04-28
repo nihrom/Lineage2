@@ -6,5 +6,6 @@ public class RequestExitPartyMatchingWaitingRoom
 {
     public RequestExitPartyMatchingWaitingRoom(Packet packet)
     {
+        //Тут пусто
     }
 }

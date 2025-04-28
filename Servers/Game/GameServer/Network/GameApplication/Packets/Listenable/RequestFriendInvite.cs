@@ -6,5 +6,6 @@ public class RequestFriendInvite
 {
     public RequestFriendInvite(Packet packet)
     {
+        _name = readString();
     }
 }

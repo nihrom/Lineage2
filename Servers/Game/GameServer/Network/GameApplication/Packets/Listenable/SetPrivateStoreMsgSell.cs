@@ -6,5 +6,6 @@ public class SetPrivateStoreMsgSell
 {
     public SetPrivateStoreMsgSell(Packet packet)
     {
+        _storeMsg = readString();
     }
 }

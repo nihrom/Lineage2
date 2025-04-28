@@ -6,5 +6,7 @@ public class RequestPetition
 {
     public RequestPetition(Packet packet)
     {
+        _content = readString();
+        _type = readInt();
     }
 }

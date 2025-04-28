@@ -6,5 +6,7 @@ public class RequestPledgeWarList
 {
     public RequestPledgeWarList(Packet packet)
     {
+        _unk1 = readInt();
+        _tab = readInt();
     }
 }

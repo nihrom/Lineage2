@@ -6,5 +6,6 @@ public class RequestPledgeInfo
 {
     public RequestPledgeInfo(Packet packet)
     {
+        _clanId = readInt();
     }
 }

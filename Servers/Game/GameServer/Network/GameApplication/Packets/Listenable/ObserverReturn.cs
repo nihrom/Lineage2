@@ -6,5 +6,6 @@ public class ObserverReturn
 {
     public ObserverReturn(Packet packet)
     {
+        //Тут пусто
     }
 }

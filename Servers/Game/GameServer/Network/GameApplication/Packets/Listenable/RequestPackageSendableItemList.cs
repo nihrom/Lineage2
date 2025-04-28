@@ -6,5 +6,6 @@ public class RequestPackageSendableItemList
 {
     public RequestPackageSendableItemList(Packet packet)
     {
+        _objectId = readInt();
     }
 }

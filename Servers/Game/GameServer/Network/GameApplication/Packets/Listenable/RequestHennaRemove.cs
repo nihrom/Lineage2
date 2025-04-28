@@ -6,5 +6,6 @@ public class RequestHennaRemove
 {
     public RequestHennaRemove(Packet packet)
     {
+        _symbolId = readInt();
     }
 }

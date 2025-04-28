@@ -6,5 +6,6 @@ public class Logout
 {
     public Logout(Packet packet)
     {
+        //Тут пусто
     }
 }

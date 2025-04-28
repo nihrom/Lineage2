@@ -6,5 +6,7 @@ public class RequestJoinPledge
 {
     public RequestJoinPledge(Packet packet)
     {
+        _target = readInt();
+        _pledgeType = readInt();
     }
 }

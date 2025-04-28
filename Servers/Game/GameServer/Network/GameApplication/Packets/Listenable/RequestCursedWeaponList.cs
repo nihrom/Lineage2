@@ -6,5 +6,6 @@ public class RequestCursedWeaponList
 {
     public RequestCursedWeaponList(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,7 @@ public class RequestAutoSoulShot
 {
     public RequestAutoSoulShot(Packet packet)
     {
+        // _itemId = readInt();
+        // _type = readInt();
     }
 }

@@ -6,5 +6,7 @@ public class RequestReplyStartPledgeWar
 {
     public RequestReplyStartPledgeWar(Packet packet)
     {
+        readString(); // _reqName
+        _answer = readInt();
     }
 }

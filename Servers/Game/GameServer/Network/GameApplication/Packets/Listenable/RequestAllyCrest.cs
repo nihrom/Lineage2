@@ -6,5 +6,6 @@ public class RequestAllyCrest
 {
     public RequestAllyCrest(Packet packet)
     {
+        // _crestId = readInt();
     }
 }

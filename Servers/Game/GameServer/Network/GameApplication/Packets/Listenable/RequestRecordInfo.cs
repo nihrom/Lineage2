@@ -6,5 +6,6 @@ public class RequestRecordInfo
 {
     public RequestRecordInfo(Packet packet)
     {
+        //Тут пусто
     }
 }

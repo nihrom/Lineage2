@@ -6,5 +6,6 @@ public class RequestQuestList
 {
     public RequestQuestList(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,7 @@ public class RequestRecipeShopMakeInfo
 {
     public RequestRecipeShopMakeInfo(Packet packet)
     {
+        _playerObjectId = readInt();
+        _recipeId = readInt();
     }
 }

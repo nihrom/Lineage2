@@ -6,5 +6,6 @@ public class RequestAllAgitInfo
 {
     public RequestAllAgitInfo(Packet packet)
     {
+        //Тут пусто
     }
 }

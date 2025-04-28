@@ -6,5 +6,6 @@ public class RequestTutorialPassCmdToServer
 {
     public RequestTutorialPassCmdToServer(Packet packet)
     {
+        _bypass = readString();
     }
 }

@@ -6,5 +6,6 @@ public class RequestAllCastleInfo
 {
     public RequestAllCastleInfo(Packet packet)
     {
+        //Тут пусто
     }
 }

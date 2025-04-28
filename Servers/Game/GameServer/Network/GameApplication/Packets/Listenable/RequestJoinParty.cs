@@ -6,5 +6,7 @@ public class RequestJoinParty
 {
     public RequestJoinParty(Packet packet)
     {
+        _name = readString();
+        _partyDistributionTypeId = readInt();
     }
 }

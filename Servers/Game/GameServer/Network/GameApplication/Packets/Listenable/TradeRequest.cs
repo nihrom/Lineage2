@@ -6,5 +6,6 @@ public class TradeRequest
 {
     public TradeRequest(Packet packet)
     {
+        _objectId = readInt();
     }
 }

@@ -6,5 +6,7 @@ public class UseItem
 {
     public UseItem(Packet packet)
     {
+        _objectId = readInt();
+        _ctrlPressed = readInt() != 0;
     }
 }

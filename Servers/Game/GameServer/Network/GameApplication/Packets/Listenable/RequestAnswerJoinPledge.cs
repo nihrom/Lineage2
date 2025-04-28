@@ -6,5 +6,6 @@ public class RequestAnswerJoinPledge
 {
     public RequestAnswerJoinPledge(Packet packet)
     {
+        // _answer = readInt();
     }
 }

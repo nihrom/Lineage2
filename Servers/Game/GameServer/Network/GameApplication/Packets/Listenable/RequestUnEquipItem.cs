@@ -6,5 +6,6 @@ public class RequestUnEquipItem
 {
     public RequestUnEquipItem(Packet packet)
     {
+        _slot = readInt();
     }
 }

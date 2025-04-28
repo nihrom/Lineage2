@@ -6,5 +6,6 @@ public class RequestFriendList
 {
     public RequestFriendList(Packet packet)
     {
+        //Тут пусто
     }
 }

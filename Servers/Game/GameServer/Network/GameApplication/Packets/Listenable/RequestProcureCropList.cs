@@ -6,5 +6,29 @@ public class RequestProcureCropList
 {
     public RequestProcureCropList(Packet packet)
     {
+        final int count = readInt();
+        if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != remaining()))
+        {
+            return;
+        }
+		
+        _items = new ArrayList<>(count);
+        for (int i = 0; i < count; i++)
+        {
+            final int objId = readInt();
+            final int itemId = readInt();
+            final int manorId = readInt();
+            int cnt = readInt();
+            if (cnt > Integer.MAX_VALUE)
+            {
+                cnt = Integer.MAX_VALUE;
+            }
+            if ((objId < 1) || (itemId < 1) || (manorId < 0) || (cnt < 0))
+            {
+                _items = null;
+                return;
+            }
+            _items.add(new CropHolder(objId, itemId, cnt, manorId));
+        }
     }
 }

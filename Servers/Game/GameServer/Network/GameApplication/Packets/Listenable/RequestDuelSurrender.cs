@@ -6,5 +6,6 @@ public class RequestDuelSurrender
 {
     public RequestDuelSurrender(Packet packet)
     {
+        //Тут пусто
     }
 }

@@ -6,5 +6,8 @@ public class RequestRecipeShopMakeItem
 {
     public RequestRecipeShopMakeItem(Packet packet)
     {
+        _id = readInt();
+        _recipeId = readInt();
+        _unknown = readInt();
     }
 }

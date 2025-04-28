@@ -6,5 +6,6 @@ public class RequestConfirmTargetItem
 {
     public RequestConfirmTargetItem(Packet packet)
     {
+        // _itemObjId = readInt();
     }
 }

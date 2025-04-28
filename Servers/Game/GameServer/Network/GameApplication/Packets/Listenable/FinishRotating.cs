@@ -6,5 +6,7 @@ public class FinishRotating
 {
     public FinishRotating(Packet packet)
     {
+        // _degree = readInt();
+        // readInt(); // Unknown.
     }
 }

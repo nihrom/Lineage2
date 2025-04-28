@@ -6,5 +6,6 @@ public class RequestExFishRanking
 {
     public RequestExFishRanking(Packet packet)
     {
+        //Тут пусто
     }
 }

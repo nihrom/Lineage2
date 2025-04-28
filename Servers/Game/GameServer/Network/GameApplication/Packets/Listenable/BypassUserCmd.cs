@@ -6,5 +6,6 @@ public class BypassUserCmd
 {
     public BypassUserCmd(Packet packet)
     {
+        // _command = readInt();
     }
 }

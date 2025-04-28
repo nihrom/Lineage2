@@ -6,5 +6,6 @@ public class RequestShowMiniMap
 {
     public RequestShowMiniMap(Packet packet)
     {
+        //Тут пусто
     }
 }

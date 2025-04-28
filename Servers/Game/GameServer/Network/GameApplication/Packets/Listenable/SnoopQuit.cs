@@ -6,5 +6,6 @@ public class SnoopQuit
 {
     public SnoopQuit(Packet packet)
     {
+        _snoopID = readInt();
     }
 }

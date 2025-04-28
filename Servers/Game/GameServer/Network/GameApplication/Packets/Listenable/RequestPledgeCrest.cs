@@ -6,5 +6,6 @@ public class RequestPledgeCrest
 {
     public RequestPledgeCrest(Packet packet)
     {
+        _crestId = readInt();
     }
 }

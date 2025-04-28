@@ -6,5 +6,8 @@ public class RequestDuelAnswerStart
 {
     public RequestDuelAnswerStart(Packet packet)
     {
+        // _partyDuel = readInt();
+        // _unk1 = readInt();
+        // _response = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestRefineCancel
 {
     public RequestRefineCancel(Packet packet)
     {
+        _targetItemObjId = readInt();
     }
 }

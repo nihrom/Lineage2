@@ -6,5 +6,7 @@ public class RequestDuelStart
 {
     public RequestDuelStart(Packet packet)
     {
+        // _player = readString();
+        // _partyDuel = readInt();
     }
 }

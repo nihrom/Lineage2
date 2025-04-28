@@ -6,5 +6,6 @@ public class RequestPledgeExtendedInfo
 {
     public RequestPledgeExtendedInfo(Packet packet)
     {
+        readString(); // name?
     }
 }

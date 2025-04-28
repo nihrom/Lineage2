@@ -6,5 +6,6 @@ public class RequestPledgeMemberList
 {
     public RequestPledgeMemberList(Packet packet)
     {
+        //Тут пусто
     }
 }

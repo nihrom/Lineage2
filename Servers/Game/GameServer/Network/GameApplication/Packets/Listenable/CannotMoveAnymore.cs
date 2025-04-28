@@ -6,5 +6,9 @@ public class CannotMoveAnymore
 {
     public CannotMoveAnymore(Packet packet)
     {
+        // _x = readInt();
+        // _y = readInt();
+        // _z = readInt();
+        // _heading = readInt();
     }
 }

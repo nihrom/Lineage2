@@ -6,5 +6,6 @@ public class ChangeWaitType2
 {
     public ChangeWaitType2(Packet packet)
     {
+        // _typeStand = readInt() == 1;
     }
 }

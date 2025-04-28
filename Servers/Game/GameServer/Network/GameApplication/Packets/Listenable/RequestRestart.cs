@@ -6,5 +6,6 @@ public class RequestRestart
 {
     public RequestRestart(Packet packet)
     {
+        //Тут пусто
     }
 }

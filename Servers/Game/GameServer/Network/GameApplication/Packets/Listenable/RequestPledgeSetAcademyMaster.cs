@@ -6,5 +6,8 @@ public class RequestPledgeSetAcademyMaster
 {
     public RequestPledgeSetAcademyMaster(Packet packet)
     {
+        _set = readInt();
+        _currPlayerName = readString();
+        _targetPlayerName = readString();
     }
 }

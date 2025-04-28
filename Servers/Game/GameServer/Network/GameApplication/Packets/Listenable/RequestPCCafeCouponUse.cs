@@ -6,5 +6,6 @@ public class RequestPCCafeCouponUse
 {
     public RequestPCCafeCouponUse(Packet packet)
     {
+        _str = readString();
     }
 }

@@ -6,5 +6,6 @@ public class RequestFriendDel
 {
     public RequestFriendDel(Packet packet)
     {
+        _name = readString();
     }
 }

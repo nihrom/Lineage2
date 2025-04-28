@@ -6,5 +6,7 @@ public class RequestWithdrawPartyRoom
 {
     public RequestWithdrawPartyRoom(Packet packet)
     {
+        _roomid = readInt();
+        _unk1 = readInt();
     }
 }

@@ -6,5 +6,6 @@ public class RequestJoinAlly
 {
     public RequestJoinAlly(Packet packet)
     {
+        _id = readInt();
     }
 }

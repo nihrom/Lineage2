@@ -6,5 +6,6 @@ public class RequestPrivateStoreManageBuy
 {
     public RequestPrivateStoreManageBuy(Packet packet)
     {
+        //Тут пусто
     }
 }

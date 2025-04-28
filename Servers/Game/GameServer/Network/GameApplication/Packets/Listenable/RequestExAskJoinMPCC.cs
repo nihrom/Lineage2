@@ -6,5 +6,6 @@ public class RequestExAskJoinMPCC
 {
     public RequestExAskJoinMPCC(Packet packet)
     {
+        _name = readString();
     }
 }

@@ -6,5 +6,7 @@ public class RequestExEnchantSkillInfo
 {
     public RequestExEnchantSkillInfo(Packet packet)
     {
+        _skillId = readInt();
+        _skillLevel = readInt();
     }
 }

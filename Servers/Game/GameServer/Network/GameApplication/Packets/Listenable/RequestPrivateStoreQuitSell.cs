@@ -6,5 +6,6 @@ public class RequestPrivateStoreQuitSell
 {
     public RequestPrivateStoreQuitSell(Packet packet)
     {
+        //Тут пусто
     }
 }

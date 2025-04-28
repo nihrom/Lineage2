@@ -6,5 +6,6 @@ public class RequestGetBossRecord
 {
     public RequestGetBossRecord(Packet packet)
     {
+        _bossId = readInt();
     }
 }

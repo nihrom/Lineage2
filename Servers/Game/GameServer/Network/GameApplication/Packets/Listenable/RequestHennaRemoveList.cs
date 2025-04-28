@@ -6,5 +6,6 @@ public class RequestHennaRemoveList
 {
     public RequestHennaRemoveList(Packet packet)
     {
+        readInt(); // Unknown.
     }
 }
