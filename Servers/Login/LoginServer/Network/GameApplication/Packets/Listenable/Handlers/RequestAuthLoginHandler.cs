@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using LoginServer.Application.Enums;
 using LoginServer.Application.Services;
+using LoginServer.Application.Services.L2GameApplication;
 using LoginServer.Domain.Models.GameServers;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Sent;

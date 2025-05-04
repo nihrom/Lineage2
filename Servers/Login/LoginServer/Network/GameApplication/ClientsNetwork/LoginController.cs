@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Common.Cryptography;
 using Common.Network;
+using LoginServer.Application.Services.L2GameApplication;
 using LoginServer.Models;
 using Org.BouncyCastle.Crypto.Engines;
 using Serilog;

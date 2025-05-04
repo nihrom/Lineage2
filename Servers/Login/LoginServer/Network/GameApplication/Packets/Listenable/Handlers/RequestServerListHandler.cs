@@ -1,4 +1,5 @@
 ﻿using LoginServer.Application.Services;
+using LoginServer.Application.Services.L2GameApplication;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Sent;
 

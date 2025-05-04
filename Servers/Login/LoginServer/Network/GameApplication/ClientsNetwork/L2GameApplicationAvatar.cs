@@ -1,5 +1,6 @@
 ﻿using System.Net.Sockets;
 using Common.Cryptography;
+using LoginServer.Application.Services.L2GameApplication;
 using LoginServer.Network.GameApplication.Packets.Sent;
 
 namespace LoginServer.Network.GameApplication.ClientsNetwork;
@@ -54,7 +55,10 @@ public class L2GameApplicationAvatar : L2Connection
 
     public async Task Init()
     {
-        //SendAsync(new _0x00_Init());
+        await SendAsync(new _0x00_Init(
+            SessionId,
+            ScrambledKeyPair.scrambledModulus,
+            Blowfish));
     }
     
     public Task SendLoginFail(LoginFailReason reason)
@@ -63,14 +67,16 @@ public class L2GameApplicationAvatar : L2Connection
             new _0x01_LoginFail((byte)reason));
     }
     
-    public async Task SendAccountKicked()
+    public Task SendAccountKicked(AccountKickedReason reason)
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x02_AccountKicked((int)reason));
     }
     
-    public async Task SendLoginOk()
+    public Task SendLoginOk()
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x03_LoginOk(LoginOkId1, LoginOkId2));
     }
     
     public Task SendServerList(
@@ -82,9 +88,10 @@ public class L2GameApplicationAvatar : L2Connection
             new _0x04_ServerList(serversCount, accountLastServer, servers));
     }
     
-    public async Task SendPlayFail()
+    public Task SendPlayFail(PlayFailReason reason)
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x06_PlayFail((byte)reason));
     }
     
     public Task SendPlayOk()
