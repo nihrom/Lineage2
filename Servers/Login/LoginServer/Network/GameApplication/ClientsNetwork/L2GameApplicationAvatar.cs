@@ -15,8 +15,14 @@ public class L2GameApplicationAvatar : L2Connection
     public int LoginOkId1 { get; set; }
     
     public int LoginOkId2 { get; set; }
+    
+    public int PlayOkId1 { get; set; }
+    
+    public int PlayOkId2 { get; set; }
 
     public LoginClientState LoginClientState { get; set; }
+    
+    public string? Login  { get; set; }
 
     public L2GameApplicationAvatar(TcpClient tcpClient) : base(tcpClient)
     {
@@ -25,14 +31,25 @@ public class L2GameApplicationAvatar : L2Connection
         Random.Shared.NextBytes(Blowfish);
     }
 
+    public async Task Close(LoginFailReason reason)
+    {
+        //TODO: Реализовать
+    }
+
+    public bool CheckLoginOk(int loginOkId1, int loginOkId2)
+    {
+        return LoginOkId1 == loginOkId1 && LoginOkId2 == loginOkId2;
+    }
+
     public async Task Init()
     {
-        throw new NotImplementedException();
+        //SendAsync(new _0x00_Init());
     }
     
-    public async Task SendLoginFail()
+    public Task SendLoginFail(LoginFailReason reason)
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x01_LoginFail((byte)reason));
     }
     
     public async Task SendAccountKicked()
@@ -45,9 +62,13 @@ public class L2GameApplicationAvatar : L2Connection
         throw new NotImplementedException();
     }
     
-    public async Task SendServerList()
+    public Task SendServerList(
+        byte serversCount,
+        byte accountLastServer,
+        IReadOnlyCollection<_0x04_ServerList.ServerData> servers)
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x04_ServerList(serversCount, accountLastServer, servers));
     }
     
     public async Task SendPlayFail()
@@ -55,13 +76,15 @@ public class L2GameApplicationAvatar : L2Connection
         throw new NotImplementedException();
     }
     
-    public async Task SendPlayOk()
+    public Task SendPlayOk()
     {
-        throw new NotImplementedException();
+        return SendAsync(
+            new _0x07_PlayOk(PlayOkId1, PlayOkId2));
     }
     
     public async Task SendGgAuth()
     {
-        await SendAsync(new _0x0b_GGAuth(SessionId));
+        await SendAsync(
+            new _0x0b_GGAuth(SessionId));
     }
 }

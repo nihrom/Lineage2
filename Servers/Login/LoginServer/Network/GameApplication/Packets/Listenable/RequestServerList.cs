@@ -4,9 +4,9 @@ namespace LoginServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestServerList
 {
-    private int Skey1 { get; }
+    public int Skey1 { get; }
     
-    private int Skey2 { get; }
+    public int Skey2 { get; }
 
     public RequestServerList(Packet packet)
     {

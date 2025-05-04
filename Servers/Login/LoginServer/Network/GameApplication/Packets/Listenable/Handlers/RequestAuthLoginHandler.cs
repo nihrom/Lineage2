@@ -1,24 +1,32 @@
 ﻿using System.Text;
+using LoginServer.Application.Enums;
+using LoginServer.Application.Services;
+using LoginServer.Domain.Models.GameServers;
 using LoginServer.Network.GameApplication.ClientsNetwork;
+using LoginServer.Network.GameApplication.Packets.Sent;
 using Org.BouncyCastle.Crypto.Engines;
+using Serilog;
 
 namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
 public class RequestAuthLoginHandler
 {
+    private readonly ILogger logger = Log.Logger.ForContext<RequestAuthLoginHandler>();
+    
     private L2GameApplicationAvatar _avatar;
+    private readonly AccountManager accountManager;
+    private readonly ServerConfig serverConfig;
+    private readonly ServersManager serversManager;
     
     public async Task Handle(RequestAuthLogin request)
     {
-        if (loginClientState != LoginClientState.AuthedGg)
+        if (_avatar.LoginClientState != LoginClientState.AuthedGg)
         {
-            await l2Connection.SendAsync(
-                PacketBuilder.LoginFail(LoginFailReason.ReasonAccessFailed));
-            //l2Connection.Close();
+            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
             return;
         }
         
-        var decrypt = DecryptPacket(raw);
+        var decrypt = DecryptPacket(request.Raw);
 
         var username = Encoding.ASCII
             .GetString(decrypt, 0x4E, 64)
@@ -32,68 +40,96 @@ public class RequestAuthLoginHandler
             "Username: {Username}, password: {Password}",
             username,
             password);
+
+        string clientAddr = _avatar.Ip;
         
-        final String clientAddr = client.getIp();
-        final LoginController lc = LoginController.getInstance();
-        final AccountInfo info = lc.retriveAccountInfo(clientAddr, user, password);
-        if (info == null)
+        LoginController lc = LoginController.getInstance();
+        
+        var accountInfo = accountManager.GetAccountInfo(
+            clientAddr,
+            username,
+            password);
+        
+        if (accountInfo == null)
         {
             // Account or password was wrong.
-            client.close(LoginFailReason.REASON_USER_OR_PASS_WRONG);
+            await _avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
             return;
         }
-		
-        switch (lc.tryCheckinAccount(client, clientAddr, info))
+
+        var checkinAccountResult = accountManager.TryCheckinAccount(
+            //client,
+            clientAddr,
+            accountInfo);
+        
+        switch (checkinAccountResult)
         {
-            case AUTH_SUCCESS:
+            case LoginResult.AuthSuccess:
             {
-                client.setAccount(info.getLogin());
-                client.setConnectionState(ConnectionState.AUTHED_LOGIN);
-                client.setSessionKey(lc.assignSessionKeyToClient(info.getLogin(), client));
-                lc.getCharactersOnAccount(info.getLogin());
-                if (Config.SHOW_LICENCE)
+                _avatar.Login = accountInfo.Login;
+                _avatar.LoginClientState = LoginClientState.AuthedLogin;
+                client.setSessionKey(lc.assignSessionKeyToClient(accountInfo.Login, client));
+                lc.getCharactersOnAccount(accountInfo.Login);
+                if (serverConfig.ShowLicence)
                 {
-                    client.sendPacket(new LoginOk(client.getSessionKey()));
+                    await _avatar.SendLoginOk();
                 }
                 else
                 {
-                    client.sendPacket(new ServerList(client));
+                    var servers = serversManager.GetServers();
+            
+                    var mappedServers =servers
+                        .Select(x => new _0x04_ServerList.ServerData(
+                            x.ServerId,
+                            x.Ip,
+                            x.Port,
+                            x.AgeLimit,
+                            x.IsPvp,
+                            x.CurrentPlayers,
+                            x.MaxPlayers,
+                            x.Connected,
+                            x.IsBrackets,
+                            x.TestMode))
+                        .ToList();
+            
+                    //TODO: откуда то взять эту инфу
+                    await _avatar.SendServerList(1, 1, mappedServers);
                 }
                 break;
             }
-            case INVALID_PASSWORD:
+            case LoginResult.InvalidPassword:
             {
-                client.close(LoginFailReason.REASON_USER_OR_PASS_WRONG);
+                await _avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
                 break;
             }
-            case ACCOUNT_BANNED:
+            case LoginResult.AccountBanned:
             {
-                client.close(new AccountKicked(AccountKickedReason.REASON_PERMANENTLY_BANNED));
+                await _avatar.Close(new AccountKicked(AccountKickedReason.REASON_PERMANENTLY_BANNED));
                 return;
             }
-            case ALREADY_ON_LS:
+            case LoginResult.AlreadyOnLs:
             {
-                final LoginClient oldClient = lc.getAuthedClient(info.getLogin());
+                LoginClient oldClient = lc.getAuthedClient(accountInfo.Login);
                 if (oldClient != null)
                 {
-                    // Kick the other client.
-                    oldClient.close(LoginFailReason.REASON_ACCOUNT_IN_USE);
-                    lc.removeAuthedLoginClient(info.getLogin());
+                    // Кикнуть старого клиента
+                    oldClient.close(LoginFailReason.ReasonAccountInUse);
+                    lc.removeAuthedLoginClient(accountInfo.Login);
                 }
-				
-                // Also kick current client.
-                client.close(LoginFailReason.REASON_ACCOUNT_IN_USE);
+                
+                // Также кикнуть ныншнего клиента
+                await _avatar.Close(LoginFailReason.ReasonAccountInUse);
                 break;
             }
-            case ALREADY_ON_GS:
+            case LoginResult.AlreadyOnGs:
             {
-                final GameServerInfo gsi = lc.getAccountOnGameServer(info.getLogin());
+                GameServerInfo gsi = lc.getAccountOnGameServer(accountInfo.Login);
                 if (gsi != null)
                 {
-                    client.close(LoginFailReason.REASON_ACCOUNT_IN_USE);
-                    if (gsi.isAuthed())
+                    await _avatar.Close(LoginFailReason.ReasonAccountInUse);
+                    if (gsi.IsAuthed)
                     {
-                        gsi.getGameServerThread().kickPlayer(info.getLogin());
+                        gsi.getGameServerThread().kickPlayer(accountInfo.Login);
                     }
                 }
                 break;

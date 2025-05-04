@@ -16,6 +16,9 @@ public class L2Connection : IDisposable
     public event Func<Packet, Task> ReceivedPacket;
     public event Func<Packet, Task> SendingPacket;
     
+    public string Ip => tcpClient.Client.RemoteEndPoint?
+        .ToString() ?? string.Empty;
+    
     public L2Connection(TcpClient tcpClient)
     {
         this.tcpClient = tcpClient;

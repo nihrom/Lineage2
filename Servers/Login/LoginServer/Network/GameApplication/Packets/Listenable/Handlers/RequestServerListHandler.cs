@@ -1,17 +1,40 @@
-﻿namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
+﻿using LoginServer.Application.Services;
+using LoginServer.Network.GameApplication.ClientsNetwork;
+using LoginServer.Network.GameApplication.Packets.Sent;
+
+namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
 public class RequestServerListHandler
 {
+    private L2GameApplicationAvatar _avatar;
+    private readonly ServersManager serversManager;
+    
     public async Task Handle(RequestServerList request)
     {
-        LoginClient client = getClient();
-        if (client.getSessionKey().checkLoginPair(_skey1, _skey2))
+        if (_avatar.CheckLoginOk(request.Skey1, request.Skey2))
         {
-            client.sendPacket(new ServerList(client));
+            var servers = serversManager.GetServers();
+            
+            var mappedServers =servers
+                .Select(x => new _0x04_ServerList.ServerData(
+                    x.ServerId,
+                    x.Ip,
+                    x.Port,
+                    x.AgeLimit,
+                    x.IsPvp,
+                    x.CurrentPlayers,
+                    x.MaxPlayers,
+                    x.Connected,
+                    x.IsBrackets,
+                    x.TestMode))
+                .ToList();
+            
+            //TODO: откуда то взять эту инфу
+            await _avatar.SendServerList(1, 1, mappedServers);
         }
         else
         {
-            client.close(LoginFailReason.REASON_ACCESS_FAILED);
+            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
         }
     }
 }

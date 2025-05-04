@@ -9,4 +9,6 @@ public sealed class ServerConfig
     public int GameServersPort { get; set; }
 
     public bool AutoCreate { get; set; }
+    
+    public bool ShowLicence { get; set; }
 }

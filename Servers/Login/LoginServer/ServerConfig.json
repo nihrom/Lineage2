@@ -4,6 +4,7 @@
     "Host": "127.0.0.1",
     "Port": "2106",
     "GameServersPort": "9014",
-    "AutoCreate": "true"
+    "AutoCreate": true,
+    "ShowLicence": true
   }
 }

@@ -1,32 +1,41 @@
-﻿namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
+﻿using LoginServer.Application.Services;
+using LoginServer.Network.GameApplication.ClientsNetwork;
+
+namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
 public class RequestServerLoginHandler
 {
-    public async Task Handle(RequestServerLogin handler)
+    private L2GameApplicationAvatar _avatar;
+    private Application.Services.LoginServer _server;
+    private readonly AccountManager accountManager;
+    private readonly ServerConfig serverConfig;
+    
+    public async Task Handle(RequestServerLogin request)
     {
-        LoginClient client = getClient();
-        SessionKey sk = client.getSessionKey();
-        
         // Если мы не предъявили лицензию, мы не сможем проверить эти значения.
-        if (!Config.SHOW_LICENCE || sk.checkLoginPair(_skey1, _skey2))
+        if (!serverConfig.ShowLicence || _avatar.CheckLoginOk(request.Skey1, request.Skey2))
         {
-            if ((LoginServer.getInstance().getStatus() == ServerStatus.STATUS_DOWN) || ((LoginServer.getInstance().getStatus() == ServerStatus.STATUS_GM_ONLY) && (client.getAccessLevel() < 1)))
+            if (
+                _server.Status == LoginServerStatus.StatusDown ||
+                (_server.Status == LoginServerStatus.StatusGmOnly && _avatar.getAccessLevel() < 1))
             {
-                client.close(LoginFailReason.REASON_ACCESS_FAILED);
+                await _avatar.Close(LoginFailReason.ReasonAccessFailed);
             }
-            else if (LoginController.getInstance().isLoginPossible(client, _serverId))
+            else if (accountManager.IsLoginPossible(
+                         client, 
+                         request.ServerId))
             {
                 client.setJoinedGS(true);
-                client.sendPacket(new PlayOk(sk));
+                await _avatar.SendPlayOk();
             }
             else
             {
-                client.close(PlayFailReason.REASON_SERVER_OVERLOADED);
+                _avatar.Close(PlayFailReason.REASON_SERVER_OVERLOADED);
             }
         }
         else
         {
-            client.close(LoginFailReason.REASON_ACCESS_FAILED);
+            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
         }
     }
 }

@@ -33,6 +33,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Commons\Common.Cryptography\Common.Cryptography.csproj" />
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
+      <ProjectReference Include="..\LoginServer.Application\LoginServer.Application.csproj" />
     </ItemGroup>
 
 </Project>
