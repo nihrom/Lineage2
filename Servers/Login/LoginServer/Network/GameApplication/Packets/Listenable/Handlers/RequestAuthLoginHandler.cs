@@ -42,9 +42,7 @@ public class RequestAuthLoginHandler
             password);
 
         string clientAddr = _avatar.Ip;
-        
-        LoginController lc = LoginController.getInstance();
-        
+
         var accountInfo = accountManager.GetAccountInfo(
             clientAddr,
             username,
@@ -68,8 +66,13 @@ public class RequestAuthLoginHandler
             {
                 _avatar.Login = accountInfo.Login;
                 _avatar.LoginClientState = LoginClientState.AuthedLogin;
-                client.setSessionKey(lc.assignSessionKeyToClient(accountInfo.Login, client));
-                lc.getCharactersOnAccount(accountInfo.Login);
+                
+                //TODO: Проверить эту цепочку и реализовать
+                //client.setSessionKey(lc.assignSessionKeyToClient(accountInfo.Login, client));
+                
+                //TODO: На сколько понимаю, запрашивает на серверах Characters по аккауту
+                //lc.getCharactersOnAccount(accountInfo.Login);
+                
                 if (serverConfig.ShowLicence)
                 {
                     await _avatar.SendLoginOk();
@@ -104,18 +107,18 @@ public class RequestAuthLoginHandler
             }
             case LoginResult.AccountBanned:
             {
-                await _avatar.Close(new AccountKicked(AccountKickedReason.REASON_PERMANENTLY_BANNED));
+                //await _avatar.Close(new AccountKicked(AccountKickedReason.REASON_PERMANENTLY_BANNED));
                 return;
             }
             case LoginResult.AlreadyOnLs:
             {
-                LoginClient oldClient = lc.getAuthedClient(accountInfo.Login);
-                if (oldClient != null)
-                {
-                    // Кикнуть старого клиента
-                    oldClient.close(LoginFailReason.ReasonAccountInUse);
-                    lc.removeAuthedLoginClient(accountInfo.Login);
-                }
+                // LoginClient oldClient = lc.getAuthedClient(accountInfo.Login);
+                // if (oldClient != null)
+                // {
+                //     // Кикнуть старого клиента
+                //     oldClient.close(LoginFailReason.ReasonAccountInUse);
+                //     lc.removeAuthedLoginClient(accountInfo.Login);
+                // }
                 
                 // Также кикнуть ныншнего клиента
                 await _avatar.Close(LoginFailReason.ReasonAccountInUse);
@@ -123,15 +126,15 @@ public class RequestAuthLoginHandler
             }
             case LoginResult.AlreadyOnGs:
             {
-                GameServerInfo gsi = lc.getAccountOnGameServer(accountInfo.Login);
-                if (gsi != null)
-                {
-                    await _avatar.Close(LoginFailReason.ReasonAccountInUse);
-                    if (gsi.IsAuthed)
-                    {
-                        gsi.getGameServerThread().kickPlayer(accountInfo.Login);
-                    }
-                }
+                // GameServerInfo gsi = lc.getAccountOnGameServer(accountInfo.Login);
+                // if (gsi != null)
+                // {
+                //     await _avatar.Close(LoginFailReason.ReasonAccountInUse);
+                //     if (gsi.IsAuthed)
+                //     {
+                //         gsi.getGameServerThread().kickPlayer(accountInfo.Login);
+                //     }
+                // }
                 break;
             }
         }

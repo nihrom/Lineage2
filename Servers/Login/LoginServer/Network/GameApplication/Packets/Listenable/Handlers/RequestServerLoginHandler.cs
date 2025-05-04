@@ -17,15 +17,15 @@ public class RequestServerLoginHandler
         {
             if (
                 _server.Status == LoginServerStatus.StatusDown ||
-                (_server.Status == LoginServerStatus.StatusGmOnly && _avatar.getAccessLevel() < 1))
+                (_server.Status == LoginServerStatus.StatusGmOnly && _avatar.AccessLevel < 1))
             {
                 await _avatar.Close(LoginFailReason.ReasonAccessFailed);
             }
             else if (accountManager.IsLoginPossible(
-                         client, 
+                         //client, 
                          request.ServerId))
             {
-                client.setJoinedGS(true);
+                _avatar.JoinedGs = true;
                 await _avatar.SendPlayOk();
             }
             else

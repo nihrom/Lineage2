@@ -15,8 +15,7 @@ public class AuthGameGuardHandler
         }
         else
         {
-            //getClient().close(LoginFailReason.REASON_ACCESS_FAILED);
-            //Надо изучить, как тут закрыть
+            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
         }
     }
 }

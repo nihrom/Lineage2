@@ -23,6 +23,12 @@ public class L2GameApplicationAvatar : L2Connection
     public LoginClientState LoginClientState { get; set; }
     
     public string? Login  { get; set; }
+    
+    public int? AccessLevel { get; set; }
+    
+    public int? LastServer { get; set; }
+    
+    public bool JoinedGs { get; set; }
 
     public L2GameApplicationAvatar(TcpClient tcpClient) : base(tcpClient)
     {
@@ -32,6 +38,11 @@ public class L2GameApplicationAvatar : L2Connection
     }
 
     public async Task Close(LoginFailReason reason)
+    {
+        //TODO: Реализовать
+    }
+    
+    public async Task Close(PlayFailReason reason)
     {
         //TODO: Реализовать
     }
