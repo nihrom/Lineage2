@@ -14,7 +14,7 @@ public class ProtocolVersion
         }
         catch (Exception e)
         {
-            _version = 0;
+            Version = 0;
         }
     }
 }

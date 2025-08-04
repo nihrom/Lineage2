@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ManagePledgePower : Packet { }
+public class ManagePledgePower : Packet
+{
+    public ManagePledgePower() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

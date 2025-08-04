@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ExSendManorList : Packet { }
+public class ExSendManorList : Packet
+{
+    public ExSendManorList() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

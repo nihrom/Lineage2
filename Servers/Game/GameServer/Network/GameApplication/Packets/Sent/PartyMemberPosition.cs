@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class PartyMemberPosition : Packet { }
+public class PartyMemberPosition : Packet
+{
+    public PartyMemberPosition() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

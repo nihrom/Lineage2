@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class Snoop : Packet { }
+public class Snoop : Packet
+{
+    public Snoop() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

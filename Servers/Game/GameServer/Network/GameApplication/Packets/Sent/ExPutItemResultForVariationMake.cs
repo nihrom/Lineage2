@@ -2,4 +2,9 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ExPutItemResultForVariationMake : Packet { }
+public class ExPutItemResultForVariationMake : Packet
+{
+    public ExPutItemResultForVariationMake() : base()
+    {
+    }
+}

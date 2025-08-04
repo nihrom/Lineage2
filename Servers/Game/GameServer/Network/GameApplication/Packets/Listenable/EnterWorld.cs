@@ -13,6 +13,7 @@ public class EnterWorld
         packet.ReadInt(); // Unknown Value
         packet.ReadBytesArray(32); // Unknown Byte Array
         packet.ReadInt(); // Unknown Value
+        
         for (int i = 0; i < 5; i++)
         {
             for (int o = 0; o < 4; o++)

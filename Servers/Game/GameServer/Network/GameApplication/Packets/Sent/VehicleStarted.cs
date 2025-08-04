@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class VehicleStarted : Packet { }
+public class VehicleStarted : Packet
+{
+    public VehicleStarted() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

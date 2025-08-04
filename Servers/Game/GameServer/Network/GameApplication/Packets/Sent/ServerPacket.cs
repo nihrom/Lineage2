@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ServerPacket : Packet { }
+public class ServerPacket : Packet
+{
+    public ServerPacket() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

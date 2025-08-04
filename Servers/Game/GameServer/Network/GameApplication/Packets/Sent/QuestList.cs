@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class QuestList : Packet { }
+public class QuestList : Packet
+{
+    public QuestList() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

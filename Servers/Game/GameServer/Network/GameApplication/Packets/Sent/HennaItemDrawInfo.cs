@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class HennaItemDrawInfo : Packet { }
+public class HennaItemDrawInfo : Packet
+{
+    public HennaItemDrawInfo() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

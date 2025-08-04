@@ -10,8 +10,4 @@
       <ProjectReference Include="..\LoginServer.Domain\LoginServer.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Services\L2GameServer\" />
-    </ItemGroup>
-
 </Project>

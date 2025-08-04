@@ -4,9 +4,11 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class AddTradeItem
 {
-    public int TradeId;
-    public int ObjectId;
-    public int Count;
+    public int TradeId { get; }
+    
+    public int ObjectId { get; }
+    
+    public int Count { get; }
 
     public AddTradeItem(Packet packet)
     {

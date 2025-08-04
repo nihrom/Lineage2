@@ -9,8 +9,12 @@ public class L2ConnectionsListener
 {
     private readonly ILogger logger;
     private readonly TcpListener tcpListener;
+    private readonly IServiceProvider serviceProvider;
 
-    public L2ConnectionsListener(IOptions<ServerConfig> serverConfig, ILogger logger)
+    public L2ConnectionsListener(
+        IOptions<ServerConfig> serverConfig,
+        ILogger logger,
+        IServiceProvider serviceProvider)
     {
         var config = serverConfig.Value;
 
@@ -21,7 +25,8 @@ public class L2ConnectionsListener
             throw new ArgumentException("В настройках сервера не указан порт прослушивания соединений");
         
         this.logger = logger;
-        
+        this.serviceProvider = serviceProvider;
+
         tcpListener = new TcpListener(
             IPAddress.Parse(config.Host),
             config.Port);
@@ -80,19 +85,9 @@ public class L2ConnectionsListener
         logger.Information(
             "Получен запрос на подключение от: {RemoteEndPoint}",
             client.Client.RemoteEndPoint?.ToString());
-        
-        var connection = new L2Connection(client);
-        var loginController = new LoginController(connection);
-        
-        await loginController.Init();
 
-        Task.Run(() => connection.ReadAsync(ct))
-            .ContinueWith(
-                _ => client.Dispose(),
-                CancellationToken.None)
-            .ContinueWith(
-                _ => logger.Information("Client disposed"),
-                CancellationToken.None);
+        var l2Client = new L2GameApplicationAvatar(client, serviceProvider);
+        await l2Client.Init();
     }
     
     public void Stop()

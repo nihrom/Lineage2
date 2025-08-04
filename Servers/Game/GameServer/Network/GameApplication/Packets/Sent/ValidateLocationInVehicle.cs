@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ValidateLocationInVehicle : Packet { }
+public class ValidateLocationInVehicle : Packet
+{
+    public ValidateLocationInVehicle() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class GetOnVehicle : Packet { }
+public class GetOnVehicle : Packet
+{
+    public GetOnVehicle() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

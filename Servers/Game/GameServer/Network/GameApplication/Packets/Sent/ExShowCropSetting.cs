@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ExShowCropSetting : Packet { }
+public class ExShowCropSetting : Packet
+{
+    public ExShowCropSetting() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

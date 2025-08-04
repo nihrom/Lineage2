@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class CharDeleteFail : Packet { }
+public class CharDeleteFail : Packet
+{
+    public CharDeleteFail() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

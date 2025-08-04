@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ChairSit : Packet { }
+public class ChairSit : Packet
+{
+    public ChairSit() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class SurrenderPledgeWar : Packet { }
+public class SurrenderPledgeWar : Packet
+{
+    public SurrenderPledgeWar() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

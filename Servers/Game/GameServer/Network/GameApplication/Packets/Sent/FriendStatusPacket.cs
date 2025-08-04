@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class FriendStatusPacket : Packet { }
+public class FriendStatusPacket : Packet
+{
+    public FriendStatusPacket() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

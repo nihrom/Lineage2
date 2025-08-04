@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class CharCreateOk : Packet { }
+public class CharCreateOk : Packet
+{
+    public CharCreateOk() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

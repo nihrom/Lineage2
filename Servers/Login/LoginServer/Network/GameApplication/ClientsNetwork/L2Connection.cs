@@ -7,7 +7,7 @@ namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public class L2Connection : IDisposable
 {
-    private readonly ILogger logger = Log.Logger.ForContext<L2Connection>();
+    protected readonly ILogger Logger = Log.Logger.ForContext<L2Connection>();
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
 
@@ -27,7 +27,7 @@ public class L2Connection : IDisposable
         
         ReceivedPacket += (packet) =>
         {
-            logger.Information(
+            Logger.Information(
                 "L2Connection получил пакет:{FirstOpcode:X2}", 
                 packet.FirstOpcode);
 
@@ -36,7 +36,7 @@ public class L2Connection : IDisposable
         
         SendingPacket += packet =>
         {
-            logger.Information(
+            Logger.Information(
                 "L2Connection отправляет пакет:{FirstOpcode:X2}",
                 packet.FirstOpcode);
             
@@ -86,7 +86,7 @@ public class L2Connection : IDisposable
             }
             catch (Exception ex)
             {
-                logger.Error(
+                Logger.Error(
                     ex,
                     "Ошибка при чтении пакета: {Message}",
                     ex.Message);
@@ -103,6 +103,10 @@ public class L2Connection : IDisposable
         var buffer = new byte[2];
         var bytesRead = await networkStream.ReadAsync(buffer, 0, 2, ct);
 
+        //Возможно чтение 0 байт совершенно валидное поведение
+        //И должно считаться корректным закрытием сокета на другой стороне
+        //Подробнее по ссылке
+        //https://blog.stephencleary.com/2009/06/using-socket-as-connected-socket.html
         if (bytesRead != 2)
             throw new Exception("Пакет имеет поврежденную структуру");
 

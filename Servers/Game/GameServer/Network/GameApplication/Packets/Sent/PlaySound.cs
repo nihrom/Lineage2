@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class PlaySound : Packet { }
+public class PlaySound : Packet
+{
+    public PlaySound() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

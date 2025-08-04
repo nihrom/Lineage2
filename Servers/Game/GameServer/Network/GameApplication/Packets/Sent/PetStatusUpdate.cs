@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class PetStatusUpdate : Packet { }
+public class PetStatusUpdate : Packet
+{
+    public PetStatusUpdate() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

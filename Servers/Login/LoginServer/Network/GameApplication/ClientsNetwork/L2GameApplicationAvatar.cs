@@ -5,7 +5,7 @@ using LoginServer.Network.GameApplication.Packets.Sent;
 
 namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
-public class L2GameApplicationAvatar : L2Connection
+public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
 {
     public int SessionId { get; }
     
@@ -30,9 +30,16 @@ public class L2GameApplicationAvatar : L2Connection
     public int? LastServer { get; set; }
     
     public bool JoinedGs { get; set; }
+    
+    private readonly CancellationTokenSource cts = new ();
+    
+    private readonly IServiceProvider serviceProvider;
 
-    public L2GameApplicationAvatar(TcpClient tcpClient) : base(tcpClient)
+    public L2GameApplicationAvatar(
+        TcpClient tcpClient,
+        IServiceProvider serviceProvider) : base(tcpClient)
     {
+        this.serviceProvider = serviceProvider;
         SessionId = Random.Shared.Next();
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
         Random.Shared.NextBytes(Blowfish);
@@ -59,6 +66,15 @@ public class L2GameApplicationAvatar : L2Connection
             SessionId,
             ScrambledKeyPair.scrambledModulus,
             Blowfish));
+        
+        _ = Task
+            .Run(() => ReadAsync(cts.Token))
+            .ContinueWith(
+                _ =>
+                {
+                    Logger.Information("Client disposed");
+                    Dispose();
+                });
     }
     
     public Task SendLoginFail(LoginFailReason reason)

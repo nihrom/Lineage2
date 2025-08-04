@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class HennaItemRemoveInfo : Packet { }
+public class HennaItemRemoveInfo : Packet
+{
+    public HennaItemRemoveInfo() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

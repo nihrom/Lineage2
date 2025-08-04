@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class Revive : Packet { }
+public class Revive : Packet
+{
+    public Revive() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

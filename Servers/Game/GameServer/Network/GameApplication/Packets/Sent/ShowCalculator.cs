@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ShowCalculator : Packet { }
+public class ShowCalculator : Packet
+{
+    public ShowCalculator() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

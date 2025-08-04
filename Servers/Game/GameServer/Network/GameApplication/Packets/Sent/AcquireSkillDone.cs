@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class AcquireSkillDone : Packet { }
+public class AcquireSkillDone : Packet
+{
+    public AcquireSkillDone() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

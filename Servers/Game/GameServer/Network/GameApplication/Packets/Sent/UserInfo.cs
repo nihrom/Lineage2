@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class UserInfo : Packet { }
+public class UserInfo : Packet
+{
+    public UserInfo() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

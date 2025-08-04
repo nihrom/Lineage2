@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class ExDuelReady : Packet { }
+public class ExDuelReady : Packet
+{
+    public ExDuelReady() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}

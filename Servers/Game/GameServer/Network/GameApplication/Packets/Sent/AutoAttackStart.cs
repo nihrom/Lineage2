@@ -2,4 +2,10 @@
 
 namespace GameServer.Network.GameApplication.Packets.Sent;
 
-public class AutoAttackStart : Packet { }
+public class AutoAttackStart : Packet
+{
+    public AutoAttackStart() : base()
+    {
+        //TODO: реализовать заполнение пакета
+    }
+}
