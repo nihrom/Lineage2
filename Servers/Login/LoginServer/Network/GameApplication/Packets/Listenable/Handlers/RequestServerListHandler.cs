@@ -16,7 +16,7 @@ public class RequestServerListHandler
         {
             var servers = serversManager.GetServers();
             
-            var mappedServers =servers
+            var mappedServers = servers
                 .Select(x => new _0x04_ServerList.ServerData(
                     x.ServerId,
                     x.Ip,
