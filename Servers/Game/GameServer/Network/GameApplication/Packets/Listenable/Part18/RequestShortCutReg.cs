@@ -4,14 +4,18 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class RequestShortCutReg
 {
+    public int TypeId;
+    public int Id;
+    public int Slot;
+    public int Page;
+    
     public RequestShortCutReg(Packet packet)
     {
-         int typeId = packet.ReadInt();
-        _type = ShortcutType.values()[(typeId < 1) || (typeId > 6) ? 0 : typeId];
-         int slot = packet.ReadInt();
-         var _id = packet.ReadInt();
-        readInt(); // level
-        var _slot = slot % 12;
-        var _page = slot / 12;
+         TypeId = packet.ReadInt();
+         var slot = packet.ReadInt();
+         Id = packet.ReadInt();
+         packet.ReadInt(); // level
+        Slot = slot % 12;
+        Page = slot / 12;
     }
 }

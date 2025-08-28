@@ -9,8 +9,8 @@ public class Say2
 
     public Say2(Packet packet)
     {
-        Text = packet.ReadString();
-        Type = packet.ReadInt();
-        var _target = (Type == ChatType.WHISPER.getClientId()) ? readString() : null;
+        // Text = packet.ReadString();
+        // Type = packet.ReadInt();
+        // var _target = (Type == ChatType.WHISPER.getClientId()) ? readString() : null;
     }
 }

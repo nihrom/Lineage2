@@ -7,12 +7,14 @@ public class RequestPreviewItem
     public int Unk;
     public int ListId;
     public int Count;
+    public int[] Items;
 
     public RequestPreviewItem(Packet packet)
     {
         Unk = packet.ReadInt();
         ListId = packet.ReadInt();
         Count = packet.ReadInt();
+        
         if (Count < 0)
         {
             Count = 0;
@@ -21,14 +23,14 @@ public class RequestPreviewItem
         {
             return; // prevent too long lists
         }
-		
-        // Create _items table that will contain all ItemID to Wear
-        _items = new int[Count];
-		
-        // Fill _items table with all ItemID to Wear
+        
+        // Create Items table that will contain all ItemID to Wear
+        Items = new int[Count];
+        
+        // Fill Items table with all ItemID to Wear
         for (int i = 0; i < Count; i++)
         {
-            _items[i] = packet.ReadInt();
+            Items[i] = packet.ReadInt();
         }
     }
 }

@@ -4,16 +4,18 @@ namespace GameServer.Network.GameApplication.Packets.Listenable;
 
 public class GameGuardReply
 {
+    public byte[] Reply = new byte[8];
+    
     public GameGuardReply(Packet packet)
     {
-        _reply[0] = packet.ReadByte();
-        _reply[1] = packet.ReadByte();
-        _reply[2] = packet.ReadByte();
-        _reply[3] = packet.ReadByte();
+        Reply[0] = packet.ReadByte();
+        Reply[1] = packet.ReadByte();
+        Reply[2] = packet.ReadByte();
+        Reply[3] = packet.ReadByte();
         packet.ReadInt();
-        _reply[4] = packet.ReadByte();
-        _reply[5] = packet.ReadByte();
-        _reply[6] = packet.ReadByte();
-        _reply[7] = packet.ReadByte();
+        Reply[4] = packet.ReadByte();
+        Reply[5] = packet.ReadByte();
+        Reply[6] = packet.ReadByte();
+        Reply[7] = packet.ReadByte();
     }
 }

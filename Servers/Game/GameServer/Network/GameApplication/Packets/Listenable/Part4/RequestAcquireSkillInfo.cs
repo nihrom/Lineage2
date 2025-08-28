@@ -6,11 +6,12 @@ public class RequestAcquireSkillInfo
 {
     public int Id;
     public int Level;
+    public int SkillTypeId;
 
     public RequestAcquireSkillInfo(Packet packet)
     {
         Id = packet.ReadInt();
         Level = packet.ReadInt();
-        var _skillType = AcquireSkillType.getAcquireSkillType(packet.ReadInt());
+        SkillTypeId = packet.ReadInt();
     }
 }
