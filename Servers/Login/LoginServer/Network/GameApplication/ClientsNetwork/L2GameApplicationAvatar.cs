@@ -17,8 +17,6 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     public ScrambledKeyPair ScrambledKeyPair { get; set; }
     
-    //public byte[] Blowfish { get; set; } = new byte[16] { 0x6b, 0x60, 0xcb, 0x5b, 0x82, 0xce, 0x90, 0xb1, 0xcc, 0x2b, 0x6c, 0x55, 0x6c, 0x6c, 0x6c, 0x6c };
-
     public int LoginOkId1 { get; set; }
     
     public int LoginOkId2 { get; set; }
@@ -63,7 +61,6 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     {
         SessionId = 1;//Random.Shared.Next();
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
-        //Random.Shared.NextBytes(Blowfish);
         this.packetHandlersBuilder = packetHandlersBuilder;
         this.ReceivedPacket += OnReadAsync;
     }

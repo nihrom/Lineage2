@@ -2,11 +2,9 @@
 
 public class LoginCrypt : INetworkCrypt
 {
-    private byte[] key = new byte[16];
-        //{ 0x6b, 0x60, 0xcb, 0x5b, 0x82, 0xce, 0x90, 0xb1, 0xcc, 0x2b, 0x6c, 0x55, 0x6c, 0x6c, 0x6c, 0x6c };
-
     public byte[] Blowfish => key;
     
+    private byte[] key = new byte[16];
     private bool updatedKey;
 
     private readonly Random random = new();
@@ -94,7 +92,7 @@ public class LoginCrypt : INetworkCrypt
         return checkSum == 0;
     }
 
-    public static void AppendChecksum(byte[] raw, int offset, int size)
+    private static void AppendChecksum(byte[] raw, int offset, int size)
     {
         long checkSum = 0;
         var count = size - 4;
@@ -122,7 +120,7 @@ public class LoginCrypt : INetworkCrypt
         raw[i + 3] = (byte)((checkSum >> 0x18) & 0xff);
     }
 
-    public static void EncXorPass(byte[] raw, int offset, int size, int key)
+    private static void EncXorPass(byte[] raw, int offset, int size, int key)
     {
         var stop = size - 8;
         var pos = 4 + offset;
@@ -148,6 +146,6 @@ public class LoginCrypt : INetworkCrypt
         raw[pos++] = (byte)(ecx & 0xFF);
         raw[pos++] = (byte)((ecx >> 8) & 0xFF);
         raw[pos++] = (byte)((ecx >> 16) & 0xFF);
-        raw[pos++] = (byte)((ecx >> 24) & 0xFF);
+        raw[pos] = (byte)((ecx >> 24) & 0xFF);
     }
 }
