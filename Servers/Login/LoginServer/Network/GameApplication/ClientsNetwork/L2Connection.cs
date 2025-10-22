@@ -7,6 +7,11 @@ namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public class L2Connection : IDisposable
 {
+    /// <summary>
+    /// Идентификатор соединения
+    /// </summary>
+    public int SessionId { get; }
+    
     protected readonly ILogger Logger = Log.Logger.ForContext<L2Connection>();
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
@@ -21,6 +26,8 @@ public class L2Connection : IDisposable
     
     public L2Connection(TcpClient tcpClient)
     {
+        SessionId = (byte)Random.Shared.Next();
+        
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
         Crypt = new LoginCrypt();
@@ -130,10 +137,18 @@ public class L2Connection : IDisposable
         short lenght,
         CancellationToken ct)
     {
-        Console.WriteLine("---------");
-        Console.WriteLine($"{lenght}");
+        Logger.Debug(
+            "Вычитывание {Lenght} байт, из соединение с SessionId: {SessionId}",
+            lenght,
+            SessionId);
+        
         var bytesRead = await networkStream.ReadAsync(body, 0, lenght, ct);
 
+        Logger.Debug(
+            "Вычитано {BytesRead} байт, из соединение с SessionId: {SessionId}",
+            bytesRead,
+            SessionId);
+        
         if (bytesRead != lenght)
             throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 

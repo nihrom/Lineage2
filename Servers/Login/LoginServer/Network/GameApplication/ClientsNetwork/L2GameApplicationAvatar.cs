@@ -10,11 +10,6 @@ namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
 {
-    /// <summary>
-    /// Идентификатор соединения
-    /// </summary>
-    public int SessionId { get; }
-    
     public ScrambledKeyPair ScrambledKeyPair { get; set; }
     
     public int LoginOkId1 { get; set; }
@@ -59,10 +54,9 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
         TcpClient tcpClient,
         PacketHandlersBuilder packetHandlersBuilder) : base(tcpClient)
     {
-        SessionId = 1;//Random.Shared.Next();
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
         this.packetHandlersBuilder = packetHandlersBuilder;
-        this.ReceivedPacket += OnReadAsync;
+        ReceivedPacket += OnReadAsync;
     }
 
     public async Task Close(LoginFailReason reason)

@@ -37,7 +37,7 @@ public class RequestAuthLoginHandler
         }
         
         var decrypt = DecryptPacket(request.Raw);
-
+        
         var username = Encoding.ASCII
             .GetString(decrypt, 0x4E, 64)
             .Replace("\0", string.Empty);
@@ -161,8 +161,19 @@ public class RequestAuthLoginHandler
 
         var result = new byte[256];
 
-        Array.Copy(decrypt, 0, result, 128 - decrypt.Length, decrypt.Length);
-        Array.Copy(decrypt2, 0, result, 256 - decrypt2.Length, decrypt2.Length);
+        Array.Copy(
+            decrypt,
+            0,
+            result,
+            128 - decrypt.Length,
+            decrypt.Length);
+        
+        Array.Copy(
+            decrypt2,
+            0,
+            result,
+            256 - decrypt2.Length,
+            decrypt2.Length);
 
         return result;
     }
