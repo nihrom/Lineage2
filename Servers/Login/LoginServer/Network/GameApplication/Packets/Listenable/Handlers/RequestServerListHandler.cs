@@ -7,12 +7,12 @@ namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
 public class RequestServerListHandler
 {
-    private L2GameApplicationAvatar _avatar;
+    public L2GameApplicationAvatar Avatar { get; set; }
     private readonly ServersManager serversManager;
     
     public async Task Handle(RequestServerList request)
     {
-        if (_avatar.CheckLoginOk(request.Skey1, request.Skey2))
+        if (Avatar.CheckLoginOk(request.Skey1, request.Skey2))
         {
             var servers = serversManager.GetServers();
             
@@ -31,11 +31,11 @@ public class RequestServerListHandler
                 .ToList();
             
             //TODO: откуда то взять эту инфу
-            await _avatar.SendServerList(1, 1, mappedServers);
+            await Avatar.SendServerList(1, 1, mappedServers);
         }
         else
         {
-            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
+            await Avatar.Close(LoginFailReason.ReasonAccessFailed);
         }
     }
 }

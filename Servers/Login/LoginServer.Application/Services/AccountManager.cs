@@ -130,7 +130,7 @@ public class AccountManager
     /// </summary>
     /// <param name="account"></param>
     /// <returns></returns>
-    public bool IsAccountInAnyGameServer(String account)
+    public bool IsAccountInAnyGameServer(string account)
     {
         // Collection<GameServerInfo> serverList = GameServerTable.getInstance().getRegisteredGameServers().values();
         // for (GameServerInfo gsi : serverList)

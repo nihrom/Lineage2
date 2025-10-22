@@ -2,7 +2,6 @@
 using LoginServer.Application.Enums;
 using LoginServer.Application.Services;
 using LoginServer.Application.Services.L2GameApplication;
-using LoginServer.Domain.Models.GameServers;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Sent;
 using Org.BouncyCastle.Crypto.Engines;
@@ -14,16 +13,26 @@ public class RequestAuthLoginHandler
 {
     private readonly ILogger logger = Log.Logger.ForContext<RequestAuthLoginHandler>();
     
-    private L2GameApplicationAvatar _avatar;
+    public L2GameApplicationAvatar Avatar { get; set; }
     private readonly AccountManager accountManager;
     private readonly ServerConfig serverConfig;
     private readonly ServersManager serversManager;
-    
+
+    public RequestAuthLoginHandler(
+        AccountManager accountManager)
+    {
+        this.accountManager = accountManager;
+        serverConfig = new ServerConfig();
+        serverConfig.ShowLicence = false;
+        //this.serverConfig = serverConfig;
+        //this.serversManager = serversManager;
+    }
+
     public async Task Handle(RequestAuthLogin request)
     {
-        if (_avatar.LoginClientState != LoginClientState.AuthedGg)
+        if (Avatar.LoginClientState != LoginClientState.AuthedGg)
         {
-            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
+            await Avatar.Close(LoginFailReason.ReasonAccessFailed);
             return;
         }
         
@@ -42,7 +51,7 @@ public class RequestAuthLoginHandler
             username,
             password);
 
-        string clientAddr = _avatar.Ip;
+        string clientAddr = Avatar.Ip;
 
         var accountInfo = accountManager.GetAccountInfo(
             clientAddr,
@@ -52,7 +61,7 @@ public class RequestAuthLoginHandler
         if (accountInfo == null)
         {
             // Account or password was wrong.
-            await _avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
+            await Avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
             return;
         }
 
@@ -65,8 +74,8 @@ public class RequestAuthLoginHandler
         {
             case LoginResult.AuthSuccess:
             {
-                _avatar.Login = accountInfo.Login;
-                _avatar.LoginClientState = LoginClientState.AuthedLogin;
+                Avatar.Login = accountInfo.Login;
+                Avatar.LoginClientState = LoginClientState.AuthedLogin;
                 
                 //TODO: Проверить эту цепочку и реализовать
                 //client.setSessionKey(lc.assignSessionKeyToClient(accountInfo.Login, client));
@@ -76,13 +85,13 @@ public class RequestAuthLoginHandler
                 
                 if (serverConfig.ShowLicence)
                 {
-                    await _avatar.SendLoginOk();
+                    await Avatar.SendLoginOk();
                 }
                 else
                 {
                     var servers = serversManager.GetServers();
             
-                    var mappedServers =servers
+                    var mappedServers = servers
                         .Select(x => new _0x04_ServerList.ServerData(
                             x.ServerId,
                             x.Ip,
@@ -97,13 +106,13 @@ public class RequestAuthLoginHandler
                         .ToList();
             
                     //TODO: откуда то взять эту инфу
-                    await _avatar.SendServerList(1, 1, mappedServers);
+                    await Avatar.SendServerList(1, 1, mappedServers);
                 }
                 break;
             }
             case LoginResult.InvalidPassword:
             {
-                await _avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
+                await Avatar.Close(LoginFailReason.ReasonUserOrPassWrong);
                 break;
             }
             case LoginResult.AccountBanned:
@@ -122,7 +131,7 @@ public class RequestAuthLoginHandler
                 // }
                 
                 // Также кикнуть ныншнего клиента
-                await _avatar.Close(LoginFailReason.ReasonAccountInUse);
+                await Avatar.Close(LoginFailReason.ReasonAccountInUse);
                 break;
             }
             case LoginResult.AlreadyOnGs:
@@ -143,7 +152,7 @@ public class RequestAuthLoginHandler
 
     byte[] DecryptPacket(byte[] input)
     {
-        var privateKey = _avatar.ScrambledKeyPair.privateKey;
+        var privateKey = Avatar.ScrambledKeyPair.privateKey;
         var rsa = new RsaEngine();
         rsa.Init(false, privateKey);
 
