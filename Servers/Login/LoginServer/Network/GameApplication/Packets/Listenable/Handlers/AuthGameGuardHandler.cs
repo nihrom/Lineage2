@@ -5,18 +5,18 @@ namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
 public class AuthGameGuardHandler
 {
-    private L2GameApplicationAvatar _avatar;
+    public L2GameApplicationAvatar Avatar {get; set;}
     
     public async Task Handle(AuthGameGuard request)
     {
-        if (_avatar.SessionId == request.SessionId)
+        if (Avatar.SessionId == request.SessionId)
         {
-            _avatar.LoginClientState = LoginClientState.AuthedGg;
-            await _avatar.SendGgAuth();
+            Avatar.LoginClientState = LoginClientState.AuthedGg;
+            await Avatar.SendGgAuth();
         }
         else
         {
-            await _avatar.Close(LoginFailReason.ReasonAccessFailed);
+            await Avatar.Close(LoginFailReason.ReasonAccessFailed);
         }
     }
 }

@@ -1,17 +1,23 @@
 ﻿using System.Net.Sockets;
 using Common.Cryptography;
+using Common.Network;
 using LoginServer.Application.Services.L2GameApplication;
+using LoginServer.Network.GameApplication.Packets.Listenable;
+using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 using LoginServer.Network.GameApplication.Packets.Sent;
 
 namespace LoginServer.Network.GameApplication.ClientsNetwork;
 
 public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
 {
+    /// <summary>
+    /// Идентификатор соединения
+    /// </summary>
     public int SessionId { get; }
     
     public ScrambledKeyPair ScrambledKeyPair { get; set; }
     
-    public byte[] Blowfish { get; set; } = new byte[16];
+    //public byte[] Blowfish { get; set; } = new byte[16] { 0x6b, 0x60, 0xcb, 0x5b, 0x82, 0xce, 0x90, 0xb1, 0xcc, 0x2b, 0x6c, 0x55, 0x6c, 0x6c, 0x6c, 0x6c };
 
     public int LoginOkId1 { get; set; }
     
@@ -21,28 +27,45 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     public int PlayOkId2 { get; set; }
 
+    /// <summary>
+    /// Этап соединения
+    /// </summary>
     public LoginClientState LoginClientState { get; set; }
     
+    /// <summary>
+    /// Логин юзера. Привязывается к соеднинению после залогинивания
+    /// </summary>
     public string? Login  { get; set; }
     
+    /// <summary>
+    /// Уровень доступа. Пока не знаю какие могут быть и откуда берутся
+    /// </summary>
     public int? AccessLevel { get; set; }
     
+    /// <summary>
+    /// Сервер на который юзер заходил в прошлый раз
+    /// </summary>
     public int? LastServer { get; set; }
     
+    /// <summary>
+    /// Флаг залогинен ли юзер на гейм сервере.
+    /// //TODO: думаю можно объединить с другой инфой доступной после залогининвания
+    /// </summary>
     public bool JoinedGs { get; set; }
     
     private readonly CancellationTokenSource cts = new ();
     
-    private readonly IServiceProvider serviceProvider;
+    private readonly PacketHandlersBuilder packetHandlersBuilder;
 
     public L2GameApplicationAvatar(
         TcpClient tcpClient,
-        IServiceProvider serviceProvider) : base(tcpClient)
+        PacketHandlersBuilder packetHandlersBuilder) : base(tcpClient)
     {
-        this.serviceProvider = serviceProvider;
-        SessionId = Random.Shared.Next();
+        SessionId = 1;//Random.Shared.Next();
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
-        Random.Shared.NextBytes(Blowfish);
+        //Random.Shared.NextBytes(Blowfish);
+        this.packetHandlersBuilder = packetHandlersBuilder;
+        this.ReceivedPacket += OnReadAsync;
     }
 
     public async Task Close(LoginFailReason reason)
@@ -62,10 +85,12 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
 
     public async Task Init()
     {
-        await SendAsync(new _0x00_Init(
-            SessionId,
-            ScrambledKeyPair.scrambledModulus,
-            Blowfish));
+        await SendAsync(
+            new _0x00_Init(
+                SessionId,
+                ScrambledKeyPair.scrambledModulus,
+                Crypt.Blowfish),
+            false);
         
         _ = Task
             .Run(() => ReadAsync(cts.Token))
@@ -120,5 +145,49 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     {
         await SendAsync(
             new _0x0b_GGAuth(SessionId));
+    }
+    
+    private async Task OnReadAsync(Packet packet)
+    {
+        switch (packet.FirstOpcode)
+        {
+            case 0x00:
+                {
+                    var requestPacket = new RequestAuthLogin(packet);
+                    var handler = packetHandlersBuilder
+                        .Get<RequestAuthLoginHandler>();
+                    handler.Avatar = this;
+                    await handler.Handle(requestPacket);
+                }
+                break;
+            case 0x02:
+                {
+                    var requestPacket = new RequestServerLogin(packet);
+                    var handler = packetHandlersBuilder
+                        .Get<RequestServerLoginHandler>();
+                    handler.Avatar = this;
+                    await handler.Handle(requestPacket);
+                }
+                break;
+            case 0x05:
+                {
+                    var requestPacket = new RequestServerList(packet);
+                    var handler = packetHandlersBuilder
+                        .Get<RequestServerListHandler>();
+                    handler.Avatar = this;
+                    await handler.Handle(requestPacket);
+                }
+                break;
+            case 0x07:
+                {
+                    var requestPacket = new AuthGameGuard(packet);
+                    var handler = packetHandlersBuilder
+                        .Get<AuthGameGuardHandler>();
+                    handler.Avatar = this;
+                    await handler.Handle(requestPacket);
+                } 
+                break;
+            default: break;
+        }
     }
 }

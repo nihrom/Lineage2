@@ -9,12 +9,12 @@ public class L2ConnectionsListener
 {
     private readonly ILogger logger;
     private readonly TcpListener tcpListener;
-    private readonly IServiceProvider serviceProvider;
+    private readonly ClientsManager  clientsManager;
 
     public L2ConnectionsListener(
         IOptions<ServerConfig> serverConfig,
         ILogger logger,
-        IServiceProvider serviceProvider)
+        ClientsManager clientsManager)
     {
         var config = serverConfig.Value;
 
@@ -25,7 +25,7 @@ public class L2ConnectionsListener
             throw new ArgumentException("В настройках сервера не указан порт прослушивания соединений");
         
         this.logger = logger;
-        this.serviceProvider = serviceProvider;
+        this.clientsManager = clientsManager;
 
         tcpListener = new TcpListener(
             IPAddress.Parse(config.Host),
@@ -71,23 +71,15 @@ public class L2ConnectionsListener
             try
             {
                 var client = await tcpListener.AcceptTcpClientAsync(ct);
-                await AcceptClient(client, ct);
+                await clientsManager.AcceptClient(client, ct);
             }
             catch (Exception e)
             {
-                throw;
+                logger.Error(
+                    e,
+                    "Прослушка входящих соединений закончилась с ошибкой");
             }
         }
-    }
-    
-    private async Task AcceptClient(TcpClient client, CancellationToken ct)
-    {
-        logger.Information(
-            "Получен запрос на подключение от: {RemoteEndPoint}",
-            client.Client.RemoteEndPoint?.ToString());
-
-        var l2Client = new L2GameApplicationAvatar(client, serviceProvider);
-        await l2Client.Init();
     }
     
     public void Stop()

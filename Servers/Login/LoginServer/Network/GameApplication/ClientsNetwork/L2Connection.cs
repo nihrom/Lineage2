@@ -11,7 +11,7 @@ public class L2Connection : IDisposable
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
 
-    public INetworkCrypt Crypt { get; set; }
+    protected INetworkCrypt Crypt { get; set; }
     
     public event Func<Packet, Task> ReceivedPacket;
     public event Func<Packet, Task> SendingPacket;
@@ -48,14 +48,18 @@ public class L2Connection : IDisposable
     /// Отправить пакет по соединению
     /// </summary>
     /// <param name="p"></param>
+    /// <param name="encrypt">Шифровать сообщение?</param>
     /// <returns></returns>
-    public async Task SendAsync(Packet p)
+    public async Task SendAsync(Packet p, bool encrypt = true)
     {
         await SendingPacket.Invoke(p);
         var data = p.GetBuffer();
-        Crypt.Encrypt(data);
+        if (encrypt)
+        {
+            Crypt.Encrypt(data);
+        }
 
-        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2));
+        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
         var message = new byte[data.Length + 2];
 
         lengthBytes.CopyTo(message, 0);
@@ -78,7 +82,7 @@ public class L2Connection : IDisposable
                     var bodyLength = await ReadBodyLengthAsync(ct);
 
                     var body = new byte[bodyLength];
-                    await ReadBodyAsync(body, bodyLength);
+                    await ReadBodyAsync(body, bodyLength, ct);
                     var packet = new Packet(1, body);
 
                     await ReceivedPacket.Invoke(packet);
@@ -108,7 +112,7 @@ public class L2Connection : IDisposable
         //Подробнее по ссылке
         //https://blog.stephencleary.com/2009/06/using-socket-as-connected-socket.html
         if (bytesRead != 2)
-            throw new Exception("Пакет имеет поврежденную структуру");
+            throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 
         var length = BitConverter.ToInt16(buffer, 0);
 
@@ -116,16 +120,22 @@ public class L2Connection : IDisposable
     }
 
     /// <summary>
-    /// Заполняет массив телом пакета
+    /// Вычитывает пакет из потока
     /// </summary>
     /// <param name="body">Массив для заполнения</param>
     /// <param name="lenght">Длина пакета</param>
-    private async Task ReadBodyAsync(byte[] body, short lenght)
+    /// <param name="ct">Токен отмены</param>
+    private async Task ReadBodyAsync(
+        byte[] body,
+        short lenght,
+        CancellationToken ct)
     {
-        var bytesRead = await networkStream.ReadAsync(body, 0, lenght);
+        Console.WriteLine("---------");
+        Console.WriteLine($"{lenght}");
+        var bytesRead = await networkStream.ReadAsync(body, 0, lenght, ct);
 
         if (bytesRead != lenght)
-            throw new Exception("Пакет имеет поврежденную структуру");
+            throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 
         //TODO: Возможно расшифровку надо обернуть в try catch
         Crypt.Decrypt(ref body);

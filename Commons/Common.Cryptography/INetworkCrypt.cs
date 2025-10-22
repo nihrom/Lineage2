@@ -2,6 +2,8 @@
 
 public interface INetworkCrypt
 {
+    byte[] Blowfish { get; }
+    
     void UpdateKey(byte[] blowfishKey);
     
     bool Decrypt(ref byte[] arr);
