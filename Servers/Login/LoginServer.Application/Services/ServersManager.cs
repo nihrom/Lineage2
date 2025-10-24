@@ -10,8 +10,8 @@ public class ServersManager
         {
             new GameServerInfo(
                 200,
-                [127, 0, 0, 10],
-                808080,
+                [127, 0, 0, 1],
+                3106,
                 0,
                 true,
                 10,

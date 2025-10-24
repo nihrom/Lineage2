@@ -25,7 +25,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Commons\Common.Cryptography\Common.Cryptography.csproj" />
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="GameServerConfig.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
