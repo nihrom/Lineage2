@@ -118,6 +118,9 @@ public class L2Connection : IDisposable
         //И должно считаться корректным закрытием сокета на другой стороне
         //Подробнее по ссылке
         //https://blog.stephencleary.com/2009/06/using-socket-as-connected-socket.html
+        if (bytesRead == 0)
+            throw new Exception($"11111Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
+        
         if (bytesRead != 2)
             throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 

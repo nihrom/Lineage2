@@ -45,8 +45,11 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
             builder.RegisterType<RequestServerListHandler>();
             builder.RegisterType<RequestServerLoginHandler>();
             
+            // Регистрация сервис менеджеров
             builder.RegisterType<AccountManager>().SingleInstance();
             builder.RegisterType<ClientsManager>().SingleInstance();
+            builder.RegisterType<ServersManager>().SingleInstance();
+            
             builder.RegisterType<L2ConnectionsListener>().SingleInstance();
             builder.RegisterType<L2ServersConnectionsListener>().SingleInstance();
         })

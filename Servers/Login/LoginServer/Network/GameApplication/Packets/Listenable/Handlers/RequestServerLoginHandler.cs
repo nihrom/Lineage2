@@ -10,15 +10,28 @@ public class RequestServerLoginHandler
     private Application.Services.LoginServer _server;
     private readonly AccountManager accountManager;
     private readonly ServerConfig serverConfig;
-    
+
+    public RequestServerLoginHandler(AccountManager accountManager)
+    {
+        this.accountManager = accountManager;
+        this.serverConfig = new ServerConfig()
+        {
+            ShowLicence = false
+        };
+        
+        _server = new Application.Services.LoginServer()
+        {
+            Status = LoginServerStatus.StatusNormal
+        };
+    }
+
     public async Task Handle(RequestServerLogin request)
     {
         // Если мы не предъявили лицензию, мы не сможем проверить эти значения.
         if (!serverConfig.ShowLicence || Avatar.CheckLoginOk(request.Skey1, request.Skey2))
         {
-            if (
-                _server.Status == LoginServerStatus.StatusDown ||
-                (_server.Status == LoginServerStatus.StatusGmOnly && Avatar.AccessLevel < 1))
+            if (_server.Status == LoginServerStatus.StatusDown 
+                || (_server.Status == LoginServerStatus.StatusGmOnly && Avatar.AccessLevel < 1))
             {
                 await Avatar.Close(LoginFailReason.ReasonAccessFailed);
             }

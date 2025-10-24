@@ -304,6 +304,12 @@ public class Packet
             return dest;
         }
 
+        /// <summary>
+        /// Чтение массива байт из пакета.
+        /// //TODO: По какой то причине в RequestAuthLogin этот способ работает в отличии от ReadBytesArray
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public byte[] ReadByteArrayAlt(int length)
         {
             byte[] result = new byte[length];

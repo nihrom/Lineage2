@@ -19,13 +19,14 @@ public class RequestAuthLoginHandler
     private readonly ServersManager serversManager;
 
     public RequestAuthLoginHandler(
-        AccountManager accountManager)
+        AccountManager accountManager,
+        ServersManager serversManager)
     {
         this.accountManager = accountManager;
         serverConfig = new ServerConfig();
         serverConfig.ShowLicence = false;
         //this.serverConfig = serverConfig;
-        //this.serversManager = serversManager;
+        this.serversManager = serversManager;
     }
 
     public async Task Handle(RequestAuthLogin request)

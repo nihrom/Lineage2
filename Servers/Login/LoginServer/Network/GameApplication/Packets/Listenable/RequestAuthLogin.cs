@@ -8,6 +8,6 @@ public class RequestAuthLogin
     
     public RequestAuthLogin(Packet packet)
     {
-        Raw = packet.ReadBytesArray(256);
+        Raw = packet.ReadByteArrayAlt(256);
     }
 }
