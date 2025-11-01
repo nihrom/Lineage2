@@ -9,16 +9,16 @@ public class ServersManager
         return new List<GameServerInfo>()
         {
             new GameServerInfo(
-                200,
+                1,
                 [127, 0, 0, 1],
                 3106,
                 0,
                 true,
-                10,
-                10000,
+                1,
+                101,
                 true,
                 false,
-                true,
+                false,
                 true)
         };
     }
