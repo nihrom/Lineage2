@@ -63,7 +63,7 @@ public class L2Connection : IDisposable
         var data = p.GetBuffer();
         if (encrypt)
         {
-            Crypt.Encrypt(data);
+            //Crypt.Encrypt(data);
         }
 
         var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
