@@ -47,18 +47,14 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     public bool JoinedGs { get; set; }
     
     private readonly CancellationTokenSource cts = new ();
-    
-    private readonly PacketHandlersBuilder packetHandlersBuilder;
 
     private readonly TestHandler testHandler;
 
     public L2GameApplicationAvatar(
         TcpClient tcpClient,
-        PacketHandlersBuilder packetHandlersBuilder,
         TestHandler testHandler) : base(tcpClient)
     {
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
-        this.packetHandlersBuilder = packetHandlersBuilder;
         this.testHandler = testHandler;
         ReceivedPacket += OnReadAsync;
     }

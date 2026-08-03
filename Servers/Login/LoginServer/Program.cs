@@ -38,7 +38,6 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         .ConfigureContainer<ContainerBuilder>((hostBuilder, builder) =>
         {
             builder.RegisterType<Server>();
-            builder.RegisterType<PacketHandlersBuilder>();
             builder.RegisterType<TestHandler>();
             
             // Регистрация обработчиков пакетов от клиентского приложения
