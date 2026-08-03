@@ -50,12 +50,16 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     private readonly PacketHandlersBuilder packetHandlersBuilder;
 
+    private readonly TestHandler testHandler;
+
     public L2GameApplicationAvatar(
         TcpClient tcpClient,
-        PacketHandlersBuilder packetHandlersBuilder) : base(tcpClient)
+        PacketHandlersBuilder packetHandlersBuilder,
+        TestHandler testHandler) : base(tcpClient)
     {
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
         this.packetHandlersBuilder = packetHandlersBuilder;
+        this.testHandler = testHandler;
         ReceivedPacket += OnReadAsync;
     }
 
@@ -140,45 +144,10 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     private async Task OnReadAsync(Packet packet)
     {
-        switch (packet.FirstOpcode)
-        {
-            case 0x00:
-                {
-                    var requestPacket = new RequestAuthLogin(packet);
-                    var handler = packetHandlersBuilder
-                        .Get<RequestAuthLoginHandler>();
-                    handler.Avatar = this;
-                    await handler.Handle(requestPacket);
-                }
-                break;
-            case 0x02:
-                {
-                    var requestPacket = new RequestServerLogin(packet);
-                    var handler = packetHandlersBuilder
-                        .Get<RequestServerLoginHandler>();
-                    handler.Avatar = this;
-                    await handler.Handle(requestPacket);
-                }
-                break;
-            case 0x05:
-                {
-                    var requestPacket = new RequestServerList(packet);
-                    var handler = packetHandlersBuilder
-                        .Get<RequestServerListHandler>();
-                    handler.Avatar = this;
-                    await handler.Handle(requestPacket);
-                }
-                break;
-            case 0x07:
-                {
-                    var requestPacket = new AuthGameGuard(packet);
-                    var handler = packetHandlersBuilder
-                        .Get<AuthGameGuardHandler>();
-                    handler.Avatar = this;
-                    await handler.Handle(requestPacket);
-                } 
-                break;
-            default: break;
-        }
+        await testHandler.HandleAsync(
+            packet.FirstOpcode,
+            packet,
+            this,
+            cts.Token);
     }
 }

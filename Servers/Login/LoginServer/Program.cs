@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using LoginServer;
 using LoginServer.Application.Services;
+using LoginServer.Network.GameApplication;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 using LoginServer.Network.GameServer.ServersNetwork;
@@ -38,6 +39,7 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         {
             builder.RegisterType<Server>();
             builder.RegisterType<PacketHandlersBuilder>();
+            builder.RegisterType<TestHandler>();
             
             // Регистрация обработчиков пакетов от клиентского приложения
             builder.RegisterType<AuthGameGuardHandler>();
