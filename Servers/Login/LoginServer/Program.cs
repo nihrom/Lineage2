@@ -41,10 +41,11 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
             builder.RegisterType<TestHandler>();
             
             // Регистрация обработчиков пакетов от клиентского приложения
-            builder.RegisterType<AuthGameGuardHandler>();
-            builder.RegisterType<RequestAuthLoginHandler>();
-            builder.RegisterType<RequestServerListHandler>();
-            builder.RegisterType<RequestServerLoginHandler>();
+            builder.RegisterAssemblyTypes(typeof(BaseGameApplicationHandler).Assembly)
+                .Where(t => typeof(BaseGameApplicationHandler).IsAssignableFrom(t)
+                            && t != typeof(BaseGameApplicationHandler) 
+                            && !t.IsAbstract)
+                .PropertiesAutowired();
             
             // Регистрация сервис менеджеров
             builder.RegisterType<AccountManager>().SingleInstance();

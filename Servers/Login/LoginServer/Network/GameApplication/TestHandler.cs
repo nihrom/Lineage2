@@ -3,6 +3,7 @@ using Common.Network;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Listenable;
 using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
+using Serilog;
 
 namespace LoginServer.Network.GameApplication;
 
@@ -10,6 +11,7 @@ public class TestHandler
 {
     private readonly ILifetimeScope serviceProvider;
     private readonly IReadOnlyDictionary<byte, (Type request, Type handler)> handlers;
+    protected readonly ILogger Logger = Log.Logger.ForContext<TestHandler>();
 
     public TestHandler(ILifetimeScope serviceProvider)
     {
@@ -27,7 +29,7 @@ public class TestHandler
     {
         if (!handlers.TryGetValue(opcode, out var rh))
         {
-            //Записать в лог, что код не найден
+            Logger.Information("Opcode: {Opcode}, для обработки клиентского пакета, не найден", opcode);
         }
 
         var request = Activator.CreateInstance(rh.request, new object[] { packet });
