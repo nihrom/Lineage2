@@ -4,21 +4,37 @@ namespace LoginServer.Network.GameServer.Packets.Listenable;
 
 public class GameServerAuth
 {
+    public byte DesiredId { get; }
+    
+    public bool AcceptAlternativeId { get; }
+    
+    public byte HostReserved { get; }
+    
+    public short Port { get; }
+    
+    public int MaxPlayers { get; }
+    
+    public int Size { get; }
+    
+    public byte[] HexId { get; }
+    
+    public string[] Hosts { get; }
+    
     public GameServerAuth(Packet packet)
     {
-        var desiredId = packet.ReadByte();
-        var acceptAlternativeId = packet.ReadByte() != 0;
-        var hostReserved = packet.ReadByte(); // _hostReserved = readByte() != 0
-        var port = packet.ReadShort();
-        var maxPlayers = packet.ReadInt();
-        int size = packet.ReadInt();
-        var hexId = packet.ReadBytesArray(size);
-        size = 2 * packet.ReadInt();
-        var hosts = new string[size];
+        DesiredId = packet.ReadByte();
+        AcceptAlternativeId = packet.ReadByte() != 0;
+        HostReserved = packet.ReadByte();
+        Port = packet.ReadShort();
+        MaxPlayers = packet.ReadInt();
+        Size = packet.ReadInt();
+        HexId = packet.ReadBytesArray(Size);
+        Size = 2 * packet.ReadInt();
+        Hosts = new string[Size];
         
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < Size; i++)
         {
-            hosts[i] = packet.ReadString();
+            Hosts[i] = packet.ReadString();
         }
     }
 }

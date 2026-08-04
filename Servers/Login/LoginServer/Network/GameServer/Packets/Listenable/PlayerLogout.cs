@@ -4,8 +4,10 @@ namespace LoginServer.Network.GameServer.Packets.Listenable;
 
 public class PlayerLogout
 {
+    public string Account { get; }
+
     public PlayerLogout(Packet packet)
     {
-        string account = packet.ReadString();
+        Account = packet.ReadString();
     }
 }

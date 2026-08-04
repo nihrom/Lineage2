@@ -4,12 +4,22 @@ namespace LoginServer.Network.GameServer.Packets.Listenable;
 
 public class PlayerAuthRequest
 {
+    public string Account { get; }
+    
+    public int PlayKey1 { get; }
+    
+    public int PlayKey2 { get; }
+    
+    public int LoginKey1 { get; }
+    
+    public int LoginKey2 { get; }
+    
     public PlayerAuthRequest(Packet packet)
     {
-        string account = packet.ReadString();
-        int playKey1 = packet.ReadInt();
-        int playKey2 = packet.ReadInt();
-        int loginKey1 = packet.ReadInt();
-        int loginKey2 = packet.ReadInt();
+        Account = packet.ReadString();
+        PlayKey1 = packet.ReadInt();
+        PlayKey2 = packet.ReadInt();
+        LoginKey1 = packet.ReadInt();
+        LoginKey2 = packet.ReadInt();
     }
 }

@@ -4,8 +4,9 @@ namespace LoginServer.Network.GameServer.Packets.Listenable;
 
 public class ChangeAccessLevel
 {
-    public int Level;
-    public string Account;
+    public int Level { get; }
+    
+    public string Account { get; }
 
     public ChangeAccessLevel(Packet packet)
     {
