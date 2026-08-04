@@ -9,11 +9,10 @@ using Serilog;
 
 namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
-public class RequestAuthLoginHandler
+public class RequestAuthLoginHandler : BaseGameApplicationHandler
 {
     private readonly ILogger logger = Log.Logger.ForContext<RequestAuthLoginHandler>();
     
-    public L2GameApplicationAvatar Avatar { get; set; }
     private readonly AccountManager accountManager;
     private readonly ServerConfig serverConfig;
     private readonly ServersManager serversManager;

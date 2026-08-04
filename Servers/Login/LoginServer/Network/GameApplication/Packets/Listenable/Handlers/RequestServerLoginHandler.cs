@@ -4,9 +4,8 @@ using LoginServer.Network.GameApplication.ClientsNetwork;
 
 namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
-public class RequestServerLoginHandler
+public class RequestServerLoginHandler : BaseGameApplicationHandler
 {
-    public L2GameApplicationAvatar Avatar { get; set; }
     private Application.Services.LoginServer _server;
     private readonly AccountManager accountManager;
     private readonly ServerConfig serverConfig;

@@ -1,20 +1,19 @@
-﻿using System.Reflection;
+﻿using Autofac;
 using Common.Network;
 using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Listenable;
 using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace LoginServer.Network.GameApplication;
 
 public class TestHandler
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly ILifetimeScope serviceProvider;
     private readonly IReadOnlyDictionary<byte, (Type request, Type handler)> handlers;
 
-    public TestHandler(IServiceProvider serviceProvider)
+    public TestHandler(ILifetimeScope serviceProvider)
     {
-        _serviceProvider = serviceProvider;
+        this.serviceProvider = serviceProvider;
         handlers = new Dictionary<byte, (Type request, Type handler)>()
         {
             {0x00, (typeof(RequestAuthLogin), typeof(RequestAuthLoginHandler))},
@@ -33,12 +32,8 @@ public class TestHandler
 
         var request = Activator.CreateInstance(rh.request, new object[] { packet });
         
-        using var scope = _serviceProvider.CreateScope();
-        var handler = scope.ServiceProvider.GetRequiredService(rh.handler);
-
-        var field = rh.handler.GetProperty("Avatar");
-        
-        field?.SetValue(handler, avatar);
+        using var scope = serviceProvider.BeginLifetimeScope();
+        var handler = scope.Resolve(rh.handler, new TypedParameter(typeof(L2GameApplicationAvatar), avatar));
         
         var method = rh.handler.GetMethod("Handle");
 

@@ -5,11 +5,15 @@ using LoginServer.Network.GameApplication.Packets.Sent;
 
 namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
-public class RequestServerListHandler
+public class RequestServerListHandler : BaseGameApplicationHandler
 {
-    public L2GameApplicationAvatar Avatar { get; set; }
     private readonly ServersManager serversManager;
-    
+
+    public RequestServerListHandler(ServersManager serversManager)
+    {
+        this.serversManager = serversManager;
+    }
+
     public async Task Handle(RequestServerList request)
     {
         if (Avatar.CheckLoginOk(request.Skey1, request.Skey2))

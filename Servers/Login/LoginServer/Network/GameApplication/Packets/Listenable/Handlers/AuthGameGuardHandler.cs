@@ -3,10 +3,8 @@ using LoginServer.Network.GameApplication.ClientsNetwork;
 
 namespace LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 
-public class AuthGameGuardHandler
+public class AuthGameGuardHandler : BaseGameApplicationHandler
 {
-    public L2GameApplicationAvatar Avatar {get; set;}
-    
     public async Task Handle(AuthGameGuard request)
     {
         if (Avatar.SessionId == request.SessionId)
