@@ -2,7 +2,7 @@
 using Common.Network;
 using GameServer.Network.GameApplication.Packets.Sent;
 
-namespace GameServer.Network.GameApplication.ClientsNetwork;
+namespace GameServer.Network.GameApplication;
 
 public class L2GameApplicationAvatar : L2Connection
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace GameServer.Network.LoginServer.LoginServerNetwork;
+namespace GameServer.Network.LoginServer;
 
 public class LoginServerNetworkManager
 {

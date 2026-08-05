@@ -1,5 +1,5 @@
-﻿using LoginServer.Network.GameApplication.ClientsNetwork;
-using LoginServer.Network.GameServer.ServersNetwork;
+﻿using LoginServer.Network.GameApplication;
+using LoginServer.Network.GameServer;
 using Microsoft.Extensions.Hosting;
 
 namespace LoginServer;

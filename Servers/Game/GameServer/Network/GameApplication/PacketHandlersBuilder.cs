@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace GameServer.Network.GameApplication.ClientsNetwork;
+namespace GameServer.Network.GameApplication;
 
 public class PacketHandlersBuilder
 {

@@ -2,7 +2,7 @@
 using Common.Cryptography;
 using Common.Network;
 
-namespace LoginServer.Network.GameServer.ServersNetwork;
+namespace LoginServer.Network.GameServer;
 
 public class L2GameServerAvatar : L2ServerConnection
 {

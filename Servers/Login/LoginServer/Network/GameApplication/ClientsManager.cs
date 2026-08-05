@@ -1,26 +1,30 @@
 ﻿using System.Net.Sockets;
 using Serilog;
 
-namespace GameServer.Network.GameApplication.ClientsNetwork;
+namespace LoginServer.Network.GameApplication;
 
 public class ClientsManager
 {
     private readonly ILogger logger;
-    private readonly PacketHandlersBuilder packetHandlersBuilder;
+    private readonly GameApplicationPacketHandler gameApplicationPacketHandler;
 
-    public ClientsManager(ILogger logger, PacketHandlersBuilder packetHandlersBuilder)
+    public ClientsManager(
+        ILogger logger,
+        GameApplicationPacketHandler gameApplicationPacketHandler)
     {
         this.logger = logger;
-        this.packetHandlersBuilder = packetHandlersBuilder;
+        this.gameApplicationPacketHandler = gameApplicationPacketHandler;
     }
-    
+
     public async Task AcceptClient(TcpClient client, CancellationToken ct)
     {
         logger.Information(
             "Получен запрос на подключение от: {RemoteEndPoint}",
             client.Client.RemoteEndPoint?.ToString());
 
-        var l2Client = new L2GameApplicationAvatar(client, packetHandlersBuilder);
+        var l2Client = new L2GameApplicationAvatar(
+            client,
+            gameApplicationPacketHandler);
         await l2Client.Init();
     }
 }

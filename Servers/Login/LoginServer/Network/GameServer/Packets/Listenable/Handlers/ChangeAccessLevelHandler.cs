@@ -1,4 +1,4 @@
-﻿namespace LoginServer.Network.GameServer.Packets.Listenable;
+﻿namespace LoginServer.Network.GameServer.Packets.Listenable.Handlers;
 
 public class ChangeAccessLevelHandler
 {

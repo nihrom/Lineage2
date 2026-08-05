@@ -2,11 +2,9 @@
 using Common.Cryptography;
 using Common.Network;
 using LoginServer.Application.Services.L2GameApplication;
-using LoginServer.Network.GameApplication.Packets.Listenable;
-using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
 using LoginServer.Network.GameApplication.Packets.Sent;
 
-namespace LoginServer.Network.GameApplication.ClientsNetwork;
+namespace LoginServer.Network.GameApplication;
 
 public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
 {
@@ -48,14 +46,14 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     private readonly CancellationTokenSource cts = new ();
 
-    private readonly TestHandler testHandler;
+    private readonly GameApplicationPacketHandler gameApplicationPacketHandler;
 
     public L2GameApplicationAvatar(
         TcpClient tcpClient,
-        TestHandler testHandler) : base(tcpClient)
+        GameApplicationPacketHandler gameApplicationPacketHandler) : base(tcpClient)
     {
         ScrambledKeyPair = new ScrambledKeyPair(ScrambledKeyPair.GenKeyPair());
-        this.testHandler = testHandler;
+        this.gameApplicationPacketHandler = gameApplicationPacketHandler;
         ReceivedPacket += OnReadAsync;
     }
 
@@ -140,7 +138,7 @@ public class L2GameApplicationAvatar : L2Connection, IL2GameApplicationClient
     
     private async Task OnReadAsync(Packet packet)
     {
-        await testHandler.HandleAsync(
+        await gameApplicationPacketHandler.HandleAsync(
             packet.FirstOpcode,
             packet,
             this,

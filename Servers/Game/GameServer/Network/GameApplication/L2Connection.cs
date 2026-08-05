@@ -3,7 +3,7 @@ using Common.Cryptography;
 using Common.Network;
 using Serilog;
 
-namespace LoginServer.Network.GameApplication.ClientsNetwork;
+namespace GameServer.Network.GameApplication;
 
 public class L2Connection : IDisposable
 {
@@ -16,7 +16,7 @@ public class L2Connection : IDisposable
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
 
-    protected INetworkCrypt Crypt { get; set; }
+    protected INetworkCrypt? Crypt { get; set; }
     
     public event Func<Packet, Task> ReceivedPacket;
     public event Func<Packet, Task> SendingPacket;
@@ -30,12 +30,12 @@ public class L2Connection : IDisposable
         
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
-        Crypt = new LoginCrypt();
+        //Crypt = new LoginCrypt();
         
         ReceivedPacket += (packet) =>
         {
             Logger.Information(
-                "L2Connection получил пакет:{FirstOpcode:X2}", 
+                "L2Connection получил пакет: 0x{FirstOpcode:X2}", 
                 packet.FirstOpcode);
 
             return Task.CompletedTask;
@@ -44,7 +44,7 @@ public class L2Connection : IDisposable
         SendingPacket += packet =>
         {
             Logger.Information(
-                "L2Connection отправляет пакет:{FirstOpcode:X2}",
+                "L2Connection отправляет пакет: 0x{FirstOpcode:X2}",
                 packet.FirstOpcode);
             
             return Task.CompletedTask;
@@ -63,7 +63,7 @@ public class L2Connection : IDisposable
         var data = p.GetBuffer();
         if (encrypt)
         {
-            Crypt.Encrypt(data);
+            //Crypt.Encrypt(data);
         }
 
         var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
@@ -86,6 +86,7 @@ public class L2Connection : IDisposable
             {
                 while (!ct.IsCancellationRequested)
                 {
+                    Logger.Information("Жду сообщений");
                     var bodyLength = await ReadBodyLengthAsync(ct);
 
                     var body = new byte[bodyLength];
@@ -156,7 +157,7 @@ public class L2Connection : IDisposable
             throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 
         //TODO: Возможно расшифровку надо обернуть в try catch
-        Crypt.Decrypt(ref body);
+        //Crypt?.Decrypt(ref body);
     }
 
     public void Dispose()

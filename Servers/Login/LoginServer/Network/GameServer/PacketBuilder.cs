@@ -1,7 +1,7 @@
 ﻿using Common.Network;
 using LoginServer.Network.GameServer.Packets.Sent;
 
-namespace LoginServer.Network.GameServer.ServersNetwork;
+namespace LoginServer.Network.GameServer;
 
 public static class PacketBuilder
 {

@@ -3,9 +3,8 @@ using Autofac.Extensions.DependencyInjection;
 using LoginServer;
 using LoginServer.Application.Services;
 using LoginServer.Network.GameApplication;
-using LoginServer.Network.GameApplication.ClientsNetwork;
 using LoginServer.Network.GameApplication.Packets.Listenable.Handlers;
-using LoginServer.Network.GameServer.ServersNetwork;
+using LoginServer.Network.GameServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,7 +37,7 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         .ConfigureContainer<ContainerBuilder>((hostBuilder, builder) =>
         {
             builder.RegisterType<Server>();
-            builder.RegisterType<TestHandler>();
+            builder.RegisterType<GameApplicationPacketHandler>();
             
             // Регистрация обработчиков пакетов от клиентского приложения
             builder.RegisterAssemblyTypes(typeof(BaseGameApplicationHandler).Assembly)

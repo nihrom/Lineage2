@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using Common.Network;
 
-namespace GameServer.Network.LoginServer.LoginServerNetwork;
+namespace GameServer.Network.LoginServer;
 
 public class LoginServerAvatar : L2LoginServerConnection
 {

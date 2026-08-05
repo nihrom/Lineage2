@@ -1,4 +1,4 @@
-﻿using GameServer.Network.GameApplication.ClientsNetwork;
+﻿using GameServer.Network.GameApplication;
 using Microsoft.Extensions.Hosting;
 
 namespace GameServer;

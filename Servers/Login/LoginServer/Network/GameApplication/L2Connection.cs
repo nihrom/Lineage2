@@ -1,26 +1,40 @@
 ﻿using System.Net.Sockets;
+using Common.Cryptography;
 using Common.Network;
 using Serilog;
 
-namespace GameServer.Network.LoginServer.LoginServerNetwork;
+namespace LoginServer.Network.GameApplication;
 
-public class L2LoginServerConnection
+public class L2Connection : IDisposable
 {
-    protected readonly ILogger logger = Log.Logger.ForContext<L2LoginServerConnection>();
+    /// <summary>
+    /// Идентификатор соединения
+    /// </summary>
+    public int SessionId { get; }
+    
+    protected readonly ILogger Logger = Log.Logger.ForContext<L2Connection>();
     private readonly NetworkStream networkStream;
     private readonly TcpClient tcpClient;
+
+    protected INetworkCrypt Crypt { get; set; }
     
     public event Func<Packet, Task> ReceivedPacket;
     public event Func<Packet, Task> SendingPacket;
     
-    public L2LoginServerConnection(TcpClient tcpClient)
+    public string Ip => tcpClient.Client.RemoteEndPoint?
+        .ToString() ?? string.Empty;
+    
+    public L2Connection(TcpClient tcpClient)
     {
+        SessionId = (byte)Random.Shared.Next();
+        
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
+        Crypt = new LoginCrypt();
         
         ReceivedPacket += (packet) =>
         {
-            logger.Information(
+            Logger.Information(
                 "L2Connection получил пакет:{FirstOpcode:X2}", 
                 packet.FirstOpcode);
 
@@ -29,7 +43,7 @@ public class L2LoginServerConnection
         
         SendingPacket += packet =>
         {
-            logger.Information(
+            Logger.Information(
                 "L2Connection отправляет пакет:{FirstOpcode:X2}",
                 packet.FirstOpcode);
             
@@ -41,13 +55,18 @@ public class L2LoginServerConnection
     /// Отправить пакет по соединению
     /// </summary>
     /// <param name="p"></param>
+    /// <param name="encrypt">Шифровать сообщение?</param>
     /// <returns></returns>
-    public async Task SendAsync(Packet p)
+    public async Task SendAsync(Packet p, bool encrypt = true)
     {
         await SendingPacket.Invoke(p);
         var data = p.GetBuffer();
+        if (encrypt)
+        {
+            Crypt.Encrypt(data);
+        }
 
-        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2));
+        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
         var message = new byte[data.Length + 2];
 
         lengthBytes.CopyTo(message, 0);
@@ -70,7 +89,7 @@ public class L2LoginServerConnection
                     var bodyLength = await ReadBodyLengthAsync(ct);
 
                     var body = new byte[bodyLength];
-                    await ReadBodyAsync(body, bodyLength);
+                    await ReadBodyAsync(body, bodyLength, ct);
                     var packet = new Packet(1, body);
 
                     await ReceivedPacket.Invoke(packet);
@@ -78,7 +97,7 @@ public class L2LoginServerConnection
             }
             catch (Exception ex)
             {
-                logger.Error(
+                Logger.Error(
                     ex,
                     "Ошибка при чтении пакета: {Message}",
                     ex.Message);
@@ -95,8 +114,15 @@ public class L2LoginServerConnection
         var buffer = new byte[2];
         var bytesRead = await networkStream.ReadAsync(buffer, 0, 2, ct);
 
+        //Возможно чтение 0 байт совершенно валидное поведение
+        //И должно считаться корректным закрытием сокета на другой стороне
+        //Подробнее по ссылке
+        //https://blog.stephencleary.com/2009/06/using-socket-as-connected-socket.html
+        if (bytesRead == 0)
+            throw new Exception($"11111Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
+        
         if (bytesRead != 2)
-            throw new Exception("Пакет имеет поврежденную структуру");
+            throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
 
         var length = BitConverter.ToInt16(buffer, 0);
 
@@ -104,16 +130,33 @@ public class L2LoginServerConnection
     }
 
     /// <summary>
-    /// Заполняет массив телом пакета
+    /// Вычитывает пакет из потока
     /// </summary>
     /// <param name="body">Массив для заполнения</param>
     /// <param name="lenght">Длина пакета</param>
-    private async Task ReadBodyAsync(byte[] body, short lenght)
+    /// <param name="ct">Токен отмены</param>
+    private async Task ReadBodyAsync(
+        byte[] body,
+        short lenght,
+        CancellationToken ct)
     {
-        var bytesRead = await networkStream.ReadAsync(body, 0, lenght);
+        Logger.Debug(
+            "Вычитывание {Lenght} байт, из соединение с SessionId: {SessionId}",
+            lenght,
+            SessionId);
+        
+        var bytesRead = await networkStream.ReadAsync(body, 0, lenght, ct);
 
+        Logger.Debug(
+            "Вычитано {BytesRead} байт, из соединение с SessionId: {SessionId}",
+            bytesRead,
+            SessionId);
+        
         if (bytesRead != lenght)
-            throw new Exception("Пакет имеет поврежденную структуру");
+            throw new Exception($"Пакет имеет поврежденную структуру : bytesRead = {bytesRead}");
+
+        //TODO: Возможно расшифровку надо обернуть в try catch
+        Crypt.Decrypt(ref body);
     }
 
     public void Dispose()

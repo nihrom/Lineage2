@@ -1,6 +1,6 @@
 ﻿using Common.Network;
 
-namespace GameServer.Network.GameApplication.Packets.Listenable;
+namespace GameServer.Network.GameApplication.Packets.Listenable.Part6;
 
 public class RequestDeleteMacro
 {
