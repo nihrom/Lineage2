@@ -3,6 +3,7 @@ using LoginServer.Application.Enums;
 using LoginServer.Application.Services;
 using LoginServer.Application.Services.L2GameApplication;
 using LoginServer.Network.GameApplication.Packets.Sent;
+using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Crypto.Engines;
 using Serilog;
 
@@ -13,17 +14,16 @@ public class RequestAuthLoginHandler : BaseGameApplicationHandler
     private readonly ILogger logger = Log.Logger.ForContext<RequestAuthLoginHandler>();
     
     private readonly AccountManager accountManager;
-    private readonly ServerConfig serverConfig;
     private readonly ServersManager serversManager;
+    private readonly ServerConfig serverConfig;
 
     public RequestAuthLoginHandler(
         AccountManager accountManager,
-        ServersManager serversManager)
+        ServersManager serversManager,
+        IOptions<ServerConfig> serverConfig)
     {
         this.accountManager = accountManager;
-        serverConfig = new ServerConfig();
-        serverConfig.ShowLicence = false;
-        //this.serverConfig = serverConfig;
+        this.serverConfig = serverConfig.Value;
         this.serversManager = serversManager;
     }
 

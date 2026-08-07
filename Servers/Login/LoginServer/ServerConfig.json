@@ -5,6 +5,6 @@
     "Port": "2106",
     "GameServersPort": "9014",
     "AutoCreate": true,
-    "ShowLicence": true
+    "ShowLicence": false
   }
 }
