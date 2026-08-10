@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GameServer;
+using GameServer.Configs;
 using GameServer.Network.GameApplication;
 using GameServer.Network.GameApplication.Packets.Listenable.Handlers;
 using Microsoft.Extensions.Configuration;
@@ -25,14 +26,14 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         .ConfigureHostConfiguration(configHost =>
         {
             configHost.SetBasePath(Directory.GetCurrentDirectory());
-            configHost.AddJsonFile(
-                "GameServerConfig.json", optional: false);
+            configHost.AddIniFile(
+                "Configs/ServerConfig.ini", optional: false);
         })
         .ConfigureServices((builder, services) =>
         {
             services.AddHostedService<Server>();
-            services.Configure<GameServerConfig>(
-                builder.Configuration.GetSection("GameServerConfig"));
+            services.Configure<ServerConfig>(
+                builder.Configuration.GetSection("ServerConfig"));
         })
         .ConfigureContainer<ContainerBuilder>((hostBuilder, builder) =>
         {

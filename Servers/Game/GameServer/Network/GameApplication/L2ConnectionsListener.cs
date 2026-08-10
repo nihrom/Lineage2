@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using GameServer.Configs;
 using Microsoft.Extensions.Options;
 using Serilog;
 
@@ -12,24 +13,24 @@ public class L2ConnectionsListener
     private readonly ClientsManager  clientsManager;
 
     public L2ConnectionsListener(
-        IOptions<GameServerConfig> serverConfig,
+        IOptions<ServerConfig> serverConfig,
         ILogger logger,
         ClientsManager clientsManager)
     {
         var config = serverConfig.Value;
 
-        if (string.IsNullOrEmpty(config.Host))
+        if (string.IsNullOrEmpty(config.GameServerHost))
             throw new ArgumentException("В настройках сервера не указан адрес прослушивания соединений");
         
-        if(config.Port == 0)
+        if(config.GameServerPort == 0)
             throw new ArgumentException("В настройках сервера не указан порт прослушивания соединений");
         
         this.logger = logger;
         this.clientsManager = clientsManager;
 
         tcpListener = new TcpListener(
-            IPAddress.Parse(config.Host),
-            config.Port);
+            IPAddress.Parse(config.GameServerHost),
+            config.GameServerPort);
     }
 
     public void Start()
