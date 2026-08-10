@@ -30,7 +30,7 @@ public class L2Connection : IDisposable
         
         this.tcpClient = tcpClient;
         networkStream = tcpClient.GetStream();
-        //Crypt = new LoginCrypt();
+        //Crypt = new GameServerCrypt();
         
         ReceivedPacket += (packet) =>
         {
@@ -51,29 +51,39 @@ public class L2Connection : IDisposable
         };
     }
 
+    public INetworkCrypt EnableCrypt()
+    {
+        Crypt = new GameServerCrypt();
+
+        return Crypt;
+    }
+
     /// <summary>
     /// Отправить пакет по соединению
     /// </summary>
     /// <param name="p"></param>
     /// <param name="encrypt">Шифровать сообщение?</param>
+    /// <param name="ct"></param>
     /// <returns></returns>
-    public async Task SendAsync(Packet p, bool encrypt = true)
+    public async Task SendAsync(Packet p, bool encrypt = true, CancellationToken ct = default)
     {
         await SendingPacket.Invoke(p);
         var data = p.GetBuffer();
+        
         if (encrypt)
         {
-            //Crypt.Encrypt(data);
+            Crypt?.Encrypt(data);
         }
 
-        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
+        // Длина сообщения + 2 байта на длину сообщения
+        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); 
         var message = new byte[data.Length + 2];
 
         lengthBytes.CopyTo(message, 0);
         data.CopyTo(message, 2);
 
-        await networkStream.WriteAsync(message, 0, message.Length);
-        await networkStream.FlushAsync();
+        await networkStream.WriteAsync(message, 0, message.Length, ct);
+        await networkStream.FlushAsync(ct);
     }
 
     /// <summary>
