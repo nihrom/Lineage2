@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using GameServer;
 using GameServer.Network.GameApplication;
+using GameServer.Network.GameApplication.Packets.Listenable.Handlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,14 +37,15 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         .ConfigureContainer<ContainerBuilder>((hostBuilder, builder) =>
         {
             builder.RegisterType<Server>();
-            builder.RegisterType<PacketHandlersBuilder>();
+            builder.RegisterType<GameApplicationPacketHandler>();
             
-            // // Регистрация обработчиков пакетов от клиентского приложения
-            // builder.RegisterType<AuthGameGuardHandler>();
-            // builder.RegisterType<RequestAuthLoginHandler>();
-            // builder.RegisterType<RequestServerListHandler>();
-            // builder.RegisterType<RequestServerLoginHandler>();
-            //
+            // Регистрация обработчиков пакетов от клиентского приложения
+            builder.RegisterAssemblyTypes(typeof(BaseGameApplicationHandler).Assembly)
+                .Where(t => typeof(BaseGameApplicationHandler).IsAssignableFrom(t)
+                            && t != typeof(BaseGameApplicationHandler) 
+                            && !t.IsAbstract)
+                .PropertiesAutowired();
+            
             // // Регистрация сервис менеджеров
             // builder.RegisterType<AccountManager>().SingleInstance();
             builder.RegisterType<ClientsManager>().SingleInstance();

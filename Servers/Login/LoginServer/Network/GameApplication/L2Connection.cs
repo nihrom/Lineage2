@@ -66,7 +66,8 @@ public class L2Connection : IDisposable
             Crypt.Encrypt(data);
         }
 
-        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); //TODO: не понимаю. Возможно надо убрать + 2
+        // Длина сообщения + 2 байта на длину сообщения
+        var lengthBytes = BitConverter.GetBytes((short)(data.Length + 2)); 
         var message = new byte[data.Length + 2];
 
         lengthBytes.CopyTo(message, 0);
