@@ -34,9 +34,21 @@ public class L2Connection : IDisposable
         
         ReceivedPacket += (packet) =>
         {
-            Logger.Information(
-                "L2Connection получил пакет: 0x{FirstOpcode:X2}", 
-                packet.FirstOpcode);
+
+            if (packet.FirstOpcode != 0xD0)
+            {
+                Logger.Information(
+                    "L2Connection получил пакет: 0x{FirstOpcode:X2}", 
+                    packet.FirstOpcode);
+            }
+            else
+            {
+                Logger.Information(
+                    "L2Connection получил пакет: 0x{FirstOpcode:X2} ex 0x{SecondOpcode:X2}", 
+                    packet.FirstOpcode,
+                    packet.SecondOpcode);
+            }
+
 
             return Task.CompletedTask;
         };

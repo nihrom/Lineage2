@@ -15,7 +15,7 @@ public class NewCharacterSuccess : Packet
         int BaseMen);
     
     public NewCharacterSuccess(List<Character> characters) 
-        : base(0x17)
+        : base(0x0D)
     {
         //TODO: реализовать заполнение пакета
         
@@ -26,24 +26,24 @@ public class NewCharacterSuccess : Packet
             // TODO: Unhardcode these
             WriteInt(character.Race);
             WriteInt(character.ClassId);
-            WriteInt(0x46);
+            WriteInt(99);
             WriteInt(character.BaseStr);
-            WriteInt(0x0A);
-            WriteInt(0x46);
+            WriteInt(1);
+            WriteInt(99);
             WriteInt(character.BaseDex);
-            WriteInt(0x0A);
-            WriteInt(0x46);
+            WriteInt(1);
+            WriteInt(99);
             WriteInt(character.BaseCon);
-            WriteInt(0x0A);
-            WriteInt(0x46);
+            WriteInt(1);
+            WriteInt(99);
             WriteInt(character.BaseInt);
-            WriteInt(0x0A);
-            WriteInt(0x46);
+            WriteInt(1);
+            WriteInt(99);
             WriteInt(character.BaseWit);
-            WriteInt(0x0A);
-            WriteInt(0x46);
+            WriteInt(1);
+            WriteInt(99);
             WriteInt(character.BaseMen);
-            WriteInt(0x0A);
+            WriteInt(1);
         }
     }
 }
