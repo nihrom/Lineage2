@@ -11,7 +11,7 @@ public class KeyPacket : Packet
         {
             WriteByte(0); //_key[i]); // key
         }
-        WriteInt(1); // Config.PACKET_ENCRYPTION use blowfish encryption //TODO достать из конфига
+        WriteInt(0); // Config.PACKET_ENCRYPTION use blowfish encryption //TODO достать из конфига
         WriteInt(1);// Config.SERVER_ID server id //TODO достать из конфига
         WriteByte(1);
         WriteInt(0); // obfuscation key

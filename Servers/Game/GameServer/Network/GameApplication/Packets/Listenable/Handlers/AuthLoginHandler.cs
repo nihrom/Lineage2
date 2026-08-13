@@ -7,6 +7,7 @@ public class AuthLoginHandler : BaseGameApplicationHandler, IGameApplicationHand
 {
     public async Task HandleAsync(AuthLogin request, CancellationToken ct)
     {
+        await Avatar.SendAsync(new LoginFail(-1, 0), ct: ct);
         await Avatar.SendAsync(new CharSelectionInfo(), ct: ct);
     }
 }

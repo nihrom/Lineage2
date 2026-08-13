@@ -72,7 +72,7 @@ public class L2Connection : IDisposable
         
         if (encrypt)
         {
-            Crypt?.Encrypt(data);
+            //Crypt?.Encrypt(data);
         }
 
         // Длина сообщения + 2 байта на длину сообщения

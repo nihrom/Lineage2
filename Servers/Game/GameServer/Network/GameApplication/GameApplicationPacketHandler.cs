@@ -56,7 +56,7 @@ public class GameApplicationPacketHandler
         
         if (!handlers.TryGetValue(opcode, out (Type requestType, Type handlerType) rh))
         {
-            logger.Information("Opcode: {Opcode}, для обработки клиентского пакета, не найден", opcode);
+            logger.Information("Opcode: {Opcode:X2}, для обработки клиентского пакета, не найден", opcode);
         }
 
         var request = Activator.CreateInstance(rh.requestType, new object[] { packet });
@@ -71,8 +71,25 @@ public class GameApplicationPacketHandler
         return task;
     }
 
-    private async Task HandleExAsync(Packet packet, L2GameApplicationAvatar avatar, CancellationToken ct)
+    private Task HandleExAsync(Packet packet, L2GameApplicationAvatar avatar, CancellationToken ct)
     {
+        var secondOpcode = packet.SecondOpcode;
         
+        if (!exHandlers.TryGetValue(secondOpcode, out (Type requestType, Type handlerType) rh))
+        {
+            logger.Information("Opcode: {Opcode:X2}, для обработки клиентского пакета, не найден", secondOpcode);
+            return Task.CompletedTask;
+        }
+
+        var request = Activator.CreateInstance(rh.requestType, new object[] { packet });
+        
+        using var scope = serviceProvider.BeginLifetimeScope();
+        var handler = scope.Resolve(rh.handlerType, new TypedParameter(typeof(L2GameApplicationAvatar), avatar));
+        
+        var method = rh.handlerType.GetMethod(nameof(IGameApplicationHandler<object>.HandleAsync));
+        
+        var task = (Task)method.Invoke(handler, [request, ct]);
+        
+        return task;
     }
 }
