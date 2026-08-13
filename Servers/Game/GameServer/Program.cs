@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using GameServer;
 using GameServer.Configs;
+using GameServer.Data.PlayerTemplateDataSlice;
 using GameServer.Network.GameApplication;
 using GameServer.Network.GameApplication.Packets.Listenable.Handlers;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +40,13 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
         {
             builder.RegisterType<Server>();
             builder.RegisterType<GameApplicationPacketHandler>();
+
+            builder
+                .RegisterType<PlayerTemplateData>()
+                .SingleInstance()
+                .AutoActivate()
+                .OnActivated(x => x.Instance.Load())
+                .AsSelf();
             
             // Регистрация обработчиков пакетов от клиентского приложения
             builder.RegisterAssemblyTypes(typeof(BaseGameApplicationHandler).Assembly)
