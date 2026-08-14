@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginServer.Domain", "Servers\Login\LoginServer.Domain\LoginServer.Domain.csproj", "{E132D322-4729-4A08-8CC5-9B558305F6E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer.Domain", "Servers\Game\GameServer.Domain\GameServer.Domain.csproj", "{D16EF581-1F3A-45FC-948F-B07794999F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer.Application", "Servers\Game\GameServer.Application\GameServer.Application.csproj", "{C3D7F082-F548-4737-93C9-659E0A5C3EA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,8 @@ Global
 		{82AD2125-A860-4894-97A2-1F513D68BDE9} = {FDAB717B-37F1-4106-988B-87B90DC7F40C}
 		{F90355FA-3F69-402A-A503-C07B1389E06F} = {FDAB717B-37F1-4106-988B-87B90DC7F40C}
 		{E132D322-4729-4A08-8CC5-9B558305F6E3} = {FDAB717B-37F1-4106-988B-87B90DC7F40C}
+		{D16EF581-1F3A-45FC-948F-B07794999F67} = {8E36935B-E2FD-4EED-B9DF-916BE559548B}
+		{C3D7F082-F548-4737-93C9-659E0A5C3EA7} = {8E36935B-E2FD-4EED-B9DF-916BE559548B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C58230BD-441A-43B3-97BD-A5F8D7D4CBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -90,5 +96,13 @@ Global
 		{E132D322-4729-4A08-8CC5-9B558305F6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E132D322-4729-4A08-8CC5-9B558305F6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E132D322-4729-4A08-8CC5-9B558305F6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16EF581-1F3A-45FC-948F-B07794999F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16EF581-1F3A-45FC-948F-B07794999F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16EF581-1F3A-45FC-948F-B07794999F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16EF581-1F3A-45FC-948F-B07794999F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D7F082-F548-4737-93C9-659E0A5C3EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D7F082-F548-4737-93C9-659E0A5C3EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D7F082-F548-4737-93C9-659E0A5C3EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D7F082-F548-4737-93C9-659E0A5C3EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
