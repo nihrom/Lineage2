@@ -1,4 +1,5 @@
 ﻿using GameServer.Data.PlayerTemplateDataSlice;
+using GameServer.Models;
 using GameServer.Network.GameApplication.Packets.Listenable.Part3;
 using GameServer.Network.GameApplication.Packets.Sent;
 
@@ -7,33 +8,41 @@ namespace GameServer.Network.GameApplication.Packets.Listenable.Handlers;
 public class NewCharacterHandler 
     : BaseGameApplicationHandler, IGameApplicationHandler<NewCharacter>
 {
-    private readonly PlayerTemplateData  _playerTemplateData;
+    private readonly PlayerTemplateData  playerTemplateData;
 
     public NewCharacterHandler(PlayerTemplateData playerTemplateData)
     {
-        _playerTemplateData = playerTemplateData;
+        this.playerTemplateData = playerTemplateData;
     }
 
     public async Task HandleAsync(
         NewCharacter request,
         CancellationToken ct)
     {
-        List<int> ClassIds = [
-        0, 10, 18, 25, 31, 38, 44, 49, 53, 123, 124, 182,184];
-
-        var templates = _playerTemplateData.PlayerTemplates
-            .Where(x => ClassIds.Contains(x.ClassId))
+        var classIds = new List<L2Class>() {
+            L2Class.Fighter,
+            L2Class.Mage,
+            L2Class.ElvenFighter,
+            L2Class.ElvenMage,
+            L2Class.DarkFighter,
+            L2Class.DarkMage,
+            L2Class.OrcFighter,
+            L2Class.OrcMage,
+            L2Class.DwarvenFighter,
+            L2Class.MaleSoldier,
+            L2Class.FemaleSoldier,
+            L2Class.ErtheiaFighter,
+            L2Class.ErtheiaWizard
+        }.ToDictionary(c => c.Id, c => c);
+        
+        var templates = playerTemplateData.PlayerTemplates
+            .Where(x => classIds.ContainsKey(x.ClassId))
             .OrderBy(x => x.ClassId)
             .ToList();
-        
-        Dictionary<int, int> races = new Dictionary<int, int>()
-        {
-            {0, 0}, {10, 0}, {18, 1}, {25, 1}, {31, 2}, {38, 2}, {44, 3}, {49, 3}, {53, 4}, {123, 5}, {124, 5}, {182, 6}, {183, 6}
-        };
 
         var characters = templates
             .Select(x => new NewCharacterSuccess.Character(
-                races[x.ClassId],
+                (int)classIds[x.ClassId].Race,
                 x.ClassId,
                 x.StaticData.BaseStr,
                 x.StaticData.BaseDex,
