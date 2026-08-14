@@ -28,6 +28,9 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Commons\Common.Cryptography\Common.Cryptography.csproj" />
       <ProjectReference Include="..\..\..\Commons\Common.Network\Common.Network.csproj" />
+      <ProjectReference Include="..\GameServer.Application\GameServer.Application.csproj" />
+      <ProjectReference Include="..\GameServer.DataAccess\GameServer.DataAccess.csproj" />
+      <ProjectReference Include="..\GameServer.Domain\GameServer.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using GameServer.Data.PlayerTemplateDataSlice;
-using GameServer.Models;
+using GameServer.Domain.Models;
 using GameServer.Network.GameApplication.Packets.Listenable.Part3;
 using GameServer.Network.GameApplication.Packets.Sent;
 
